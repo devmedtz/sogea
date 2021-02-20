@@ -19,11 +19,12 @@
     <title>Sogea - {% block title %}{% endblock %}</title>
 </head>
 
-<body>
+<body class="bg-site">
     {% include 'includes/header.html' %}
 
-    {% block content %} {% endblock %}
- 
+    <div class="mx-lg-5 mx-sm-2">
+        {% block content %} {% endblock %}
+    </div>
     {% include 'includes/footer.html' %}
 
     {% include 'includes/scripts.html' %}

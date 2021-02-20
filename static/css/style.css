@@ -8,6 +8,74 @@ html, body {
     overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 
+.text-maroon {
+  color: #c1272d;
+}
+.margin-top-60{
+  margin-top: 60px;
+}
+.margin-top-80{
+  margin-top: 80px;
+}
+.padding-top-60{
+  padding-top: 60px;
+}
+.padding-top-80{
+  padding-top: 80px;
+}
+.bg-site{
+  background-color: #eceff3;
+}
+.bg-marron {
+  background-color:#c1272d;
+}
+.bg-white{
+  background-color: #fff;
+}
+.bg-dark{
+  background-color: #000;
+}
+.bg-gray{
+  background-color: #d2d6db;
+}
+.btn-maroon {
+  color: #fff;
+  background-color: #c1272d;
+  border-color: #c1272d;
+}
+.btn-outline-maroon {
+  color: #c1272d;
+  border-color: #c1272d;
+}
+.btn-facebook {
+  background: #3B5998;
+  color: white;
+  }
+  
+  .btn-google {
+  background: #dd4b39;
+  color: white;
+  }
+.border-maroon {
+  border-color: #c1272d!important;
+}
+.btn-maroon:focus,
+.btn-maroon:active{
+  color: #fff;
+  box-shadow:none !important;
+  outline:0px !important;
+}
+.btn-outline-maroon:focus,
+.btn-outline-maroon:active{
+  color: #c1272d;
+  box-shadow:none !important;
+  outline:0px !important;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
 .offcanvas-header{ 
     display:none !important; 
 }
@@ -16,8 +84,30 @@ html, body {
     display:none !important;
 }
 
+.logo-mobile{
+  display:none !important;
+}
+
 .offcanvas-header h5{
     font-weight:600;
+}
+.sidebar{
+  display:none !important;
+}
+
+#search-form{
+  width: 40%;
+}
+
+#search-form .form-control{
+  padding: .475rem .55rem;
+  font-size: 1.0rem;
+}
+#search-form input:focus,
+#search-form input:focus{
+  color: #000;
+  box-shadow:none !important;
+  outline:0px !important;
 }
 
 .screen-overlay {
@@ -43,6 +133,10 @@ html, body {
 
     .offcanvas-header{ display:block!important; }
     .offcanvas-card{display: block!important;}
+    .logo-mobile{display: block!important;}
+    .logo-desktop{display:none !important;}
+    .sidebar{display:block !important;}
+    
 
     .offcanvas-margin{
         padding-right: 1rem;
@@ -110,7 +204,20 @@ html, body {
     color: #343a40;
   }
   
-  .text-white-50 { color: rgba(255, 255, 255, .5); }
-  
-  .bg-purple { background-color: #6f42c1; }
-  
+
+  a{
+    text-decoration:none;
+  }
+  a{
+    color: rgb(39, 39, 39);
+  }
+
+  .footer a:link,
+  .footer a:visited {
+    color: rgb(39, 39, 39);
+  }
+
+  .footer a:hover,
+  .footer a:active {
+    color: blue;
+  }
