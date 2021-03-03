@@ -26,8 +26,15 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1',
-                       cast=lambda v: [s.strip() for s in v.split(',')])
+if not DEBUG:
+    ALLOWED_HOSTS = ['sogea.co.tz']
+    GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
+    SECURE_SSL_REDIRECT=True
+    SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE=True
+    SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+else:
+    ALLOWED_HOST = []
 
 
 # Application definition
@@ -170,12 +177,29 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.mysql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT', cast=int),
+            # 'OPTIONS': {
+            #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            # },
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': (BASE_DIR / 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
@@ -232,8 +256,8 @@ if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = config('EMAIL_HOST')
     EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-    EMAIL_PORT = config('PORT', cast=int)
-    EMAIL_USE_SSL = config('PORT', cast=bool)
+    EMAIL_PORT = config('EMAIL_PORT', cast=int)
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 else:
     EMAIL_HOST_USER = 'noreply@example.com'
