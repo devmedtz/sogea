@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block title %}Write a Post{% endblock title %}
+
+{% block stylesheet %}
+
+{% endblock stylesheet %}
+
+
+{% block content %}
+
+    <div class="container margin-top-120 margin-bottom-60">
+        <div class="row g-3">
+            <div class="col-lg-8">
+                <div class="row mb-3">
+                    <div class="col-8"><h4><b>Write a New Post</b></h4></div>
+                    <div class="col-4"><a class="d-flex justify-content-end" href="/"><i class="fa fa-times fa-2x"></i></a></div>
+                </div>
+                <div class="card">
+                    <form id="post-form" method="POST" action="." enctype="multipart/form-data">{% csrf_token %}
+                        <div class="card-body">
+                            {{form.media}}
+                            
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+
+                            <div class="form-group my-3">
+                                <label class="mb-2" for=""><b>Write a post Title</b></label>
+                                {% render_field form.title class="form-control" placeholder="Write a post title...." %}
+                                {% for error in field.errors %}
+                                    <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Upload Featured Image</b></label>
+                                        {% render_field form.featured_image class="form-control" %}
+                                        {% for error in field.errors %}
+                                            <span class="help-block">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Select post category</b></label>
+                                        {% render_field form.category class="form-control" %}
+                                        {% for error in field.errors %}
+                                            <span class="help-block">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="mb-2" for="{{ field.id_for_label }}"><b>Write post content here</b></label>
+                                {% render_field form.content class="form-control" %}
+                                {% for error in field.errors %}
+                                    <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Select Post Language</b></label>
+                                        {% render_field form.language class="form-control" %}
+                                        {% for error in field.errors %}
+                                            <span class="help-block">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Select Membership for your post content</b></label>
+                                        {% render_field form.membership class="form-control" %}
+                                        {% for error in field.errors %}
+                                            <span class="help-block">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="tags mt-3 mb-4 form-group">
+                                    <label class="mb-2"><b>Tags</b></label>
+                                    {% render_field form.tags class="form-control" %}
+                                    <small class="my-3">Common Tags: 
+                                        {% for mt in common_tags %}
+                                        <a href="#">
+                                            <span class="badge bg-success">{{mt}}</span>
+                                        </a>
+                                        {% endfor %}
+                                    </small>
+                                </div>
+                                
+                            </div>
+
+
+                        </div>
+                        <div class="card-footer bg-site">
+                            <button name="_publish" class="mx-2 my-2 btn btn-success btn-md" type="submit">
+                            <i class="fa fa-check-square-o"></i> Publish</button>
+                            <!-- <button class="mx-2 my-2 btn btn-secondary btn-md" type="submit">
+                                <i class="fa fa-save"></i> Save Draft</button>
+                            <button name="_preview" class="mx-2 my-2 btn btn-primary btn-md" type="submit">
+                                <i class="fa fa-paper-plane"></i> Preview</button> -->
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header bg-marron text-light">
+                        <div class="card-title">
+                            <h5>Writing a good post Guidelines</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><b>How to write good post title?</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock javascript %}

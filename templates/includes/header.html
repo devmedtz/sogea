@@ -18,7 +18,7 @@
             <form class="d-none d-sm-block" id="search-form" method="GET" action="">
                 <div class="input-group mb-3 mt-2">
                     <input type="search" id="form1" class="form-control" placeholder="Search....">
-                    <button type="button" class="btn btn-primary">
+                    <button type="submit" class="btn btn-maroon">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
@@ -76,17 +76,51 @@
 
             <div class="d-flex justify-content-end">
                 <div class="nav-item d-md-none">
-                    <a class="nav-link text-maroon me-2" href="#">
-                        <i class="fa fa-search"></i>
+                    <a class="nav-link text-maroon" href="#">
+                        <i class="fa fa-search fa-2x"></i>
                     </a>
                 </div>
-                <div class="nav-item d-none d-sm-block">
-                    <a class="nav-link text-maroon me-2" aria-current="page" href="#">Login</a>
-                </div>
-                <div class="nav-item">
-                    <a class="btn btn-maroon py-2" href="#">Create account</a>
-                </div>
-                
+                {% if request.user.is_authenticated %}
+                    <div class="nav-item d-none d-md-block">
+                        <a class="btn btn-maroon py-2" href="{% url 'posts:create_post' %}">Write Post</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link text-maroon me-2" href="#">
+                            <i class="fa fa-bell-o fa-2x"></i>
+                        </a>
+                    </div>
+                    <ul class="nav header-dash-drop">
+                        <li class="nav-item dropdown">
+                            <img class="dropdown-toggle image-circle rounded-circle" data-bs-toggle="dropdown" src="{{user.profile.profile_picture.url}}" alt="profile-image" role="button" aria-expanded="false">
+                            <ul class="dropdown-menu dropdown-menu-end border-maroon">
+                              <li><div class="dropdown-item me-3"><b>{{user.email}}</b><br> <small>@{{user.username}}</small></div>
+                                </li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item me-3" href="#">
+                                <i class="fa fa-tachometer text-maroon" aria-hidden="true"></i> Dashboard</a></li>
+                              <li><a class="dropdown-item me-3" href="{% url 'posts:create_post' %}">
+                                <i class="fa fa-pencil-square-o text-maroon" aria-hidden="true"></i>
+                                Write a Post</a></li>
+                              <li><a class="dropdown-item me-3" href="#">
+                                <i class="fa fa-eye text-maroon" aria-hidden="true"></i>  Reading list</a></li>
+                              <li><a class="dropdown-item me-3" href="#">
+                                <i class="fa fa-cogs text-maroon" aria-hidden="true"></i> Settings</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item me-3" href="{% url 'account_logout' %}">
+                                <i class="fa fa-sign-out text-maroon" aria-hidden="true"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                {% else %}
+                    <div class="nav-item d-none d-sm-block">
+                        <a class="nav-link text-maroon me-2" aria-current="page" href="{% url 'account_login' %}">Login</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="btn btn-maroon py-2" href="{% url 'account_signup' %}">Create account</a>
+                    </div>
+                {% endif %}
+           
             </div>
         </div>
      </nav>

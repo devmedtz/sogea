@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Signup" %}{% endblock title %}
+
+{% block content %}
+
+  <div class="container margin-bottom-60" style="min-height: 100vh; padding-top: 120px;">
+    {% include 'includes/messages.html' %}
+    <div class="d-flex justify-content-between">
+      <div class="card mx-auto">
+        <div class="card-body">
+          <h3 class="text-center" id="head_banner">{% trans "Sign Up" %}</h3>
+      
+          <p class="exist_account_info">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+      
+          <form class="container-fluid" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+              {% endfor %}
+          
+              {% for field in form.visible_fields %}
+                <div class="form-group">
+                  <label class="mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  {{ field|add_class:'form-control mb-3' }}
+                  {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+          
+            {% if redirect_field_value %}
+          
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            
+            {% endif %}
+            <div class="d-grid gap-2">
+              <button class="btn btn-maroon btn-lg" type="submit">{% trans "Sign Up" %}</button>
+            </div>
+            
+          </form>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load account socialaccount %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap version 5 -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- fontawesome icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Sogea Community - Login</title>
+</head>
+<body>
+    <div class="container-fluid" style="min-height:100vh;">
+        <div class="row">
+            <div class="col-md-6 bg-light">
+                
+                <div class="container form-signin mt-2 mb-4">
+                    <h2 class="text-center py-4">Login</h2>
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{error}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>  
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'account_login' %}">{% csrf_token %}
+
+                        <div class="form-group d-grid gap-2">
+                            <div class="mb-2">
+                                <label for="exampleFormControlInput1" class="form-label">Username or Email address</label>
+                                {% render_field form.login class="form-control" placeholder="Email or Username" %}
+                            </div>
+                            
+                            <div class="mb-2">
+                                <label for="exampleFormControlInput1" class="form-label">Password</label>
+                                {% render_field form.password class="form-control" placeholder=form.password.label %}
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-check">
+                                        {% render_field form.remember class="form-check-input" type="checkbox" %}
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col d-flex justify-content-end">
+                                    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                </div>
+                            </div>
+                             
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+    
+                            <button type="submit" class="btn btn-maroon">Login</button>
+
+
+                            <h5 class="text-center my-2">OR</h5>
+                            {% get_providers as socialaccount_providers %}
+                                {% for provider in socialaccount_providers %}
+                                    <a title="{{provider.name}}" class="btn {% if provider.name == 'Google' %}btn-google {% elif provider.name == 'Facebook' %}btn-facebook{% else %} btn-linkedin{% endif %}"  
+                                 href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fa fa-{{provider.name|lower}} me-2" id="social_icon"></i>Login with {{provider.name}}</a>
+                                {% endfor %}
+                        </div>
+                     
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 login-picture">
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
