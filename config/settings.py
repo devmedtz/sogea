@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 if not DEBUG:
-    ALLOWED_HOSTS = ['www.sogea.co.tz','sogea.co.tz']
+    ALLOWED_HOSTS = ['sogea.co.tz']
     GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
     SECURE_SSL_REDIRECT=True
     SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO', 'https')
