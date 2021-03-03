@@ -91,6 +91,7 @@
                 </a>
                 {% endif %}
 
+                {% if posts %}
                 {% for post in posts %}
                 <a href="#">
                     <div class="card mb-2">
@@ -126,6 +127,7 @@
                 </a>
                 
                 {% endfor %}
+                {% endif %}
             </div>
             <div class="col-lg-3 my-3">
                 <div class="card">
