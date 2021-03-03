@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                {% if featured %}
+                
                     <a href="">
                     <div class="card mb-3">
                         <img src="{{featured.featured_image.url}}" class="card-img-top" height="auto" width="100%" alt="{{feautured.title}}">
@@ -67,11 +67,11 @@
                             </ul>
                             
                             <small class="py-3"> 
-                                {% for t in featured.tags.all %}
+                                
                                 <a href="#">
                                     <span class="badge bg-success">#{{t}}</span>
                                 </a>
-                                {% endfor %}
+                                
                             </small>
                             <div class="row mt-3">
                             <div class="col-6">
