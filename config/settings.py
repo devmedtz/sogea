@@ -220,8 +220,8 @@ MEDIA_URL = '/media/'
 if not DEBUG:
     STATICFILES_DIRS = [BASE_DIR / 'static']
 
-    MEDIA_ROOT = '/home/f21c/analytics.f21c.co.tz/media'
-    STATIC_ROOT = '/home/f21c/analytics.f21c.co.tz/static'
+    MEDIA_ROOT = '/home/sogeacot/public_html/media'
+    STATIC_ROOT = '/home/sogeacot/public_html/static'
 else:
     STATICFILES_DIRS = [BASE_DIR / 'static']
     MEDIA_ROOT = 'media/'
