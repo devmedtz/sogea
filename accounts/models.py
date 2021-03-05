@@ -95,7 +95,7 @@ class Profile(models.Model):
     linkedin_link = models.URLField(verbose_name='Linkedin URL')
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
     # this method must be defined for appropriate url mapping in comments section
     def get_absolute_url(self):
