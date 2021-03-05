@@ -1,6 +1,7 @@
 import uuid
 from uuid import uuid4
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.shortcuts import reverse
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.db import models
 from django_countries.fields import CountryField
@@ -32,7 +33,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='Email Address',
         max_length=255,
@@ -95,3 +96,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    # this method must be defined for appropriate url mapping in comments section
+    def get_absolute_url(self):
+        return reverse('main:homepage')

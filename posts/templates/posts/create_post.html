@@ -37,19 +37,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group mb-3">
                                         <label class="mb-2" for="{{ field.id_for_label }}"><b>Upload Featured Image</b></label>
                                         {% render_field form.featured_image class="form-control" %}
-                                        {% for error in field.errors %}
-                                            <span class="help-block">{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Select post category</b></label>
-                                        {% render_field form.category class="form-control" %}
                                         {% for error in field.errors %}
                                             <span class="help-block">{{ error }}</span>
                                         {% endfor %}
@@ -63,29 +54,6 @@
                                 {% for error in field.errors %}
                                     <span class="help-block">{{ error }}</span>
                                 {% endfor %}
-                            </div>
-
-                            
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Select Post Language</b></label>
-                                        {% render_field form.language class="form-control" %}
-                                        {% for error in field.errors %}
-                                            <span class="help-block">{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label class="mb-2" for="{{ field.id_for_label }}"><b>Select Membership for your post content</b></label>
-                                        {% render_field form.membership class="form-control" %}
-                                        {% for error in field.errors %}
-                                            <span class="help-block">{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="row">
@@ -108,10 +76,6 @@
                         <div class="card-footer bg-site">
                             <button name="_publish" class="mx-2 my-2 btn btn-success btn-md" type="submit">
                             <i class="fa fa-check-square-o"></i> Publish</button>
-                            <!-- <button class="mx-2 my-2 btn btn-secondary btn-md" type="submit">
-                                <i class="fa fa-save"></i> Save Draft</button>
-                            <button name="_preview" class="mx-2 my-2 btn btn-primary btn-md" type="submit">
-                                <i class="fa fa-paper-plane"></i> Preview</button> -->
                         </div>
                     </form>
                     

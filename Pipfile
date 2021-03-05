@@ -14,6 +14,9 @@ django-allauth = "*"
 django-ckeditor = "*"
 django-countries = "*"
 django-taggit = "*"
+readtime = "*"
+django-comments-dab = "*"
+djangorestframework = "*"
 
 [dev-packages]
 

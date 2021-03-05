@@ -8,7 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
     path('accounts/', include('allauth.urls')),
-    # path('user/', include('accounts.urls', namespace='accounts'))
+    
+    path('comment/', include('comment.urls')),
+    path('api/', include('comment.api.urls')),  # only required for API Framework
 
     path('posts/', include('posts.urls', namespace='posts')),
     path('ckeditor/', include('ckeditor_uploader.urls')),

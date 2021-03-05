@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'django.contrib.sites', #django allauth app
 
     'crispy_forms',
@@ -58,6 +59,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_countries',
     'taggit',
+    'comment',
+    'rest_framework',
 
     'allauth',
     'allauth.account',
@@ -69,6 +72,23 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_URL = 'accounts/login'  # or actual url
+
+#Comment Settings
+COMMENT_PER_PAGE=None
+PROFILE_APP_NAME = 'accounts'
+PROFILE_MODEL_NAME = 'Profile' # letter case insensitive
+COMMENT_FLAGS_ALLOWED = 5
+COMMENT_SHOW_FLAGGED = False
+COMMENT_FLAG_REASONS = [
+    (1, ('Spam | Exists only to promote a service')),
+    (2, ('Abusive | Intended at promoting hatred')),
+    (3, ('Racist | Sick mentality')),
+    (4, ('Whatever | Your reason')),
+]
+COMMENT_USE_GRAVATAR = True
+
 
 SITE_ID = 1
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'

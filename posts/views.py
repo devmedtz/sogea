@@ -46,12 +46,7 @@ def create_post(request):
     return render(request, template_name, context)
 
 
-def detail_view(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    context = {
-        'post':post,
-    }
-    return render(request, 'detail.html', context)
+
 
 
 def tagged(request, slug):

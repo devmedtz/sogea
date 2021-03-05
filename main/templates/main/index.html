@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load socialaccount %}
+{% load comment_tags %}
 
 {% block title %}Feeds{% endblock title %}
 
@@ -56,27 +57,27 @@
                 </div>
 
                 
-                    <a href="">
+                    <a href="{% url 'main:post_detail' p_ft.slug %}">
                     <div class="card mb-3">
-                        <img src="{{featured.featured_image.url}}" class="card-img-top" height="auto" width="100%" alt="{{feautured.title}}">
+                        <img src="{{p_ft.featured_image.url}}" class="card-img-top" height="auto" width="100%" alt="{{p_ft.title}}">
                         <div class="card-body">
-                            <h5 class="title card-title">{{featured.title}}</h5>
+                            <h5 class="title card-title">{{p_ft.title}}</h5>
                             <ul class="list-inline">
-                                <li class="list-inline-item"><img class="image-circle rounded-circle"src="{{featured.author.profile.profile_picture.url}}" alt="{{featured.title}}"></li>
-                                <li class="author list-inline-item">@{{featured.author.username}}</li>
+                                <li class="list-inline-item"><img class="image-circle rounded-circle"src="{{p_ft.author.profile.profile_picture.url}}" alt="{{p_ft.title}}"></li>
+                                <li class="author list-inline-item">@{{p_ft.author.username}}</li>
                             </ul>
                             
                             <small class="py-3"> 
-                                
+                                {% for mt in common_tags %}
                                 <a href="#">
-                                    <span class="badge bg-success">#{{t}}</span>
+                                    <span class="badge bg-success">#{{mt}}</span>
                                 </a>
-                                
+                                {% endfor %}
                             </small>
                             <div class="row mt-3">
                             <div class="col-6">
                                 <a class="me-3" href="#"><i class="fa fa-thumbs-o-up me-2"></i> 7 likes</a>
-                                <a href="#"><i class="fa fa-comments-o me-2"></i> 7 comments</a>
+                                <a href="#"><i class="fa fa-comments-o me-2"></i> {% get_comments_count p_ft user %} comments</a>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex d-flex justify-content-end">
@@ -91,8 +92,8 @@
                 </a>
                
 
-                {% for post in posts %}
-                <a href="#">
+                {% for post in posts_list %}
+                <a href="{% url 'main:post_detail' post.slug %}">
                     <div class="card mb-2">
                         <div class="card-body">
                             <h5 class="title card-title">{{post.title}}</h5>
@@ -111,7 +112,7 @@
                             <div class="row mt-3">
                             <div class="col-6">
                                 <a class="me-3" href="#"><i class="fa fa-thumbs-o-up me-2"></i> 7 likes</a>
-                                <a href="#"><i class="fa fa-comments-o me-2"></i> 7 comments</a>
+                                <a href="#"><i class="fa fa-comments-o me-2"></i> {% get_comments_count post user %} comments</a>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex d-flex justify-content-end">
