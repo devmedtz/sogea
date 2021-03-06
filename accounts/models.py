@@ -97,6 +97,5 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.email
 
-    # this method must be defined for appropriate url mapping in comments section
     def get_absolute_url(self):
         return reverse('main:homepage')
