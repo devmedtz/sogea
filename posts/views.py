@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-
+from django.http import HttpResponseForbidden, JsonResponse
 from django.contrib import messages
 from taggit.models import Tag
 
 from .forms import PostForm
-from .models import Post
+from .models import Post, PostBookmark
 
 
 def create_post(request):
@@ -58,3 +58,23 @@ def tagged(request, slug):
         'posts':posts,
     }
     return render(request, 'home.html', context)
+
+
+def save_post_bookmark(request):
+
+    if request.method == 'POST':
+        post_id = request.POST['postID']
+        post = Post.objects.get(id=post_id)
+        user = request.user
+
+        post_bookmark = PostBookmark.objects.filter(
+            post=post, user=user)
+        if post_bookmark.exists():
+            post_bookmark.delete()
+            return JsonResponse({'bool': False})
+        else:
+            PostBookmark.objects.create(
+                post=post,
+                user=user
+            )
+            return JsonResponse({'bool': True})

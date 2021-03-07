@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'taggit',
     'comment',
     'rest_framework',
+    'django_social_share',
 
     'allauth',
     'allauth.account',

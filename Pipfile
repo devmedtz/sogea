@@ -17,6 +17,7 @@ django-taggit = "*"
 readtime = "*"
 django-comments-dab = "*"
 djangorestframework = "*"
+django-social-share = "*"
 
 [dev-packages]
 
