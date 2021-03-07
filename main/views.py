@@ -63,7 +63,7 @@ def post_detail(request, post_slug):
     post_bookmarks = PostBookmark.objects.filter(post=post).count()
 
     if request.user.is_authenticated:
-        post_state = PostBookmark.objects.get(user=request.user, post=post)
+        post_state = PostBookmark.objects.filter(user=request.user, post=post)
         like_state = post.likes.filter(id=request.user.id)
         context = {'post':post,'post_state':post_state,'post_bookmarks':post_bookmarks,'like_state':like_state}
 
