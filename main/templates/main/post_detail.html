@@ -235,8 +235,11 @@
                     {% endif %} 
                 </div>
                 <div class="col-12">
-                    
+                    {% if request.user.is_authenticated %}
                     <i class="bookmark-click fa fa-bookmark-o me-2 my-float {% if post_state %}text-primary{% endif %}" data-url="{% url 'posts:save_post_bookmark' %}" id="{{post.id}}"></i><br><span class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}}</span>
+                    {% else %}
+                    <a name="{{ post.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="{{post.id}}"><i class="bookmark-click fa fa-bookmark-o me-2 my-float" aria-hidden="true"></i></a><br><span class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}}</span>
+                    {% endif %}
                   
                 </div>
             </div>
