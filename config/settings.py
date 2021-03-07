@@ -281,7 +281,9 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT', cast=int)
     EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = 'noreply@sogea.co.tz'
 else:
+    DEFAULT_FROM_EMAIL = 'noreply@sogea.co.tz'
     EMAIL_HOST_USER = 'noreply@sogea.co.tz'
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = BASE_DIR / 'sent_mails'
