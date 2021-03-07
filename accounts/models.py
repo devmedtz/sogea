@@ -81,7 +81,7 @@ def profile_pic_filename(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-    profile_picture = models.ImageField(upload_to=profile_pic_filename, default='static/images/default_profile.png')
+    profile_picture = models.ImageField(upload_to=profile_pic_filename, default='profile_pics/default_profile.png')
     website = models.URLField(blank=True, max_length=200)
     country = CountryField(default='TZ', verbose_name='Country')
     location = models.CharField(max_length=200)
