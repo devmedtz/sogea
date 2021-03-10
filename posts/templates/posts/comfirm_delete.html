@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Comfirm Delete {% endblock title %}
+
+
+{% block content %}
+
+    <div class="container margin-top-120 margin-bottom-60" style="min-height: 100vh;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <form method="POST" action=".">
+                        {% csrf_token %}
+                        <p>Are sure want to delete <strong>{{obj}}</strong></p>
+                        <button type="submit" class="my-3 btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

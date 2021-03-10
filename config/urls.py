@@ -10,8 +10,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     
     path('comment/', include('comment.urls')),
-    path('api/', include('comment.api.urls')),  # only required for API Framework
+    path('api/', include('comment.api.urls')), 
 
     path('posts/', include('posts.urls', namespace='posts')),
+    path('dashboard/', include('dashboard.urls', namespace='dashboard')),
+    
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

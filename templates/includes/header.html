@@ -96,7 +96,7 @@
                               <li><div class="dropdown-item me-3"><small>@{{user.username}}</small></div>
                                 </li>
                               <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item me-3" href="#">
+                              <li><a class="dropdown-item me-3" href="{% url 'dashboard:dashboard' %}">
                                 <i class="fa fa-tachometer text-maroon" aria-hidden="true"></i> Dashboard</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'posts:create_post' %}">
                                 <i class="fa fa-pencil-square-o text-maroon" aria-hidden="true"></i>

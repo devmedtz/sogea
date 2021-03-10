@@ -11,9 +11,11 @@ from django_countries.fields import CountryField
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 from django.contrib.contenttypes.fields import GenericRelation
+from PIL import Image
 
 from comment.models import Comment
 from .choices import *
+from accounts.models import Profile
 
 User = get_user_model()
 
@@ -21,11 +23,6 @@ def profile_pic_filename(instance, filename):
     ext = filename.split('.')[1]
     new_filename = f'{uuid4()}.{ext}'
     return f'profile_pics/{new_filename}'
-
-def featured_image(instance, filename):
-    ext = filename.split('.')[1]
-    new_filename = f'{uuid4()}.{ext}'
-    return f'featured_pics/{new_filename}'
 
 
 class Post(models.Model):
@@ -38,7 +35,7 @@ class Post(models.Model):
     view_count = models.PositiveIntegerField(default=0)
     comments = GenericRelation(Comment)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    featured_image = models.ImageField(upload_to=featured_image)
+    featured_image = models.ImageField(upload_to='featured_pics/')
     featured = models.BooleanField(default=False)
     tags = TaggableManager()
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
@@ -63,6 +60,14 @@ class Post(models.Model):
         return result.text
 
     def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+
+        img = Image.open(self.featured_image.path)
+        if img.height > 450 or img.width > 1200:
+            output_size = (450, 1200)
+            img.thumbnail(output_size)
+            img.save(self.featured_image.path)
+
         if not self.slug:
             random_code = datetime.now().strftime('%H%M%S')
             self.slug = str(random_code) + "-" + slugify(self.title)

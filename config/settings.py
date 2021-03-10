@@ -40,9 +40,10 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-    'main',
     'accounts',
+    'main',
     'posts',
+    'dashboard',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'comment',
     'rest_framework',
     'django_social_share',
+    'active_link',
 
     'allauth',
     'allauth.account',
@@ -177,8 +179,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                # `allauth` needs this from django
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -261,6 +261,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
 
 if not DEBUG:
@@ -270,9 +272,10 @@ if not DEBUG:
     STATIC_ROOT = '/home/sogeacot/public_html/static'
 else:
     STATICFILES_DIRS = [BASE_DIR / 'static']
-    MEDIA_ROOT = 'media/'
 
 BASE_URL = config('BASE_URL', default='http://127.0.0.1:8000')
+
+LOGIN_URL = '/accounts/login/'
 
 if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

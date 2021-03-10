@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('content', ckeditor.fields.RichTextField()),
                 ('comment_count', models.IntegerField(default=0)),
                 ('view_count', models.PositiveIntegerField(default=0)),
-                ('featured_image', models.ImageField(upload_to=posts.models.featured_image)),
+                ('featured_image', models.ImageField(upload_to='featured_pictues')),
                 ('featured', models.BooleanField(default=False)),
                 ('language', models.CharField(choices=[('', 'select'), ('sw', 'Swahili'), ('en', 'English')], max_length=20)),
                 ('status', models.CharField(choices=[('Pending', 'Pending'), ('Approved', 'Approved')], max_length=100)),

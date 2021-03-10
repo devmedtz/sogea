@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404, Http404
+from django.shortcuts import render, get_object_or_404, Http404, redirect
 from django.core.exceptions import ObjectDoesNotExist
 import json
 from django.http import HttpResponse
 
 from posts.models import Post,PostBookmark
+from accounts.models import Profile
 
 
 def homepage(request):
@@ -65,7 +66,24 @@ def post_detail(request, post_slug):
     if request.user.is_authenticated:
         post_state = PostBookmark.objects.filter(user=request.user, post=post)
         like_state = post.likes.filter(id=request.user.id)
-        context = {'post':post,'post_state':post_state,'post_bookmarks':post_bookmarks,'like_state':like_state}
+
+        #follow
+  
+        view_profile = Profile.objects.get(pk=post.author.profile.pk)
+ 
+        my_profile = Profile.objects.get(user=request.user)
+  
+
+        if view_profile.user in my_profile.following.all():
+            follow = True
+        elif view_profile == my_profile:
+            follow = 'hide'
+        else:
+            follow = False
+
+        print('follow:', follow)
+
+        context = {'post':post,'post_state':post_state,'post_bookmarks':post_bookmarks,'like_state':like_state, 'follow':follow}
 
         template_name = 'main/post_detail.html'
 

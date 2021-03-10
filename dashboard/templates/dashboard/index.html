@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load active_link_tags %}
+
+{% block title %} {{user.username}} - Posts{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container margin-top-80 pt-3 margin-bottom-60">
+        <div class="row pb-2">
+            <h2><Strong>Dashboard</Strong></h2>
+        </div>
+        <div class="row pb-5 h-100 g-3">
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm p-2">
+                    <div class="card-body">
+                        <h3><strong>{{total_post}}</strong></h3>
+                        <p>Total Posts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm p-2">
+                    <div class="card-body">
+                        <h3><strong>{{post_views.total}}</strong></h3>
+                        <p>Total Posts Views</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm p-2">
+                    <div class="card-body">
+                        <h3><strong>100</strong></h3>
+                        <p>Follower</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm p-2">
+                    <div class="card-body">
+                        <h3><strong>100</strong></h3>
+                        <p>Following</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 nav-pills">
+                <nav class="nav flex-column">
+                    <a class="nav-link {% active_link 'dashboard:dashboard' 'active' %}" href="{% url 'dashboard:dashboard' %}">Posts</a>
+                    <a class="nav-link" href="#">Reading lists</a>
+                    <a class="nav-link" href="#">Followers</a>
+                    <a class="nav-link" href="#" >Following users</a>
+                    <a class="nav-link" href="">Settings</a>
+                  </nav>
+            </div>
+            <div class="col-lg-9">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="pb-3">
+                            <h4><strong>Posts</strong></h4>
+                        </div>
+                        <div>
+                            <table class="table table-borderless">
+                                <tbody>
+                                    {% for post in posts %}
+                                    <tr>
+                                        <td>{{forloop.counter}}.</td>
+                                        <td>
+                                            <a class="text-primary" href="{% url 'main:post_detail' post.slug %}"><strong>{{post.title}}</strong></a>
+                                        </td>
+                                        <td><i class="me-2 fa fa-eye"></i>{{post.view_count}}</td>
+                                        <td>
+                                            <span class="badge {% if post.status == 'Pending' %}bg-warning{% else %}bg-success{% endif %}">{{post.status}}</span>
+                                        </td>
+                                        <td>
+                                            <a class="text-primary" href="{% url 'posts:edit_post' post.id %}"><i class="fa fa-edit me-2"></i></a>
+                                            <a class="text-danger confirm-delete" href="{% url 'posts:delete_post' post.id %}"><i class="fa fa-times-circle"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+    $(document).on('click', '.confirm-delete', function(){
+        return confirm('Are you sure you want to delete this?');
+    });
+</script>
+{% endblock javascript %}

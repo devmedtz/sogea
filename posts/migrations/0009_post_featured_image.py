@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='featured_image',
-            field=models.ImageField(default=django.utils.timezone.now, upload_to=posts.models.featured_image),
+            field=models.ImageField(default=django.utils.timezone.now, upload_to='featured_pictues'),
             preserve_default=False,
         ),
     ]

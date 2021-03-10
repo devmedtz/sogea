@@ -80,7 +80,14 @@ def profile_pic_filename(instance, filename):
 
 
 class Profile(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+
+    following = models.ManyToManyField(CustomUser, related_name='following', blank=True)
+
+
     profile_picture = models.ImageField(upload_to=profile_pic_filename, default='profile_pics/default_profile.png')
     website = models.URLField(blank=True, max_length=200)
     country = CountryField(default='TZ', verbose_name='Country')
@@ -95,7 +102,13 @@ class Profile(models.Model):
     linkedin_link = models.URLField(verbose_name='Linkedin URL')
 
     def __str__(self):
-        return self.user.email
+        return self.user.username
+
+    def profiles_posts(self):
+        return self.post_set.all()
 
     def get_absolute_url(self):
         return reverse('main:homepage')
+
+    class Meta:
+        ordering = ('-created_at',)

@@ -1,22 +1,51 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponseForbidden, JsonResponse
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 from taggit.models import Tag
 
 from .forms import PostForm
 from .models import Post, PostBookmark
+from accounts.models import Profile
 
 
-def create_post(request):
+@login_required
+def follow_profile(request):
+    
+    my_profile = Profile.objects.get(user=request.user)
+    pk = request.GET.get('profile_pk')
+    obj = Profile.objects.get(pk=pk)
+
+    if obj.user in my_profile.following.all():
+        my_profile.following.remove(obj.user)
+        return JsonResponse({'bool': False})
+    else:
+        my_profile.following.add(obj.user)
+        return JsonResponse({'bool': True})
+
+
+@login_required
+def create_edit_post(request, id=None):
+
+    user = request.user
+
+    if id:
+        obj = get_object_or_404(Post, id=id)
+        if obj.author != user:
+            raise PermissionDenied()
+    else:
+        obj = Post(author=user)
 
     posts = Post.objects.order_by('-created_at')
-    print('posts:',posts)
+
     # Show most common tags 
     common_tags = Post.tags.most_common()[:4]
-    print('comon_tags:',common_tags)
+
 
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES, instance=obj)
 
         if form.is_valid():
 
@@ -26,14 +55,18 @@ def create_post(request):
 
             form.save_m2m() #for save tags
 
-            messages.success(
+            if id:
+                messages.success(
+                request, 'Your Post Has Been Updated', extra_tags='alert alert-success')
+            else:
+                messages.success(
                 request, 'Your Post Has Been Created', extra_tags='alert alert-success')
-
-            return redirect(to='posts:create_post')
+                
+            return redirect(to='dashboard:dashboard')
         else:
             messages.error(request, 'Errors occurred',extra_tags='alert alert-danger')
     else:
-        form = PostForm()
+        form = PostForm(instance=obj)
 
     template_name = 'posts/create_post.html'
 
@@ -45,8 +78,16 @@ def create_post(request):
 
     return render(request, template_name, context)
 
+@login_required
+def delete_post(request, id):
+    post = get_object_or_404(Post, id=id)
 
+    if request.user == post.author:
+        post.delete()
+    else: 
+        raise PermissionDenied()
 
+    return redirect(reverse("dashboard:dashboard"))
 
 
 def tagged(request, slug):
@@ -60,6 +101,7 @@ def tagged(request, slug):
     return render(request, 'home.html', context)
 
 
+@login_required
 def save_post_bookmark(request):
 
     if request.method == 'POST':
