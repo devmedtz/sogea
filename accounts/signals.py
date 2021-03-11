@@ -33,7 +33,7 @@ def populate_profile(sociallogin, user, **kwargs):
         user_data = user.socialaccount_set.filter(provider='google')[0].extra_data
         picture_url = "not available"
         if len(user_data):
-            picture_url = user_data[0].extra_data['picture']
+            picture_url = user_data['picture']
         print('picture_url:',picture_url)
 
     # if sociallogin.account.provider == 'twitter':
