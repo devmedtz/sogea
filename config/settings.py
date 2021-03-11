@@ -150,7 +150,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'last-name',
             'email-address',
             'picture-url',
-            'public-profile-url',
+            'picture-urls',
         ]
     },
 }
