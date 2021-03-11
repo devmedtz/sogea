@@ -2,6 +2,7 @@
 {% load static %}
 {% load socialaccount %}
 {% load comment_tags %}
+{% load widget_tweaks %}
 
 {% block title %}Feeds{% endblock title %}
 
@@ -153,10 +154,16 @@
                     <div class="card-body bg-marron text-light">
                         <h1 class="my-3">Sogea<br>Newsletter</h1>
                         <p>Join the newsletter to receive the latest updates in your inbox.</p>
-                        <input class="form-control" type="text" name="email" placeholder="Your Email Address">
-                        <div class="d-grid gap-2 my-3">
-                            <button type="submit" class="btn btn-dark py-2">Subscribe</button>
-                        </div>
+                        <form method="POST" action="{% url 'marketing:email-list-signup' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {% render_field form.email class="form-control" placeholder="Your Email Address" %}
+                                <div class="d-grid gap-2 my-3">
+                                    <button type="submit" class="btn btn-dark py-2">Subscribe</button>
+                                </div> 
+                            </div>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

@@ -17,11 +17,11 @@ class CustomSignupForm(SignupForm):
 
 
     # Put in custom signup logic
-    def custom_signup(self, request, user):
-        user_profile = Profile(user=user)
-        user_profile.save()
+    # def custom_signup(self, request, user):
+    #     user_profile = Profile(user=user)
+    #     user_profile.save()
 
-        user.save()
+    #     user.save()
 
 
 class UserCreationForm(forms.ModelForm):

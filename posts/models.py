@@ -41,6 +41,11 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
 
     status = models.CharField(max_length=100, choices=STATUS, default='Pending')
+    
+    previous_post = models.ForeignKey(
+        'self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
+    next_post = models.ForeignKey(
+        'self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return str(self.title)

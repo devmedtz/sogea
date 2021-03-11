@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 from posts.models import Post,PostBookmark
 from accounts.models import Profile
+from marketing.forms import EmailSignupForm
 
 
 def homepage(request):
@@ -46,6 +47,7 @@ def homepage(request):
         'posts_list':posts_list,
         'p_ft':p_ft,
         'common_tags':common_tags,
+        'form':EmailSignupForm(),
     }
 
     return render(request, template_name, context=context)

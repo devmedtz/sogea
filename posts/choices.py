@@ -8,6 +8,7 @@ LANGUAGE = (
 STATUS = (
     ('Pending','Pending'),
     ('Approved','Approved'),
+    ('Discarded', 'Discarded'),
 )
 
 MEMBERSHIP = (
