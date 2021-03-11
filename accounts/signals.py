@@ -28,15 +28,14 @@ def populate_profile(sociallogin, user, **kwargs):
 
     if sociallogin.account.provider == 'linkedin':
         user_data = user.socialaccount_set.filter(provider='linkedin')[0].extra_data        
-        picture_url = user_data['picture-urls']['picture-url']
-        print('picture_url:',picture_url)
+        picture_url = user_data['picture-url']
+
 
     if sociallogin.account.provider == 'google':
         user_data = user.socialaccount_set.filter(provider='google')[0].extra_data
         picture_url = "not available"
         if len(user_data):
             picture_url = user_data['picture']
-        print('picture_url:',picture_url)
 
     # if sociallogin.account.provider == 'twitter':
     #     user_data = user.socialaccount_set.filter(provider='twitter')[0].extra_data
