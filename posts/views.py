@@ -120,3 +120,18 @@ def save_post_bookmark(request):
                 user=user
             )
             return JsonResponse({'bool': True})
+
+
+def search(request):
+    queryset = Post.objects.filter(status='Approved').order_by('-created_at')
+
+    if 'query' in request.GET: 
+        query = request.GET.get('query')
+        if query:
+            queryset = queryset.filter(title__icontains=query)
+
+    context = {
+        'posts_list': queryset,
+        'values':request.GET,
+    }
+    return render(request, 'posts/search_results.html', context)

@@ -3,12 +3,13 @@
 {% load socialaccount %}
 {% load comment_tags %}
 {% load widget_tweaks %}
+{% load active_link_tags %}
 
-{% block title %}Feeds{% endblock title %}
+{% block title %}All Feeds{% endblock title %}
 
 {% block stylesheet %}
     <style>
-        .card:hover{
+        .card:active{
             border: 2px solid maroon;
         }
         .card .title {
@@ -33,6 +34,15 @@
         .card i{
             cursor: pointer;
         }
+        .card-img-top {
+            width: 100%;
+            height: 330px;
+            object-fit: cover;
+        }
+        .active{
+            color:blue;
+            font-weight: 600;
+        }
     </style>
 {% endblock stylesheet %}
 
@@ -40,21 +50,21 @@
 <main>
     <div class="position-relative overflow-hidden padding-top-80">
         <div class="row">
-            <div class="col-lg-3 pt-3 pb-5 d-none d-lg-block">
+            <div class="col-lg-2 pt-3 pb-5 d-none d-lg-block">
                 {% include 'main/includes/sidebar.html' %}
                 
             </div>
-            <div class="col-lg-6 mt-3">
+            <div class="col-lg-7 mt-3">
                 <div class="row">
                     <div class="col-3">
                         <h5><b>Posts</b></h5>
                     </div>
                     <div class="col-9 d-flex justify-content-end">
                         <ul class="list-inline">
-                            <li class="list-inline-item"><a href="#"><b>Latest</b></a></li>
-                            <li class="list-inline-item"><a href="#">Week</a></li>
-                            <li class="list-inline-item"><a href="#">Month</a></li>
-                            <li class="list-inline-item"><a href="#">Year</a></li>
+                            <li class="list-inline-item"><a class="{% active_link 'main:homepage' 'active' strict=True %}" href="{% url 'main:homepage' %}">Latest</a></li>
+                            <li class="list-inline-item"><a class="{% active_link 'main:week-post' 'active' strict=True %}" href="{% url 'main:week-post'  %}">Week</a></li>
+                            <li class="list-inline-item"><a class="{% active_link 'main:month-post' 'active' strict=True %}" href="{% url 'main:month-post' %}">Month</a></li>
+                            <li class="list-inline-item"><a class="{% active_link 'main:year-post' 'active' strict=True %}" href="{% url 'main:year-post' %}">Year</a></li>
                             
                         </ul>
                     </div>
@@ -62,7 +72,7 @@
 
                 {% if p_ft %}
                     <a href="{% url 'main:post_detail' p_ft.slug %}">
-                    <div class="card mb-3">
+                    <div class="card mb-3 border-0 shadow-sm">
                         <img src="{{p_ft.featured_image.url}}" class="card-img-top" alt="{{p_ft.title}}">
                         <div class="card-body">
                             <h5 class="title card-title">{{p_ft.title}}</h5>
@@ -107,7 +117,7 @@
 
                 {% for post in posts_list %}
                 <a href="{% url 'main:post_detail' post.slug %}">
-                    <div class="card mb-2">
+                    <div class="card mb-2 border-0 shadow-sm">
                         <div class="card-body">
                             <h5 class="title card-title">{{post.title}}</h5>
                             <ul class="list-inline">

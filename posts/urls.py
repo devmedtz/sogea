@@ -11,4 +11,5 @@ urlpatterns = [
     path('tag/<slug:slug>/', views.tagged, name="tagged"),
     path('save-post-bookmark/', views.save_post_bookmark, name='save_post_bookmark'),
     path('follow/', views.follow_profile, name='follow_profile'),
+    path('search/', views.search, name='search'),
 ]

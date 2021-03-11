@@ -6,5 +6,9 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),
+    path('weekly/posts/', views.weekly_posts, name='week-post'),
+    path('monthly/posts', views.monthly_posts, name='month-post'),
+    path('yearly/posts', views.yearly_posts, name='year-post'),
     path('<slug:post_slug>/', views.post_detail, name='post_detail'),
+   
 ]

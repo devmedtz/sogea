@@ -1,27 +1,28 @@
 {% load static %}
+{% load active_link_tags %}
 
 <ul class="nav flex-column">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-home me-2"></i>Home</a>
+      <a class="nav-link {% active_link 'main:homepage' 'active' strict=True %}" aria-current="page" href="{% url 'main:homepage' %}"><i class="fa fa-home me-2"></i>Home</a>
+    </li>
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fa fa-book me-2"></i>Reading Lists</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-home me-2"></i>Signup/Login</a>
+        <a class="nav-link" href="{% url 'account_logout' %}"><i class="fa fa-sign-out me-2"></i>Logout</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'account_login' %}"><i class="fa fa-sign-in me-2"></i>Login</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-home me-2"></i>Listing</a>
+        <a class="nav-link" href="{% url 'account_signup' %}"><i class="fa fa-user-plus me-2"></i>Create account</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-home me-2"></i>Videos</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-home me-2"></i>Podcasts</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-home me-2"></i>Tags</a>
-    </li>
+    {% endif %}
 </ul>
 
-<div class="mt-3 ms-3">
+<!-- <div class="mt-3 ms-3">
     <h5><b>Popular Tags</b></h5>
     <div class="overflow-auto">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -29,4 +30,4 @@
             </a>
         </div>
     </div>
-</div>
+</div> -->

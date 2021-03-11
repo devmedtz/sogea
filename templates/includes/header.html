@@ -15,18 +15,15 @@
                 <img src="{% static 'images/logo-mobile.png' %}" alt="logo">
             </a>
 
-            <form class="d-none d-sm-block" id="search-form" method="GET" action="">
+            <form class="d-none d-sm-block" id="search-form" method="GET" action="{% url 'posts:search' %}">
                 <div class="input-group mb-3 mt-2">
-                    <input type="search" id="form1" class="form-control" placeholder="Search....">
+                    <input type="search" id="form1" name="query" class="form-control" placeholder="Search...." value="{{values.query}}">
                     <button type="submit" class="btn btn-maroon">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
             </form>
 
-            
-                  
-            
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
 
                 <div class="offcanvas-header pt-3 border-bottom border-maroon">

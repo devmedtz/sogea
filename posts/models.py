@@ -28,6 +28,7 @@ def profile_pic_filename(instance, filename):
 class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(default='', max_length=250, editable=False, unique=True)
@@ -66,12 +67,6 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super(Post, self).save(*args, **kwargs)
-
-        img = Image.open(self.featured_image.path)
-        if img.height > 450 or img.width > 1200:
-            output_size = (450, 1200)
-            img.thumbnail(output_size)
-            img.save(self.featured_image.path)
 
         if not self.slug:
             random_code = datetime.now().strftime('%H%M%S')
