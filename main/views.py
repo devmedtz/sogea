@@ -10,11 +10,19 @@ from marketing.forms import EmailSignupForm
 
 def homepage(request):
 
+    template_name = 'main/index.html'
+
     posts_list = Post.objects.all().order_by('-created_at')
    
     try:
         p_ft = Post.objects.get(featured=1)
         common_tags = Post.tags.most_common()[:4]
+
+        context = {
+            'p_ft':p_ft,
+            'common_tags':common_tags,
+        }
+        return render(request, template_name, context=context)
     except:
         pass
 
@@ -41,12 +49,11 @@ def homepage(request):
 
         context = {"contents":contents,"already_liked":already_liked}
    
-    template_name = 'main/index.html'
 
     context = {
         'posts_list':posts_list,
-        'p_ft':p_ft,
-        'common_tags':common_tags,
+        # 'p_ft':p_ft,
+        # 'common_tags':common_tags,
         'form':EmailSignupForm(),
     }
 

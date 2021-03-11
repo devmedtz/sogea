@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                
+                {% if p_ft %}
                     <a href="{% url 'main:post_detail' p_ft.slug %}">
                     <div class="card mb-3">
                         <img src="{{p_ft.featured_image.url}}" class="card-img-top" height="auto" width="100%" alt="{{p_ft.title}}">
@@ -101,7 +101,8 @@
                         
                         </div>
                     </div>
-                </a>
+                    </a>
+                {% endif %}
                
 
                 {% for post in posts_list %}
