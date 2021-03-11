@@ -30,7 +30,7 @@ def populate_profile(sociallogin, user, **kwargs):
         user_data = user.socialaccount_set.filter(provider='linkedin')[0].extra_data
         picture_url = "not available"
         if len(user_data):        
-            picture_url = user_data['picture-url']
+            picture_url = user_data['public-profile-url']
 
 
     if sociallogin.account.provider == 'google':
