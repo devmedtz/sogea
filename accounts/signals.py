@@ -17,9 +17,7 @@ def post_save_create_profile(sender, instance, created, **kwargs):
 
 
 @receiver(user_signed_up) 
-def populate_profile(sociallogin, user, **kwargs):
-
-    # user.profile = Profile()   
+def populate_profile(sociallogin, user, **kwargs):  
 
     if sociallogin.account.provider == 'facebook':
         user_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
@@ -40,5 +38,6 @@ def populate_profile(sociallogin, user, **kwargs):
         if len(user_data):
             picture_url = user_data['picture']
 
+    user.profile = Profile()
     user.profile.profile_picture = picture_url
     user.profile.save()  
