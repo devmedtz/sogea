@@ -28,9 +28,10 @@ def populate_profile(sociallogin, user, **kwargs):
 
     if sociallogin.account.provider == 'linkedin':
         user_data = user.socialaccount_set.filter(provider='linkedin')[0].extra_data
-        picture_url = "not available"
         if len(user_data):        
             picture_url = user_data['public-profile-url']
+        else:
+            picture_url = "not available"
 
 
     if sociallogin.account.provider == 'google':
@@ -38,13 +39,6 @@ def populate_profile(sociallogin, user, **kwargs):
         picture_url = "not available"
         if len(user_data):
             picture_url = user_data['picture']
-
-    # if sociallogin.account.provider == 'twitter':
-    #     user_data = user.socialaccount_set.filter(provider='twitter')[0].extra_data
-    #     picture_url = user_data['profile_image_url']
-    #     picture_url = picture_url.rsplit("_", 1)[0] + "." + picture_url.rsplit(".", 1)[1]
-    #     email = user_data['email']
-    #     first_name = user_data['name'].split()[0]
 
     user.profile.profile_picture = picture_url
     user.profile.save()  
