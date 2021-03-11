@@ -30,7 +30,7 @@ def populate_profile(sociallogin, user, **kwargs):
         print('picture_url:',picture_url)
 
     if sociallogin.account.provider == 'google':
-        user_data = SocialAccount.objects.filter(provider='google', user_id=self.user.id)
+        user_data = user.socialaccount_set.filter(provider='google')[0].extra_data
         picture_url = "not available"
         if len(user_data):
             picture_url = user_data[0].extra_data['picture']
