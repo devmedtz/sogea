@@ -77,7 +77,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-LOGIN_URL = 'accounts/login'  # or actual url
+LOGIN_URL = '/accounts/login/'
 
 #Comment Settings
 COMMENT_PER_PAGE=None
@@ -262,8 +262,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
 
 if not DEBUG:
@@ -273,10 +271,11 @@ if not DEBUG:
     STATIC_ROOT = '/home/sogeacot/public_html/static'
 else:
     STATICFILES_DIRS = [BASE_DIR / 'static']
+    MEDIA_ROOT = 'media/'
 
 BASE_URL = config('BASE_URL', default='http://127.0.0.1:8000')
 
-LOGIN_URL = '/accounts/login/'
+
 
 if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -297,7 +296,14 @@ ACCOUNT_FORMS = {
     "signup": "accounts.forms.CustomSignupForm",
 }
 
-
+if not DEBUG:
+    MAILCHIMP_API_KEY = config('MAILCHIMP_API_KEY')
+    MAILCHIMP_DATA_CENTER = config('MAILCHIMP_DATA_CENTER')
+    MAILCHIMP_EMAIL_LIST_ID = config('MAILCHIMP_EMAIL_LIST_ID')
+else:
+    MAILCHIMP_API_KEY = 'wewew'
+    MAILCHIMP_DATA_CENTER = 'wewewe'
+    MAILCHIMP_EMAIL_LIST_ID = 'wewew'
 
 #CKEDITOR CONFIGURATION
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -355,13 +361,3 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
-
-
-if not DEBUG:
-    MAILCHIMP_API_KEY = config('MAILCHIMP_API_KEY')
-    MAILCHIMP_DATA_CENTER = config('MAILCHIMP_DATA_CENTER')
-    MAILCHIMP_EMAIL_LIST_ID = config('MAILCHIMP_EMAIL_LIST_ID')
-else:
-    MAILCHIMP_API_KEY = ''
-    MAILCHIMP_DATA_CENTER = ''
-    MAILCHIMP_EMAIL_LIST_ID = ''

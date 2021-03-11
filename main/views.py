@@ -19,10 +19,12 @@ def homepage(request):
         common_tags = Post.tags.most_common()[:4]
 
         context = {
+            'posts_list':posts_list,
             'p_ft':p_ft,
+            'form':EmailSignupForm(),
             'common_tags':common_tags,
         }
-        return render(request, template_name, context=context)
+        #return render(request, template_name, context=context)
     except:
         pass
 
@@ -52,8 +54,6 @@ def homepage(request):
 
     context = {
         'posts_list':posts_list,
-        # 'p_ft':p_ft,
-        # 'common_tags':common_tags,
         'form':EmailSignupForm(),
     }
 

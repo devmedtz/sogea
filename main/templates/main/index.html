@@ -63,7 +63,7 @@
                 {% if p_ft %}
                     <a href="{% url 'main:post_detail' p_ft.slug %}">
                     <div class="card mb-3">
-                        <img src="{{p_ft.featured_image.url}}" class="card-img-top" height="auto" width="100%" alt="{{p_ft.title}}">
+                        <img src="{{p_ft.featured_image.url}}" class="card-img-top" alt="{{p_ft.title}}">
                         <div class="card-body">
                             <h5 class="title card-title">{{p_ft.title}}</h5>
                             <ul class="list-inline">
@@ -90,7 +90,7 @@
                                     <a name="{{ p_ft.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 like-count-{{p_ft.id}}">{{p_ft.total_likes}}</span>
                                 {% endif %} 
 
-                                <a href="{% url 'main:post_detail' p_ft.slug %}"><i class="fa fa-comments-o me-2"></i> {% get_comments_count p_ft user %} </a>
+                                <a href=""><i class="fa fa-comments-o me-2"></i> {% get_comments_count p_ft user %} </a>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex d-flex justify-content-end">
@@ -135,7 +135,7 @@
                                 {% endif %}
 
 
-                                <a href="{% url 'main:post_detail' p_ft.slug %}"><i class="fa fa-comments-o me-2"></i> {% get_comments_count post user %} </a>
+                                <a href=""><i class="fa fa-comments-o me-2"></i> {% get_comments_count post user %} </a>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex d-flex justify-content-end">
