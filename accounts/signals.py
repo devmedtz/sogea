@@ -19,7 +19,7 @@ def post_save_create_profile(sender, instance, created, **kwargs):
 @receiver(user_signed_up) 
 def populate_profile(sociallogin, user, **kwargs):
 
-    user.profile = Profile()   
+    # user.profile = Profile()   
 
     if sociallogin.account.provider == 'facebook':
         user_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
