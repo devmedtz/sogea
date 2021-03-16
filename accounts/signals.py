@@ -15,22 +15,10 @@ def post_save_create_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
 
 
-
 @receiver(user_signed_up) 
 def populate_profile(sociallogin, user, **kwargs):
 
     user.profile = Profile()   
-
-    if sociallogin.account.provider == 'facebook':
-
-        user.profile.user = user
-        user.profile.save()
-
-
-    if sociallogin.account.provider == 'linkedin':
-        user.profile.user = user
-        user.profile.save()
-
 
     if sociallogin.account.provider == 'google':
         user_data = user.socialaccount_set.filter(provider='google')[0].extra_data

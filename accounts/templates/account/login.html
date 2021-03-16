@@ -68,7 +68,7 @@
                             <h5 class="text-center my-2">OR</h5>
                             {% get_providers as socialaccount_providers %}
                                 {% for provider in socialaccount_providers %}
-                                    <a title="{{provider.name}}" class="btn {% if provider.name == 'Google' %}btn-google {% elif provider.name == 'Facebook' %}btn-facebook{% else %} btn-linkedin{% endif %}"  
+                                    <a title="{{provider.name}}" class="btn {% if provider.name == 'Google' %}btn-google{% endif %}"  
                                  href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fa fa-{{provider.name|lower}} me-2" id="social_icon"></i>Login with {{provider.name}}</a>
                                 {% endfor %}
                         </div>
