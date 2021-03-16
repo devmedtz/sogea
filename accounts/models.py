@@ -102,7 +102,7 @@ class Profile(models.Model):
     linkedin_link = models.URLField(verbose_name='Linkedin URL')
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
     def profiles_posts(self):
         return self.post_set.all()
