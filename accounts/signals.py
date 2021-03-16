@@ -30,7 +30,7 @@ def populate_profile(sociallogin, user, **kwargs):
 
     if sociallogin.account.provider == 'linkedin':
         user_data = user.socialaccount_set.filter(provider='linkedin')[0].extra_data
-        user.profile.profile_picture = picture_url = user_data['picture-urls']['picture-url']
+        user.profile.profile_picture = user_data['picture-urls']['picture-url']
         user.profile.save()
 
 
