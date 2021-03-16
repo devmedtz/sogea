@@ -5,6 +5,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django.db import models
 from django_countries.fields import CountryField
+from django.core.files import File
+from urllib.request import urlopen
+from tempfile import NamedTemporaryFile
 
 
 class CustomUserManager(BaseUserManager):
@@ -84,6 +87,7 @@ class Profile(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+    image_url = models.URLField(blank=True, null=True)
 
     following = models.ManyToManyField(CustomUser, related_name='following', blank=True)
 
@@ -112,3 +116,12 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+
+
+    def get_remote_image(self):
+        if self.image_url and not self.image_file:
+            img_temp = NamedTemporaryFile(delete=True)
+            img_temp.write(urlopen(self.image_url).read())
+            img_temp.flush()
+            self.image_file.save(f"image_{self.pk}", File(img_temp))
+        self.save()
