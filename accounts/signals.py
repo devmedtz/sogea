@@ -22,15 +22,13 @@ def populate_profile(sociallogin, user, **kwargs):
     user.profile = Profile()   
 
     if sociallogin.account.provider == 'facebook':
-        user_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
-        picture_url = "http://graph.facebook.com/" + sociallogin.account.uid + "/picture?type=large"
-        user.profile.profile_picture = picture_url
+
+        user.profile.user = user
         user.profile.save()
 
 
     if sociallogin.account.provider == 'linkedin':
-        user_data = user.socialaccount_set.filter(provider='linkedin')[0].extra_data
-        user.profile.profile_picture = user_data['picture-url']
+        user.profile.user = user
         user.profile.save()
 
 
