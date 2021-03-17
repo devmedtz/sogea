@@ -25,7 +25,7 @@ def populate_profile(sociallogin, user, **kwargs):
         picture_url = "not available"
         if len(user_data):
             picture_url = user_data['picture']
-        user.profile.profile_picture = picture_url
+        user.profile.image_url = picture_url
         user.profile.save()
 
       
