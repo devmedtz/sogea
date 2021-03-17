@@ -317,21 +317,31 @@
                         <hr>
                         <div>
                             <ul>
-                                <li>Web: <a href="{{post.author.profile.website}}" target="_blank">{{post.author.profile.website}}</a></li>
+                                {% if post.author.profile.website %}
+                                <li><b>Web:</b> <a href="{{post.author.profile.website}}" target="_blank">{{post.author.profile.website}}</a></li>
+                                {% endif %}
                                 {% if post.author.profile.location %}
-                                <li>Location: {{post.author.profile.location}}</li>
+                                <li><b>Location:</b> {{post.author.profile.location}}</li>
                                 {% endif %}
                                 {% if post.author.profile.display_email == True %}
-                                <li>Email: {{post.author.email}}</li>
+                                <li><b>Email:</b> {{post.author.email}}</li>
                                 {% endif %}
                             </ul>
                         </div>
                         <hr>
                         <div class="row justify-content-center user-social-link">
+                            {% if post.author.profile.youtube_link %}
                             <div class="col-auto"><a href="{{post.author.profile.youtube_link}}"><i class="fa fa-youtube text-facebook"></i></a></div>
+                            {% endif %}
+                            {% if post.author.profile.facebook_link %}
                             <div class="col-auto"><a href="{{post.author.profile.facebook_link}}"><i class="fa fa-facebook text-facebook"></i></a></div>
+                            {% endif %}
+                            {% if post.author.profile.linkedin_link %}
                             <div class="col-auto"><a href="{{post.author.profile.linkedin_link}}"><i class="fa fa-linkedin text-twitter"></i></a></div>
+                            {% endif %}
+                            {% if post.author.profile.instagram_link %}
                             <div class="col-auto"><a href="{{post.author.profile.instagram_link}}"><i class="fa fa-instagram text-dribbble"></i></a></div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

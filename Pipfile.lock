@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "741874bb2afad2baf0242da91045e3c2c16e9db40b23dc08956705094d046998"
+            "sha256": "ce224b7630ccf03d97cddef1c511694e13bc0c5e8975e042ae0281bd17bcd182"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -153,6 +153,14 @@
             "index": "pypi",
             "version": "==6.0.0"
         },
+        "django-cleanup": {
+            "hashes": [
+                "sha256:71e098c7d9ac3f3da40b95cff9c0bc51218d40ef419261232f46ba3141c50acc",
+                "sha256:8976aec12a22913afb3d1fcb541b1aedde2f5ec243e4260c5ff78bb6aa75a089"
+            ],
+            "index": "pypi",
+            "version": "==5.1.0"
+        },
         "django-comments-dab": {
             "hashes": [
                 "sha256:2fedd7965c3cbc78c72dd5b69e5658d37e1e5a4e944a768e6b53021316eecadf"
@@ -162,11 +170,11 @@
         },
         "django-countries": {
             "hashes": [
-                "sha256:11191d245256b4e46a4715e391ce0b2fa982e968a6a2b4d263cace95ebe448c1",
-                "sha256:936fd0716cec8388f7c50a8e9e11ba1049d926276fb4e7c8cca61716b78edc91"
+                "sha256:058e3cd82705ebf8ef680fb623b1da2d47bc03b816a71589a8279d2e5a7a5389",
+                "sha256:94170e99465f7ea504da828c8e64f36d94440a86907fc8ecb56c5336aafae0cd"
             ],
             "index": "pypi",
-            "version": "==7.0"
+            "version": "==7.1"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -417,11 +425,11 @@
         },
         "urllib3": {
             "hashes": [
-                "sha256:1b465e494e3e0d8939b50680403e3aedaa2bc434b7d5af64dfd3c958d7f5ae80",
-                "sha256:de3eedaad74a2683334e282005cd8d7f22f4d55fa690a2a1020a416cb0a47e73"
+                "sha256:2f4da4594db7e1e110a944bb1b551fdf4e6c136ad42e4234131391e21eb5b0df",
+                "sha256:e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937"
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
-            "version": "==1.26.3"
+            "version": "==1.26.4"
         }
     },
     "develop": {}

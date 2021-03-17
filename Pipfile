@@ -19,6 +19,7 @@ django-comments-dab = "*"
 djangorestframework = "*"
 django-social-share = "*"
 django-active-link = "*"
+django-cleanup = "*"
 
 [dev-packages]
 

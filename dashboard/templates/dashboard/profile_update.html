@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} Update {{user.username}} Profile {% endblock title %}
+
+{% block stylesheet %}
+    <style>
+        .card .image-circle{
+            width: 80px;
+            height: 80px;
+            border: 1px solid rgb(197, 181, 181);
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block content %}
+<div class="container margin-top-80 pt-3 margin-bottom-60" style="min-height: 100vh;">
+    <div class="row">
+        <div class="col-lg-3 nav-pills">
+            {% include 'dashboard/includes/sidebar.html' %}
+        </div>
+        <div class="col-lg-9">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="pb-3">
+                        <h4><strong><span class="text-primary">{{user.username}}'s</span> Profile</strong></h4>
+                    </div>
+                    <div>
+                        <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="col-lg-2 text-center">
+                                    <img class="image-circle rounded-circle" src="{{user.profile.profile_picture.url}}" alt="profile">
+                                </div>
+                                <div class="col-lg-10">
+                                    <label for=""><b>Profile Picture</b></label>
+                                    {% render_field form.profile_picture class="form-control mt-2" placeholder="" %}
+                                </div>
+                            </div>
+                            <div class="mb-3 mt-4">
+                                <label class="mb-2 me-4" for=""><b>Bio</b></label>
+                                {% render_field form.bio class="form-control" placeholder="Write a short bio......" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2" for=""><b>Website</b></label>
+                                {% render_field form.website class="form-control" placeholder="" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2" for=""><b>Country</b></label>
+                                {% render_field form.country class="form-control" placeholder="" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2" for=""><b>Location</b></label>
+                                {% render_field form.location class="form-control" placeholder="" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2 me-4" for=""><b>Do you agree your email to be desplayed on your public profile?</b></label>
+                                {% render_field form.display_email class="radio" placeholder="" %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="mb-2 me-4" for=""><b>Youtube Link</b></label>
+                                {% render_field form.youtube_link class="form-control" placeholder="" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2 me-4" for=""><b>Facebook Link</b></label>
+                                {% render_field form.facebook_link class="form-control" placeholder="" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2 me-4" for=""><b>Instagram Link</b></label>
+                                {% render_field form.instagram_link class="form-control" placeholder="" %}
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-2 me-4" for=""><b>Linkedin Link</b></label>
+                                {% render_field form.linkedin_link class="form-control" placeholder="" %}
+                            </div>
+
+                            <div class="d-grid gap-2 col-8 mx-auto py-4">
+                                <button class="btn btn-maroon py-2" type="submit">Save Profile</button>
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}{% endblock javascript %}

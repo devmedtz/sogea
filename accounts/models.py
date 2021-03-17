@@ -5,9 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django.db import models
 from django_countries.fields import CountryField
-from django.core.files import File
-from urllib.request import urlopen
-from tempfile import NamedTemporaryFile
+
+from ckeditor.fields import RichTextField
 
 
 class CustomUserManager(BaseUserManager):
@@ -99,10 +98,10 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
 
     #Social media links
-    youtube_link = models.URLField(verbose_name='Youtube URL')
-    facebook_link = models.URLField(verbose_name='Facebook URL')
-    instagram_link = models.URLField(verbose_name='Instagram URL')
-    linkedin_link = models.URLField(verbose_name='Linkedin URL')
+    youtube_link = models.URLField(verbose_name='Youtube URL', blank=True, null=True)
+    facebook_link = models.URLField(verbose_name='Facebook URL', blank=True, null=True)
+    instagram_link = models.URLField(verbose_name='Instagram URL', blank=True, null=True)
+    linkedin_link = models.URLField(verbose_name='Linkedin URL', blank=True, null=True)
 
     def __str__(self):
         return self.user.email
@@ -111,7 +110,7 @@ class Profile(models.Model):
         return self.post_set.all()
 
     def get_absolute_url(self):
-        return reverse('main:homepage')
+        return reverse('dashboard:profile_update', kwargs={'user_id':request.user.id})
 
     class Meta:
         ordering = ('-created_at',)

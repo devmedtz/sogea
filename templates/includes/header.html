@@ -93,6 +93,7 @@
                               <li><div class="dropdown-item me-3"><small>@{{user.username}}</small></div>
                                 </li>
                               <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item me-3" href="{% url 'dashboard:profile_update' user.id %}"><i class="fa fa-pencil text-maroon"></i> Update Profile</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'dashboard:dashboard' %}">
                                 <i class="fa fa-tachometer text-maroon" aria-hidden="true"></i> Dashboard</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'posts:create_post' %}">
@@ -100,9 +101,6 @@
                                 Write a Post</a></li>
                               <li><a class="dropdown-item me-3" href="#">
                                 <i class="fa fa-eye text-maroon" aria-hidden="true"></i>  Reading list</a></li>
-                              <li><a class="dropdown-item me-3" href="#">
-                                <i class="fa fa-cogs text-maroon" aria-hidden="true"></i> Settings</a></li>
-                              <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item me-3" href="{% url 'account_logout' %}">
                                 <i class="fa fa-sign-out text-maroon" aria-hidden="true"></i> Logout</a></li>
                             </ul>
