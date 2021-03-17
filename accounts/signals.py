@@ -21,11 +21,7 @@ def populate_profile(sociallogin, user, **kwargs):
     user.profile = Profile()   
 
     if sociallogin.account.provider == 'google':
-        user_data = user.socialaccount_set.filter(provider='google')[0].extra_data
-        picture_url = "not available"
-        if len(user_data):
-            picture_url = user_data['picture']
-        user.profile.image_url = picture_url
+        user.profile.user = user
         user.profile.save()
 
       
