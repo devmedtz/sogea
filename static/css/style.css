@@ -162,6 +162,10 @@ html, body {
   width: 40%;
 }
 
+#mobile-search-form{
+  width: 100%;
+}
+
 #search-form .form-control{
   padding: .475rem .55rem;
   font-size: 1.0rem;

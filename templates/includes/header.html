@@ -1,4 +1,5 @@
     {% load static %}
+    {% load account socialaccount %}
     
     <b class="screen-overlay"></b>
 
@@ -39,19 +40,18 @@
 
                 <div class="card offcanvas-card bg-light my-3 border-0">
                     <div class="card-body d-grid gap-2">
-                        <button class="btn btn-maroon">Create Account</button>
-                        <button class="btn btn-outline-maroon" type="button">login</button>
+                        <a href="{% url 'account_signup' %}" class="btn btn-maroon">Create Account</a>
+                        <a href="{% url 'account_login' %}" class="btn btn-outline-maroon" type="button">login</a> 
                         <h5 class="text-center my-2">OR</h5>
-                        <a href="#" class="btn btn-google">
-                            <i class="fa fa-google me-2"></i>
-                            Login with Google</a>
-                        <a href="#" class="btn btn-facebook">
-                                <i class="fa fa-facebook me-2"></i>
-                                Login with Facebook</a>
+                        {% get_providers as socialaccount_providers %}
+                                {% for provider in socialaccount_providers %}
+                                    <a title="{{provider.name}}" class="btn {% if provider.name == 'Google' %}btn-google{% endif %}"  
+                                 href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fa fa-{{provider.name|lower}} me-2" id="social_icon"></i>Login with {{provider.name}}</a>
+                                {% endfor %}
                     </div>
                 </div>
 
-                <ul class="sidebar navbar-nav me-auto mb-2 mb-lg-0 offcanvas-margin">
+                <!-- <ul class="sidebar navbar-nav me-auto mb-2 mb-lg-0 offcanvas-margin">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">
                             <i class="fa fa-home me-2"></i>
@@ -68,12 +68,12 @@
                             <i class="fa fa-home me-2"></i>
                             Profile</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
 
             <div class="d-flex justify-content-end">
                 <div class="nav-item d-md-none">
-                    <a class="nav-link text-maroon" href="#">
+                    <a class="nav-link text-maroon" href="{% url 'posts:search' %}">
                         <i class="fa fa-search fa-2x"></i>
                     </a>
                 </div>
