@@ -17,4 +17,6 @@ urlpatterns = [
     path('marketing/', include('marketing.urls', namespace='marketing')),
     
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('s3direct/', include('s3direct.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

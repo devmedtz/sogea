@@ -20,6 +20,7 @@ djangorestframework = "*"
 django-social-share = "*"
 django-active-link = "*"
 django-cleanup = "*"
+django-s3direct = "*"
 
 [dev-packages]
 
