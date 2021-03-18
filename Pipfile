@@ -22,6 +22,7 @@ django-active-link = "*"
 django-cleanup = "*"
 django-s3direct = "*"
 django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 

@@ -227,19 +227,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'
 
+#AWS SETTINGS 
 if not DEBUG:
     STATICFILES_DIRS = [BASE_DIR / 'static']
-
-    MEDIA_ROOT = '/home/sogeacot/public_html/media'
     STATIC_ROOT = '/home/sogeacot/public_html/static'
+
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = config('AWS_DEFAULT_ACL')
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    DEFAULT_FILE_STORAGE = 'config.storage.MediaStore'
+    MEDIA_URL = '/media/'
 else:
     STATICFILES_DIRS = [BASE_DIR / 'static']
-    MEDIA_ROOT = 'media/'
+    
 
 BASE_URL = config('BASE_URL', default='http://127.0.0.1:8000')
-
 
 
 if not DEBUG:
@@ -316,26 +323,4 @@ CKEDITOR_CONFIGS = {
             'codesnippet',
         ]),
     }
-}
-
-#AWS SETTINGS 
-if not DEBUG:
-    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
-    AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
-else:
-    AWS_ACCESS_KEY_ID='AKIATMDUBLMGJQRNJ7NR'
-    AWS_SECRET_ACCESS_KEY='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'
-    AWS_STORAGE_BUCKET_NAME='sogeabucket'
-    AWS_S3_REGION_NAME='ap-south-1'
-    AWS_S3_ENDPOINT_URL='https://s3.ap-south-1.amazonaws.com'
-
-
-S3DIRECT_DESTINATIONS = {
-    'primary_destination': {
-        'key': 'uploads/images',
-        'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
-    },
 }

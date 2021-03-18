@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django.db import models
 from django_countries.fields import CountryField
-from s3direct.fields import S3DirectField
 
 from ckeditor.fields import RichTextField
 
@@ -91,8 +90,7 @@ class Profile(models.Model):
     following = models.ManyToManyField(CustomUser, related_name='following', blank=True)
 
 
-    profile_picture = S3DirectField(dest='primary_destination',default='profile_pics/default_profile.png')
-    
+    profile_picture = models.ImageField(upload_to=profile_pic_filename, default='profile_pics/default_profile.png')
     website = models.URLField(blank=True, max_length=200)
     country = CountryField(default='TZ', verbose_name='Country')
     location = models.CharField(max_length=200)
