@@ -1,13 +1,12 @@
 from django import forms
-from s3direct.widgets import S3DirectWidget
 
 from accounts.models import Profile
 
 class ProfileForm(forms.ModelForm):
-    # profile_picture = forms.ImageField(required=False, \
-    #  error_messages ={'invalid':("Image files only")},\
-    #  widget=forms.FileInput)
-    profile_picture = forms.URLField(widget=S3DirectWidget(dest='example_destination'))
+    profile_picture = forms.ImageField(required=False, \
+     error_messages ={'invalid':("Image files only")},\
+     widget=forms.FileInput)
+
 
     class Meta:
         model = Profile
