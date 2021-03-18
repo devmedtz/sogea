@@ -326,16 +326,16 @@ if not DEBUG:
     AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
     AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
 else:
-    AWS_ACCESS_KEY_ID = 'aws-access-key-id'
-    AWS_SECRET_ACCESS_KEY = 'secret-access-key'
-    AWS_STORAGE_BUCKET_NAME = 'name-of-the-bucket'
-    AWS_S3_REGION_NAME = 'name-of-the-region'
-    AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
+    AWS_ACCESS_KEY_ID='AKIATMDUBLMGJQRNJ7NR'
+    AWS_SECRET_ACCESS_KEY='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'
+    AWS_STORAGE_BUCKET_NAME='sogeabucket'
+    AWS_S3_REGION_NAME='ap-south-1'
+    AWS_S3_ENDPOINT_URL='https://s3.ap-south-1.amazonaws.com'
 
 
 S3DIRECT_DESTINATIONS = {
     'primary_destination': {
-        'key': 'uploads/',
+        'key': 'uploads/images',
         'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
     },
 }

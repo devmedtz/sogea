@@ -92,6 +92,7 @@ class Profile(models.Model):
 
 
     profile_picture = S3DirectField(dest='primary_destination',default='profile_pics/default_profile.png')
+    
     website = models.URLField(blank=True, max_length=200)
     country = CountryField(default='TZ', verbose_name='Country')
     location = models.CharField(max_length=200)
