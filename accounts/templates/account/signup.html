@@ -14,7 +14,7 @@
         <div class="card-body">
           <h3 class="text-center" id="head_banner">{% trans "Sign Up" %}</h3>
       
-          <p class="exist_account_info">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+          <p class="exist_account_info">{% blocktrans %}Already have an account? Then please <a class="text-primary" href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
       
           <form class="container-fluid" id="signup_form" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}

@@ -9,19 +9,13 @@ from .models import Profile
 
 User = get_user_model
 
-@receiver(post_save, sender=User)
-def post_save_create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
 
 @receiver(user_signed_up) 
-def populate_profile(sociallogin, user, **kwargs):
+def populate_profile(user, **kwargs):
 
     user.profile = Profile()   
 
-    if sociallogin.account.provider == 'google':
-        user.profile.user = user
-        user.profile.save()
+    user.profile.user = user
+    user.profile.save()
 
       

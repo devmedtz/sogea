@@ -23,6 +23,7 @@ django-cleanup = "*"
 django-s3direct = "*"
 django-storages = "*"
 boto3 = "*"
+django-inlinecss = "*"
 
 [dev-packages]
 

@@ -6,4 +6,5 @@
     <a class="nav-link" href="#">Followers</a>
     <a class="nav-link" href="#" >Following users</a>
     <a class="nav-link {% active_link 'dashboard:profile_update' user.id 'active' %}" href="{% url 'dashboard:profile_update' user.id %}">Edit Profile</a>
+    <a class="nav-link {% active_link 'account_change_password' 'active' %}" href="{% url 'account_change_password' %}">Change Password</a>
 </nav>
