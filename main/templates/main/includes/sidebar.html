@@ -7,7 +7,7 @@
     </li>
     {% if request.user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-book me-2"></i>Reading Lists</a>
+      <a class="nav-link" href="{% url 'dashboard:reading_list' %}"><i class="fa fa-book me-2"></i>Reading Lists</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{% url 'account_logout' %}"><i class="fa fa-sign-out me-2"></i>Logout</a>

@@ -89,7 +89,7 @@ class Profile(models.Model):
 
     following = models.ManyToManyField(CustomUser, related_name='following', blank=True)
 
-
+ 
     profile_picture = models.ImageField(upload_to=profile_pic_filename, default='profile_pics/default_profile.png')
     website = models.URLField(blank=True, max_length=200)
     country = CountryField(default='TZ', verbose_name='Country')
@@ -106,8 +106,13 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.email
 
+    @property
     def profiles_posts(self):
         return self.post_set.all()
+
+    @property
+    def total_follower(self):
+        return self.following.count()  
 
     def get_absolute_url(self):
         return reverse('dashboard:profile_update', kwargs={'user_id':request.user.id})

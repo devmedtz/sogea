@@ -1,0 +1,16 @@
+{% load active_link_tags %}
+
+<div class="d-lg-none mb-3">
+    <div class="dropdown">
+        <button class="btn btn-maroon dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+          MENU
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+          <li> <a class="dropdown-item {% active_link 'dashboard:dashboard' 'active' %}" href="{% url 'dashboard:dashboard' %}">Posts</a></li>
+    
+          <li><a class="dropdown-item {% active_link 'dashboard:reading_list' 'active' %}" href="{% url 'dashboard:reading_list' %}">Reading lists</a></li>
+          <li><a class="dropdown-item {% active_link 'dashboard:profile_update' user.id 'active' %}" href="{% url 'dashboard:profile_update' user.id %}">Edit Profile</a></li>
+          <li><a class="dropdown-item {% active_link 'account_change_password' 'active' %}" href="{% url 'account_change_password' %}">Change Password</a></li>
+        </ul>
+      </div>
+</div>

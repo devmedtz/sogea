@@ -1,10 +1,12 @@
 {% load active_link_tags %}
 
-<nav class="nav flex-column">
-    <a class="nav-link {% active_link 'dashboard:dashboard' 'active' %}" href="{% url 'dashboard:dashboard' %}">Posts</a>
-    <a class="nav-link" href="#">Reading lists</a>
-    <a class="nav-link" href="#">Followers</a>
-    <a class="nav-link" href="#" >Following users</a>
-    <a class="nav-link {% active_link 'dashboard:profile_update' user.id 'active' %}" href="{% url 'dashboard:profile_update' user.id %}">Edit Profile</a>
-    <a class="nav-link {% active_link 'account_change_password' 'active' %}" href="{% url 'account_change_password' %}">Change Password</a>
-</nav>
+<div class="d-none d-lg-block">
+    <nav class="nav flex-column">
+        <a class="nav-link {% active_link 'dashboard:dashboard' 'active' %}" href="{% url 'dashboard:dashboard' %}">Posts</a>
+        <a class="nav-link {% active_link 'dashboard:reading_list' 'active' %}" href="{% url 'dashboard:reading_list' %}">Reading lists</a>
+        <!-- <a class="nav-link" href="#">Followers</a>
+        <a class="nav-link" href="#" >Following users</a> -->
+        <a class="nav-link {% active_link 'dashboard:profile_update' user.id 'active' %}" href="{% url 'dashboard:profile_update' user.id %}">Edit Profile</a>
+        <a class="nav-link {% active_link 'account_change_password' 'active' %}" href="{% url 'account_change_password' %}">Change Password</a>
+    </nav>
+</div>

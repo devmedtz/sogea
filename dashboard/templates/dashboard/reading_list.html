@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Reading Lists {% endblock title %}
+
+{% block content %}
+
+<div class="container margin-top-80 pt-5 margin-bottom-60" style="min-height: 100vh;">
+
+    <div class="row">
+        <div class="col-lg-3 nav-pills">
+            {% include 'dashboard/includes/sidebar.html' %}
+        </div>
+        <div class="col-lg-9">
+            {% include 'dashboard/includes/mobile_sidebar.html' %}
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="pb-3">
+                        <h4><strong>Reading Posts</strong></h4>
+                    </div>
+                    <div>
+                        <table class="table table-borderless">
+                            <tbody>
+                                {% for post in posts %}
+                                <tr>
+                                    <td>{{forloop.counter}}.</td>
+                                    <td>
+                                        <a class="text-primary" href="{% url 'main:post_detail' post.post.slug %}"><strong>{{post.post.title}}</strong></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

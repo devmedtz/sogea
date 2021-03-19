@@ -4,11 +4,12 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 
-from posts.models import Post
+from posts.models import Post, PostBookmark
 from accounts.models import Profile
 from .forms import ProfileForm
 
 
+@login_required
 def dashboard(request):
 
     user = request.user
@@ -17,10 +18,14 @@ def dashboard(request):
 
     post_views = posts.aggregate(total=Sum('view_count'))
 
+    profile = Profile.objects.get(user=user)
+    following = profile.following.count()
+
     context = {
         'posts':posts,
         'post_views':post_views,
         'total_post':posts.count(),
+        'following':following,
     }
 
     template_name = 'dashboard/index.html'
@@ -52,5 +57,16 @@ def profile_update(request, id):
     }
 
     template_name = 'dashboard/profile_update.html'
+
+    return render(request, template_name, context)
+
+
+def reading_list(request):
+
+    posts = PostBookmark.objects.all().order_by('-created_at')
+
+    context = {'posts':posts}
+    
+    template_name = 'dashboard/reading_list.html'
 
     return render(request, template_name, context)

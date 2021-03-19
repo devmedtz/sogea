@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load active_link_tags %}
+{% load static %}
 
 {% block title %} {{user.username}} - Posts{% endblock title %}
 
@@ -8,7 +9,10 @@
 
     <div class="container margin-top-80 pt-3 margin-bottom-60" style="min-height: 100vh;">
         <div class="row pb-2">
-            <h2><Strong>Dashboard</Strong></h2>
+            <div class="col-6"><h2><Strong>Dashboard</Strong></h2></div>
+            <div class="col-6 d-flex justify-content-end">
+               {% include 'dashboard/includes/mobile_sidebar.html' %}
+            </div>
         </div>
         <div class="row pb-5 h-100 g-3">
             <div class="col-lg-3">
@@ -22,7 +26,11 @@
             <div class="col-lg-3">
                 <div class="card border-0 shadow-sm p-2">
                     <div class="card-body">
-                        <h3><strong>{{post_views.total}}</strong></h3>
+                        <h3><strong>
+                            {% if post_views.total %}
+                            {{post_views.total}}
+                            {% else %} 0 {% endif %}
+                        </strong></h3>
                         <p>Total Posts Views</p>
                     </div>
                 </div>
@@ -30,15 +38,15 @@
             <div class="col-lg-3">
                 <div class="card border-0 shadow-sm p-2">
                     <div class="card-body">
-                        <h3><strong>100</strong></h3>
-                        <p>Follower</p>
+                        <h3><strong>{{user.following.all.count}}</strong></h3>
+                        <p>Followers</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card border-0 shadow-sm p-2">
                     <div class="card-body">
-                        <h3><strong>100</strong></h3>
+                        <h3><strong>{{following}}</strong></h3>
                         <p>Following</p>
                     </div>
                 </div>
@@ -72,6 +80,11 @@
                                             <a class="text-danger confirm-delete" href="{% url 'posts:delete_post' post.id %}"><i class="fa fa-times-circle"></i></a>
                                         </td>
                                     </tr>
+                                    {% empty %}
+                                    <div class="text-center">
+                                        <img src="{% static 'images/no_item.svg' %}" height="100" width="auto" alt="no_item"><br>
+                                        <a class="btn btn-primary my-3" href="{% url 'posts:create_post' %}">Write a post</a>
+                                    </div>
                                     {% endfor %}
                                 </tbody>
                             </table>

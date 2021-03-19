@@ -227,7 +227,7 @@
 <div class="margin-top-120">
     <div class="row h-100">
         <div class="col-lg-1 text-center fixed">
-            <div class="left-side">
+            <div class="left-side d-none d-lg-block">
                 <div class="col-12">
                     {% if request.user.is_authenticated %}
                         {% if like_state %}
@@ -349,6 +349,29 @@
             </div>
         </div>
         <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="container-fluid bg-gray fixed-bottom d-lg-none">
+    <div class="row mx-3 text-center">
+        <div class="col-6">
+            {% if request.user.is_authenticated %}
+            {% if like_state %}
+                <a name="{{post.id}}" class="likin text-primary" id="co"><i class="fa fa-thumbs-o-up me-2 my-3 fa-2x"></i></a><span class="text-primary me-3 like-count-{{post.id}}">{{post.total_likes}} likes</span>
+            {% else %}
+                <a name="{{post.id}}" class="likin" id="co" style="color: black;"><i class="fa fa-thumbs-o-up me-2 my-3 fa-2x"></i></a><br><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
+            {% endif %}
+            {% else %}
+                <a name="{{ post.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2 my-3 fa-2x" aria-hidden="true"></i></a><br><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
+            {% endif %}
+        </div>
+        <div class="col-6">
+            {% if request.user.is_authenticated %}
+                <i class="bookmark-click fa fa-bookmark-o me-2 my-3 fa-2x {% if post_state %}text-primary{% endif %}" data-url="{% url 'posts:save_post_bookmark' %}" id="{{post.id}}"></i><span class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}} save</span>
+            {% else %}
+                <a name="{{ post.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="{{post.id}}"><i class="bookmark-click fa fa-bookmark-o me-2 my-3 fa-2x" aria-hidden="true"></i></a><p class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}} saved</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 
