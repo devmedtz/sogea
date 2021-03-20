@@ -65,7 +65,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_social_share',
     'active_link',
-    'django_inlinecss',
 
     'allauth',
     'allauth.account',
