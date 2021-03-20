@@ -226,9 +226,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
-MEDIA_ROOT = 'media/'
+MEDIA_URL = '/media/'
+
 
 #AWS SETTINGS 
 if not DEBUG:
@@ -245,6 +245,7 @@ if not DEBUG:
     MEDIA_URL = '/media/'
 else:
     STATICFILES_DIRS = [BASE_DIR / 'static']
+    MEDIA_ROOT = 'media/'
     
 
 BASE_URL = config('BASE_URL', default='http://127.0.0.1:8000')
