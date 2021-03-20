@@ -14,7 +14,7 @@ def homepage(request):
     template_name = 'main/index.html'
 
     posts_list = Post.objects.filter(status='Approved').order_by('-created_at')
-    
+
     try:
         p_ft = Post.objects.get(featured=True)
         common_tags = Post.tags.most_common()[:4]
@@ -66,20 +66,13 @@ def weekly_posts(request):
     one_week_ago = datetime.today() - timedelta(days=7)
 
     posts_list = Post.objects.filter(published_date__gte=one_week_ago, status='Approved').order_by('-created_at')
-   
+
     try:
         p_ft = Post.objects.get(featured=True)
         common_tags = Post.tags.most_common()[:4]
-
-        context = {
-            'posts_list':posts_list,
-            'p_ft':p_ft,
-            'form':EmailSignupForm(),
-            'common_tags':common_tags,
-        }
-        return render(request, template_name, context=context)
-    except:
-        pass
+    except Post.DoesNotExist:
+        p_ft = None
+        common_tags = None
 
     if request.method =="POST":
         if request.POST.get("operation") == "like_submit" and request.is_ajax():
@@ -108,6 +101,8 @@ def weekly_posts(request):
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
+        'common_tags':common_tags,
+        'p_ft':p_ft,
     }
 
     return render(request, template_name, context=context)
@@ -124,16 +119,9 @@ def monthly_posts(request):
     try:
         p_ft = Post.objects.get(featured=True)
         common_tags = Post.tags.most_common()[:4]
-
-        context = {
-            'posts_list':posts_list,
-            'p_ft':p_ft,
-            'form':EmailSignupForm(),
-            'common_tags':common_tags,
-        }
-        return render(request, template_name, context=context)
-    except:
-        pass
+    except Post.DoesNotExist:
+        p_ft = None
+        common_tags = None
 
     if request.method =="POST":
         if request.POST.get("operation") == "like_submit" and request.is_ajax():
@@ -162,6 +150,8 @@ def monthly_posts(request):
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
+        'common_tags':common_tags,
+        'p_ft':p_ft,
     }
 
     return render(request, template_name, context=context)
@@ -178,16 +168,9 @@ def yearly_posts(request):
     try:
         p_ft = Post.objects.get(featured=True)
         common_tags = Post.tags.most_common()[:4]
-
-        context = {
-            'posts_list':posts_list,
-            'p_ft':p_ft,
-            'form':EmailSignupForm(),
-            'common_tags':common_tags,
-        }
-        return render(request, template_name, context=context)
-    except:
-        pass
+    except Post.DoesNotExist:
+        p_ft = None
+        common_tags = None
 
     if request.method =="POST":
         if request.POST.get("operation") == "like_submit" and request.is_ajax():
@@ -216,6 +199,8 @@ def yearly_posts(request):
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
+        'common_tags':common_tags,
+        'p_ft':p_ft,
     }
 
     return render(request, template_name, context=context)
