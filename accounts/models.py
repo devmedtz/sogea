@@ -53,7 +53,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
+    EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
+
 
     def __str__(self):
         return self.email
@@ -115,7 +117,7 @@ class Profile(models.Model):
         return self.following.count()  
 
     def get_absolute_url(self):
-        return reverse('dashboard:profile_update', kwargs={'user_id':request.user.id})
+        return reverse('dashboard:profile_update', kwargs={'id': self.user.id})
 
     class Meta:
         ordering = ('-created_at',)
