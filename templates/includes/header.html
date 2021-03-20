@@ -40,6 +40,9 @@
 
                 <div class="card offcanvas-card bg-light my-3 border-0">
                     <div class="card-body d-grid gap-2">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'account_logout' %}" class="btn btn-secondary" type="button">logout</a>
+                        {% else %}
                         <a href="{% url 'account_signup' %}" class="btn btn-maroon">Create Account</a>
                         <a href="{% url 'account_login' %}" class="btn btn-outline-maroon" type="button">login</a> 
                         <h5 class="text-center my-2">OR</h5>
@@ -48,6 +51,7 @@
                                     <a title="{{provider.name}}" class="btn {% if provider.name == 'Google' %}btn-google{% endif %}"  
                                  href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fa fa-{{provider.name|lower}} me-2" id="social_icon"></i>Login with {{provider.name}}</a>
                                 {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
 
