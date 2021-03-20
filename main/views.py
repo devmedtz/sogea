@@ -13,7 +13,7 @@ def homepage(request):
 
     template_name = 'main/index.html'
 
-    posts_list = Post.objects.filter(status='Approved').order_by('-created_at')
+    posts_list = Post.objects.filter(status='Approved').exclude(featured=True).order_by('-created_at')
 
     try:
         p_ft = Post.objects.get(featured=True)
@@ -22,33 +22,7 @@ def homepage(request):
         p_ft = None
         common_tags = None
 
-    
-    if request.method =="POST":
-        print('in request')
-        if request.POST.get("operation") == "like_submit" and request.is_ajax():
-            content_id=request.POST.get("content_id",None)
-            print('content_id:',content_id)
-            content=get_object_or_404(Post, pk=content_id)
-            if content.likes.filter(id=request.user.id): #already liked the content
-                content.likes.remove(request.user) #remove user from likes 
-                liked=False
-            else:
-                content.likes.add(request.user) 
-                liked=True
-
-            context = {"likes_count":content.total_likes,"liked":liked,"content_id":content_id}
-
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
-        already_liked=[]
-        id=request.user.id
-        for content in posts_list:
-            if(content.likes.filter(id=id).exists()):
-                already_liked.append(content.id)
-
-        context = {"contents":contents,"already_liked":already_liked}
    
-
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
@@ -73,30 +47,6 @@ def weekly_posts(request):
     except Post.DoesNotExist:
         p_ft = None
         common_tags = None
-
-    if request.method =="POST":
-        if request.POST.get("operation") == "like_submit" and request.is_ajax():
-            content_id=request.POST.get("content_id",None)
-            content=get_object_or_404(Post, pk=content_id)
-            if content.likes.filter(id=request.user.id): #already liked the content
-                content.likes.remove(request.user) #remove user from likes 
-                liked=False
-            else:
-                content.likes.add(request.user) 
-                liked=True
-
-            context = {"likes_count":content.total_likes,"liked":liked,"content_id":content_id}
-
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
-        already_liked=[]
-        id=request.user.id
-        for content in posts_list:
-            if(content.likes.filter(id=id).exists()):
-                already_liked.append(content.id)
-
-        context = {"contents":contents,"already_liked":already_liked}
-   
 
     context = {
         'posts_list':posts_list,
@@ -123,30 +73,6 @@ def monthly_posts(request):
         p_ft = None
         common_tags = None
 
-    if request.method =="POST":
-        if request.POST.get("operation") == "like_submit" and request.is_ajax():
-            content_id=request.POST.get("content_id",None)
-            content=get_object_or_404(Post, pk=content_id)
-            if content.likes.filter(id=request.user.id): #already liked the content
-                content.likes.remove(request.user) #remove user from likes 
-                liked=False
-            else:
-                content.likes.add(request.user) 
-                liked=True
-
-            context = {"likes_count":content.total_likes,"liked":liked,"content_id":content_id}
-
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
-        already_liked=[]
-        id=request.user.id
-        for content in posts_list:
-            if(content.likes.filter(id=id).exists()):
-                already_liked.append(content.id)
-
-        context = {"contents":contents,"already_liked":already_liked}
-   
-
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
@@ -172,30 +98,6 @@ def yearly_posts(request):
         p_ft = None
         common_tags = None
 
-    if request.method =="POST":
-        if request.POST.get("operation") == "like_submit" and request.is_ajax():
-            content_id=request.POST.get("content_id",None)
-            content=get_object_or_404(Post, pk=content_id)
-            if content.likes.filter(id=request.user.id): #already liked the content
-                content.likes.remove(request.user) #remove user from likes 
-                liked=False
-            else:
-                content.likes.add(request.user) 
-                liked=True
-
-            context = {"likes_count":content.total_likes,"liked":liked,"content_id":content_id}
-
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
-        already_liked=[]
-        id=request.user.id
-        for content in posts_list:
-            if(content.likes.filter(id=id).exists()):
-                already_liked.append(content.id)
-
-        context = {"contents":contents,"already_liked":already_liked}
-   
-
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
@@ -208,13 +110,10 @@ def yearly_posts(request):
 
 def post_detail(request, post_slug):
 
-    try:
-        post = get_object_or_404(Post, slug=post_slug)
-        post.view_count += 1
-        post.save()
-    except ObjectDoesNotExist:
-        raise Http404
-
+    post = get_object_or_404(Post, slug=post_slug)
+    post.view_count += 1
+    post.save()
+ 
     post_bookmarks = PostBookmark.objects.filter(post=post).count()
 
     if request.user.is_authenticated:

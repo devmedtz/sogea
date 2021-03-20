@@ -12,4 +12,6 @@ urlpatterns = [
     path('save-post-bookmark/', views.save_post_bookmark, name='save_post_bookmark'),
     path('follow/', views.follow_profile, name='follow_profile'),
     path('search/', views.search, name='search'),
+
+    path('save_likes/', views.save_likes, name='save_likes'),
 ]

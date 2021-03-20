@@ -136,12 +136,12 @@
                             <div class="col-6">
                                 {% if request.user.is_authenticated %}
                                     {% if post.id in already_liked %}
-                                        <a name="{{post.id}}" class="likin" id="co" style="color: blue;"><i class="fa fa-thumbs-o-up me-2"></i></a><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
+                                        <a name="{{post.id}}" class="latest-likin" id="co" style="color: blue;"><i class="fa fa-thumbs-o-up me-2"></i></a><span class="me-3 likes-count-{{post.id}}">{{post.total_likes}}</span>
                                     {% else %}
-                                        <a name="{{ post.id }}" style="color: black;" class="likin" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
+                                        <a name="{{ post.id }}" style="color: black;" class="latest-likin" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 likes-count-{{post.id}}">{{post.total_likes}}</span>
                                     {% endif %}
                                 {% else %}
-                                    <a name="{{ post.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
+                                    <a name="{{ post.id }}" style="color: black;" class="latest-likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 likes-count-{{post.id}}">{{post.total_likes}}</span>
                                 {% endif %}
 
 
@@ -188,14 +188,14 @@
 {% block javascript %}
 
 <script>
-    // AJAX CALL
+    // AJAX CALL - Featured Post
     $('.likin').click(function(){
         var postID = $(this).attr('name');
         console.log(postID);
 
         $.ajax({
             type: "POST",
-            url: "{% url 'main:homepage' %}",
+            url: "{% url 'posts:save_likes' %}",
             data: {'content_id': $(this).attr('name'),'operation':'like_submit','csrfmiddlewaretoken': '{{ csrf_token }}'},
             dataType: "json",
             success: function(response) {
@@ -212,6 +212,37 @@
                 else if(response.liked==false){
                     $(selector).css("color","black");
                     $(".like-count-"+postID).text(parseInt(_prevlike)-1);
+                }
+            }
+        });
+    })
+</script>
+
+<script>
+    // AJAX CALL - Latest Post
+    $('.latest-likin').click(function(){
+        var postID = $(this).attr('name');
+        console.log(postID);
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'posts:save_likes' %}",
+            data: {'content_id': $(this).attr('name'),'operation':'like_submit','csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: "json",
+            success: function(response) {
+            selector = document.getElementsByName(response.content_id);
+
+            var _prevlike=$(".likes-count-"+postID).text();
+
+            console.log(_prevlike)
+
+                if(response.liked==true){
+                    $(selector).css("color","blue");
+                    $(".likes-count-"+postID).text(parseInt(_prevlike)+1);  
+                }
+                else if(response.liked==false){
+                    $(selector).css("color","black");
+                    $(".likes-count-"+postID).text(parseInt(_prevlike)-1);
                 }
             }
         });

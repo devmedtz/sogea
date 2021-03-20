@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.http import HttpResponseForbidden, JsonResponse
-from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
+import json
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
@@ -9,6 +10,36 @@ from taggit.models import Tag
 from .forms import PostForm
 from .models import Post, PostBookmark
 from accounts.models import Profile
+
+
+@login_required
+def save_likes(request):
+
+    if request.method =="POST":
+        print('in request')
+        if request.POST.get("operation") == "like_submit" and request.is_ajax():
+            content_id=request.POST.get("content_id",None)
+            print('content_id:',content_id)
+            content=get_object_or_404(Post, pk=content_id)
+            if content.likes.filter(id=request.user.id): #already liked the content
+                content.likes.remove(request.user) #remove user from likes 
+                liked=False
+            else:
+                content.likes.add(request.user) 
+                liked=True
+
+            context = {"likes_count":content.total_likes,"liked":liked,"content_id":content_id}
+
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        already_liked=[]
+        id=request.user.id
+        for content in posts_list:
+            if(content.likes.filter(id=id).exists()):
+                already_liked.append(content.id)
+
+        context = {"contents":contents,"already_liked":already_liked}
+    return HttpResponse('success')
 
 
 @login_required
