@@ -14,24 +14,20 @@ def homepage(request):
     template_name = 'main/index.html'
 
     posts_list = Post.objects.filter(status='Approved').order_by('-created_at')
-   
+    
     try:
         p_ft = Post.objects.get(featured=True)
         common_tags = Post.tags.most_common()[:4]
+    except Post.DoesNotExist:
+        p_ft = None
+        common_tags = None
 
-        context = {
-            'posts_list':posts_list,
-            'p_ft':p_ft,
-            'form':EmailSignupForm(),
-            'common_tags':common_tags,
-        }
-        return render(request, template_name, context=context)
-    except:
-        pass
-
+    
     if request.method =="POST":
+        print('in request')
         if request.POST.get("operation") == "like_submit" and request.is_ajax():
             content_id=request.POST.get("content_id",None)
+            print('content_id:',content_id)
             content=get_object_or_404(Post, pk=content_id)
             if content.likes.filter(id=request.user.id): #already liked the content
                 content.likes.remove(request.user) #remove user from likes 
@@ -56,6 +52,8 @@ def homepage(request):
     context = {
         'posts_list':posts_list,
         'form':EmailSignupForm(),
+        'common_tags':common_tags,
+        'p_ft':p_ft,
     }
 
     return render(request, template_name, context=context)
