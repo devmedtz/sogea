@@ -6,7 +6,7 @@
           MENU
         </button>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-          <li> <a class="dropdown-item {% active_link 'dashboard:dashboard' 'active' %}" href="{% url 'dashboard:dashboard' %}">Posts</a></li>
+          <li> <a class="dropdown-item {% active_link 'dashboard:dashboard' 'active' %}" href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
     
           <li><a class="dropdown-item {% active_link 'dashboard:reading_list' 'active' %}" href="{% url 'dashboard:reading_list' %}">Reading lists</a></li>
           <li><a class="dropdown-item {% active_link 'dashboard:profile_update' user.id 'active' %}" href="{% url 'dashboard:profile_update' user.id %}">Edit Profile</a></li>
