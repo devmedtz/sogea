@@ -62,10 +62,9 @@
                     <div class="col-9 d-flex justify-content-end">
                         <ul class="list-inline">
                             <li class="list-inline-item"><a class="{% active_link 'main:homepage' 'active' strict=True %}" href="{% url 'main:homepage' %}">Latest</a></li>
+                            <li class="list-inline-item"><a class="{% active_link 'main:yesterday_posts' 'active' strict=True %}" href="{% url 'main:yesterday_posts' %}">Yesterday</a></li>
                             <li class="list-inline-item"><a class="{% active_link 'main:week-post' 'active' strict=True %}" href="{% url 'main:week-post'  %}">Week</a></li>
-                            <li class="list-inline-item"><a class="{% active_link 'main:month-post' 'active' strict=True %}" href="{% url 'main:month-post' %}">Month</a></li>
-                            <li class="list-inline-item"><a class="{% active_link 'main:year-post' 'active' strict=True %}" href="{% url 'main:year-post' %}">Year</a></li>
-                            
+                            <li class="list-inline-item"><a class="{% active_link 'main:month-post' 'active' strict=True %}" href="{% url 'main:month-post' %}">Month</a></li>                           
                         </ul>
                     </div>
                 </div>

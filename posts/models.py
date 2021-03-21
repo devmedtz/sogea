@@ -19,11 +19,8 @@ from accounts.models import Profile
 
 User = get_user_model()
 
-def profile_pic_filename(instance, filename):
-    ext = filename.split('.')[1]
-    new_filename = f'{uuid4()}.{ext}'
-    return f'profile_pics/{new_filename}'
-
+def featured_image_path(instance, filename):
+    return f"{instance.author.pk}/posts/{instance.title}/{filename}/"
 
 class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -36,7 +33,7 @@ class Post(models.Model):
     view_count = models.PositiveIntegerField(default=0)
     comments = GenericRelation(Comment)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    featured_image = models.ImageField(upload_to='featured_pics/')
+    featured_image = models.ImageField(upload_to=featured_image_path)
     featured = models.BooleanField(default=False)
     tags = TaggableManager()
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
@@ -72,6 +69,26 @@ class Post(models.Model):
             random_code = datetime.now().strftime('%H%M%S')
             self.slug = str(random_code) + "-" + slugify(self.title)
         return super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "comment"
+
+
+class Reply(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "reply"
 
 
 class PostBookmark(models.Model):

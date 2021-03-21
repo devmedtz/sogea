@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='Author',
             fields=[
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='accounts.customuser')),
-                ('profile_picture', models.ImageField(default='static/images/default_profile.png', upload_to=posts.models.profile_pic_filename)),
+                ('profile_picture', models.ImageField(default='static/images/default_profile.png', upload_to=posts.models.featured_image_path)),
                 ('website', models.URLField(blank=True)),
                 ('country', django_countries.fields.CountryField(default='TZ', max_length=2, verbose_name='Country')),
                 ('location', models.CharField(max_length=200)),

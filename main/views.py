@@ -33,13 +33,38 @@ def homepage(request):
     return render(request, template_name, context=context)
 
 
+def yesterday_posts(request):
+
+    template_name = 'main/index.html'
+
+    one_day_ago = datetime.today() - timedelta(days=1)
+
+    posts_list = Post.objects.filter(published_date__gte=one_day_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+
+    try:
+        p_ft = Post.objects.get(featured=True)
+        common_tags = Post.tags.most_common()[:4]
+    except Post.DoesNotExist:
+        p_ft = None
+        common_tags = None
+
+    context = {
+        'posts_list':posts_list,
+        'form':EmailSignupForm(),
+        'common_tags':common_tags,
+        'p_ft':p_ft,
+    }
+
+    return render(request, template_name, context=context)
+
+
 def weekly_posts(request):
 
     template_name = 'main/index.html'
 
     one_week_ago = datetime.today() - timedelta(days=7)
 
-    posts_list = Post.objects.filter(published_date__gte=one_week_ago, status='Approved').order_by('-created_at')
+    posts_list = Post.objects.filter(published_date__gte=one_week_ago, status='Approved').exclude(featured=True).order_by('-created_at')
 
     try:
         p_ft = Post.objects.get(featured=True)
@@ -64,7 +89,7 @@ def monthly_posts(request):
 
     one_month_ago = datetime.today() - timedelta(days=30)
 
-    posts_list = Post.objects.filter(published_date__gte=one_month_ago, status='Approved').order_by('-created_at')
+    posts_list = Post.objects.filter(published_date__gte=one_month_ago, status='Approved').exclude(featured=True).order_by('-created_at')
    
     try:
         p_ft = Post.objects.get(featured=True)
@@ -89,7 +114,7 @@ def yearly_posts(request):
 
     one_year_ago = datetime.today() - timedelta(days=365)
 
-    posts_list = Post.objects.filter(published_date__gte=one_year_ago, status='Approved').order_by('-created_at')
+    posts_list = Post.objects.filter(published_date__gte=one_year_ago, status='Approved').exclude(featured=True).order_by('-created_at')
    
     try:
         p_ft = Post.objects.get(featured=True)
