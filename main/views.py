@@ -64,7 +64,7 @@ def weekly_posts(request):
 
     one_week_ago = datetime.today() - timedelta(days=7)
 
-    posts_list = Post.objects.filter(created_at__gte__gte=one_week_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(created_at__gte=one_week_ago, status='Approved').exclude(featured=True).order_by('-created_at')
 
     try:
         p_ft = Post.objects.get(featured=True)
@@ -89,7 +89,7 @@ def monthly_posts(request):
 
     one_month_ago = datetime.today() - timedelta(days=30)
 
-    posts_list = Post.objects.filter(created_at__gte__gte=one_month_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(created_at__gte=one_month_ago, status='Approved').exclude(featured=True).order_by('-created_at')
    
     try:
         p_ft = Post.objects.get(featured=True)
