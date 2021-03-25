@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load socialaccount %}
-{% load comment_tags %}
 {% load widget_tweaks %}
 {% load active_link_tags %}
 
@@ -99,7 +98,7 @@
                                     <a name="{{ p_ft.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 like-count-{{p_ft.id}}">{{p_ft.total_likes}}</span>
                                 {% endif %} 
 
-                                <a href=""><i class="fa fa-comments-o me-2"></i> {% get_comments_count p_ft user %} </a>
+                                <a href=""><i class="fa fa-comments-o me-2"></i> 23 </a>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex d-flex justify-content-end">
@@ -144,7 +143,7 @@
                                 {% endif %}
 
 
-                                <a href=""><i class="fa fa-comments-o me-2"></i> {% get_comments_count post user %} </a>
+                                <a href=""><i class="fa fa-comments-o me-2"></i> 767 </a>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex d-flex justify-content-end">

@@ -15,7 +15,6 @@ django-ckeditor = "*"
 django-countries = "*"
 django-taggit = "*"
 readtime = "*"
-django-comments-dab = "*"
 djangorestframework = "*"
 django-social-share = "*"
 django-active-link = "*"
@@ -24,6 +23,9 @@ django-s3direct = "*"
 django-storages = "*"
 boto3 = "*"
 django-inlinecss = "*"
+django-comments-dab = "*"
+django-comments-xtd = "*"
+django-ajax-comments = "*"
 
 [dev-packages]
 

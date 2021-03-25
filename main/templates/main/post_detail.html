@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% load comment_tags %}
 {% load static %}
 {% load social_share %}
 
@@ -291,7 +290,11 @@
                         {% post_to_whatsapp post.get_absolute_url %}    
                     </div>
                     <div>
+                        {% load comment_tags %}  
                         {% render_comments post request %}
+
+                        <!-- {% include 'main/includes/comments.html' %} -->
+                      
                     </div>
                 </div>
             </div>
@@ -378,6 +381,9 @@
 {% endblock %}
 
 {% block javascript %}
+
+ <!-- <script src="{% static 'js/comments/comment.js' %}"></script> -->
+
 <script>
     // AJAX CALL - desktop
     $('.likin').click(function(){

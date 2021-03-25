@@ -1,0 +1,22 @@
+<div class="d-flex flex-column" id="reply_{{ reply.pk }}">
+    <div class="d-flex flex-row user-info">
+        <img class="rounded-circle me-2" src="{{ reply.author.profile_picture.url }}" width="40" height="40">
+        <div class="d-flex flex-column ml-2">
+            <span class="d-block font-weight-bold">@{{ reply.author.user.username }}</span><span class="date text-black-50">{{ reply.date|date:"d M, Y" }}</span>
+        </div>   
+    </div>
+    <div class="reply-content">
+        <p>{{ reply.text|safe }}</p>
+    </div>
+
+    <div class="d-flex flex-row fs-12">
+        <div class="like-button p-2 cursor">
+            <i class="fa fa-thumbs-o-up me-2"></i><span class="ml-1">Like</span>
+        </div>
+        {% if reply.author.pk == profile.pk %}
+            <a href="{% url 'posts:update-reply' pk=reply.pk %}" data-url="{% url 'posts:update-reply' pk=reply.pk %}" class="p-2 js-update-reply" data-reply="{{ reply.pk }}"><i class="fa fa-pencil me-2"></i><span class="ml-1">Edit</span></a>
+
+            <a href="{% url 'posts:delete-reply' pk=reply.pk %}" data-url="{% url 'posts:delete-reply' pk=reply.pk %}" class="p-2 js-delete-reply" data-reply="{{ reply.pk }}"><i class="fa fa-times-circle me-2"></i><span class="ml-1">Delete</span></a>
+        {% endif %}
+    </div>
+</div>

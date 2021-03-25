@@ -14,4 +14,20 @@ urlpatterns = [
     path('search/', views.search, name='search'),
 
     path('save_likes/', views.save_likes, name='save_likes'),
+
+    path('ajax-authenticate-user/', views.ajax_authenticate_user, name='ajax_authenticate_user'),
+
+    #Comment Crud
+    path("comment/create/<int:post_pk>", views.CommentCreate.as_view(), name="create-comment"),
+
+    path("comment/update/<int:pk>/", views.CommentUpdate.as_view(), name="update-comment"),
+
+    path("comment/delete/<int:pk>/", views.CommentDelete.as_view(), name="delete-comment"),
+
+    #Reply Crud
+    path("reply/create/<int:comment_pk>", views.ReplyCreate.as_view(), name="create-reply"),
+
+    path("reply/update/<int:pk>/", views.ReplyUpdate.as_view(), name="update-reply"),
+
+    path("reply/delete/<int:pk>/", views.ReplyDelete.as_view(), name="delete-reply"),
 ]

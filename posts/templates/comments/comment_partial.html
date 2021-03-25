@@ -1,0 +1,26 @@
+<div class="grid-x comment" id="comment_{{ comment.pk }}">
+    <div class="cell small-2 avatar-cell">
+        <img alt="" class="avatar" src="{{ comment.author.profile_picture.url }}">
+    </div>
+    <div class="cell auto">
+        <p>
+            <a href="#" style="color: rgb(0,0,0)">{{ comment.author.user.username }}</a>
+        </p>
+        <p>
+            <small><span>{{ comment.date|date:"d M, Y" }}/ </span>
+                <a href="{% url 'posts:create-reply' comment_pk=comment.pk %}"
+                   data-url="{% url 'posts:create-reply' comment_pk=comment.pk %}" class="js-reply-to-comment"
+                   data-comment="{{ comment.pk }}">Reply/</a></small>
+            {% if comment.author.pk == profile.pk %}
+                <small><a href="{% url 'posts:update-comment' pk=comment.pk %}"
+                          class="js-update-comment" data-url="{% url 'posts:update-comment' pk=comment.pk %}">edit/</a>
+                </small>
+                <small><a href="{% url 'posts:delete-comment' pk=comment.pk %}"
+                          data-url="{% url 'posts:delete-comment' pk=comment.pk %}" class="js-delete-comment"
+                          data-comment="{{ comment.pk }}">delete/</a></small>
+            {% endif %}
+        </p>
+        <p>{{ comment.text }}</p>
+    </div>
+</div>
+   

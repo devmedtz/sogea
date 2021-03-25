@@ -10,10 +10,11 @@ from django.contrib.auth import get_user_model
 from django_countries.fields import CountryField
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
-from django.contrib.contenttypes.fields import GenericRelation
 from PIL import Image
 
+from django.contrib.contenttypes.fields import GenericRelation
 from comment.models import Comment
+
 from .choices import *
 from accounts.models import Profile
 
@@ -31,12 +32,14 @@ class Post(models.Model):
     slug = models.SlugField(default='', max_length=250, editable=False, unique=True)
     content = RichTextUploadingField(blank=False)
     view_count = models.PositiveIntegerField(default=0)
-    comments = GenericRelation(Comment)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     featured_image = models.ImageField(upload_to=featured_image_path)
     featured = models.BooleanField(default=False)
     tags = TaggableManager()
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
+
+    # the field name should be comments
+    comments = GenericRelation(Comment)
 
     status = models.CharField(max_length=100, choices=STATUS, default='Pending')
     
@@ -80,6 +83,9 @@ class Comment(models.Model):
     def __str__(self):
         return "comment"
 
+    class Meta:
+        ordering = ['-date',]
+
 
 class Reply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
@@ -89,6 +95,9 @@ class Reply(models.Model):
 
     def __str__(self):
         return "reply"
+
+    class Meta:
+        ordering = ['-date',]
 
 
 class PostBookmark(models.Model):

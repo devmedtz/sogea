@@ -159,7 +159,7 @@ def post_detail(request, post_slug):
         else:
             follow = False
 
-        context = {'post':post,'post_state':post_state,'post_bookmarks':post_bookmarks,'like_state':like_state, 'follow':follow}
+        context = {'post':post,'post_state':post_state,'post_bookmarks':post_bookmarks,'like_state':like_state, 'follow':follow, 'profile':my_profile}
 
         template_name = 'main/post_detail.html'
 
