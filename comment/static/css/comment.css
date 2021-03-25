@@ -4,7 +4,7 @@
     box-shadow: 0 0 0 .2em #c8e1ff;
 }
 .js-comment-content {
-    font-size: 16px;
+    font-size: 1.1rem;
 }
 .js-comment-content>.js-comment-urlhash {
     opacity: 1;
@@ -13,15 +13,9 @@
     text-decoration: none;
     transition: opacity 200ms ease-in-out;
 }
-#comments .border-bottom {
-    border-bottom: 3px solid #00bc8c !important;
-}
-#comments .hr {
-    margin-top: 0.2rem;
-    margin-bottom: 2.5rem;
-}
 #comments .bb {
-    padding-bottom: 0.3rem;
+    padding-bottom: 2px;
+    border-bottom: 3px solid #00bc8c;
 }
 #comments .text-wrap {
     word-wrap: break-word;
@@ -37,12 +31,13 @@
     cursor: not-allowed;
 }
 #comments textarea {
-    min-height: 60px;
-    padding: 4px 15px !important;
+    min-height: 31px;
+    padding: 4px 15px;
     overflow: hidden;
+    resize: none;
 }
-#comments textarea:focus {
-    border: 1px solid maroon;
+#comments textarea:focus, #comments textarea:hover {
+    border: 1px solid #00bc8c;
     outline: none;
 }
 .form-control:focus::placeholder,
@@ -53,28 +48,31 @@ input#search-input:focus::placeholder {
 #comments .js-comment-input:invalid {
     box-shadow: none;
 }
-#comments .js-comment-input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(75, 142, 213, 0.25);
-}
 #comments .edit-comment::before {
     content: none;
 }
 #comments .btn-link {
-    text-decoration: none !important;
+    text-decoration: none;
     padding: 0;
     font-size: 100%;
     font-weight: 400;
+}
+#comments .read-more {
+    font-size: 0.9rem;
 }
 #comments .user-has-reacted,
 #comments .user-has-flagged {
     fill: #ffc96c;
 }
+
 #comments .user-has-not-reacted,
-#comments .user-has-not-flagged {
+#comments .user-has-not-flagged,
+#comments .user-has-followed {
     fill: none;
 }
 #comments .user-has-flagged,
-#comments .user-has-not-flagged {
+#comments .user-has-not-flagged,
+#comments .comment-follow-icon {
     cursor: pointer;
 }
 .flag-modal textarea {
@@ -84,7 +82,8 @@ input#search-input:focus::placeholder {
     color: #999;
 }
 .flag-rejected,
-.flag-resolved {
+.flag-resolved,
+#comments .user-has-followed {
     stroke: #00bc8c;
 }
 .comment-modal {
@@ -149,4 +148,37 @@ input#search-input:focus::placeholder {
     color: #78281f;
     background-color: #fadbd8;
     border-color: #f8cdc8;
+}
+
+.three-dots {
+    position: relative;
+    width: 5px;
+    height: 5px;
+    background-color: #666;
+    border-radius: 50%;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.three-dots-wrapper {
+    cursor: pointer;
+    width: 10px;
+    padding: 3px;
+}
+
+.three-dots-dropdown {
+    position: absolute;
+    background-color: #f9f9f9;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    right: 0;
+}
+.three-dots-dropdown > li {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 10px;
+}
+.three-dots-dropdown > li:hover {
+    background: #f1f1f1;
 }

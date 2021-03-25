@@ -11,30 +11,27 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
 
         if not email:
-            raise ValueError('You must have an Email Address')
-        
-        if not username:
-            raise ValueError('Username field not empty')
+            raise ValueError('Staff must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
-            username=self.normalize_username(username)
+            username=username,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password=None):
+    def create_superuser(self, email,username, password=None, *args, **kwargs):
 
         user = self.create_user(
             email,
-            username,
-            password=password
+            username=username,
+            password=password,
         )
         user.is_active = True
+        is_admin=True
         user.is_superuser = True
-        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -59,9 +56,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email',]
 
     def __str__(self):
-        return self.username
+        return self.email
 
     def has_module_perms(self, app_label):
         return True
