@@ -61,9 +61,12 @@ def profile_update(request, id):
     return render(request, template_name, context)
 
 
+@login_required
 def reading_list(request):
 
-    posts = PostBookmark.objects.all().order_by('-created_at')
+    user = request.user
+    
+    posts = PostBookmark.objects.filter(user=user).order_by('-created_at')
 
     context = {'posts':posts}
     
