@@ -1,6 +1,6 @@
 #comments :target {
     border: 1px solid #2188ff;
-    border-radius: 6px;
+    border-radius: 10px;
     box-shadow: 0 0 0 .2em #c8e1ff;
 }
 .js-comment-content {
@@ -15,7 +15,7 @@
 }
 #comments .bb {
     padding-bottom: 2px;
-    border-bottom: 3px solid #00bc8c;
+    border-bottom: 3px solid maroon;
 }
 #comments .text-wrap {
     word-wrap: break-word;
@@ -31,13 +31,14 @@
     cursor: not-allowed;
 }
 #comments textarea {
-    min-height: 31px;
+    min-height: 60px;
     padding: 4px 15px;
     overflow: hidden;
     resize: none;
 }
 #comments textarea:focus, #comments textarea:hover {
-    border: 1px solid #00bc8c;
+    border: 1px solid maroon;
+    border-radius: 10px;
     outline: none;
 }
 .form-control:focus::placeholder,
@@ -181,4 +182,8 @@ input#search-input:focus::placeholder {
 }
 .three-dots-dropdown > li:hover {
     background: #f1f1f1;
+}
+
+button:hover{
+    cursor: pointer;
 }

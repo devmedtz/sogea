@@ -13,6 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
         'X-CSRFToken': csrfToken,
         'Content-Type': 'application/x-www-form-urlencoded'
     };
+
+    // Redirect user to login when click comment/reply textarea
+    $('.comment-form').on('click', function () {
+        let login_url = $('#auth').attr('data-login-url');
+        let url = $('#auth').attr('data-ajax-authenticator');
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+                if (data.status == false) {
+                    window.location.href = login_url;
+                }
+                else if (data.status== true) {
+                    return
+                }
+            }
+        });
+    });
+
     document.getElementsByClassName(".js-comment-input").value = '';
     let removeTargetElement = () => {
         let currentHeight = window.pageYOffset;

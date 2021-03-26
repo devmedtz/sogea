@@ -74,32 +74,6 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    text = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "comment"
-
-    class Meta:
-        ordering = ['-date',]
-
-
-class Reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    text = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "reply"
-
-    class Meta:
-        ordering = ['-date',]
-
-
 class PostBookmark(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

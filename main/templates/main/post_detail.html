@@ -2,6 +2,7 @@
 {% load humanize %}
 {% load static %}
 {% load social_share %}
+{% load comment_tags %}  
 
 {% block title %} {{post.title}} {% endblock title %}
 
@@ -290,10 +291,10 @@
                         {% post_to_whatsapp post.get_absolute_url %}    
                     </div>
                     <div>
-                        {% load comment_tags %}  
+                    
                         {% render_comments post request %}
 
-                        <!-- {% include 'main/includes/comments.html' %} -->
+                        <input id="auth" type="hidden" data-login-url="{% url 'account_login' %}?next={{request.path}}" data-ajax-authenticator = "{% url 'posts:ajax_authenticate_user' %}">
                       
                     </div>
                 </div>

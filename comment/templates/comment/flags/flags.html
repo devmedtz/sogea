@@ -5,7 +5,7 @@
     {% include "comment/flags/flag_icon.html" %}
 </span>
 {% else %}
-<a class="js-comment-flag" href="{{ login_url }}/?next={{ request.build_absolute_uri }}" title="{% trans "flag" %}">
+<a href="{{ login_url }}?next={{comment.content_object.get_absolute_url}}" title="{% trans "flag" %}">
     {% include "comment/flags/flag_icon.html" %}
 </a>
 {% endif %}

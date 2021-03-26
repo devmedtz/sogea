@@ -1,5 +1,6 @@
 {% load comment_tags %}
 {% load i18n %}
+{% load humanize %}
 
 <div class="js-updated-comment {% if comment.has_flagged_state %}flagged-comment {% endif %}{% block content_wrapper_cls %}{% if has_valid_profile %}col-9 col-md-10{% else %}co-11 mx-3{% endif %}{% endblock content_wrapper_cls %}" id="{{ comment.urlhash }}">
     {% block comment_content %}
@@ -15,9 +16,9 @@
                 {% get_username_for_comment comment %}
             </{% if comment.user %}a{% else %}span{% endif %}> |
             {% if comment.is_edited %}
-            <span class="font-italic" title="{% trans 'Edited' %}">{% blocktrans with edited_time=comment.edited|timesince %}Edited: {{ edited_time }} ago{% endblocktrans %}</span>
+            <span class="font-italic" title="{% trans 'Edited' %}">{% blocktrans with edited_time=comment.edited|naturaltime %}Edited: {{ edited_time }}{% endblocktrans %}</span>
             {% else %}
-            <span class="font-italic" title="{% trans 'Posted' %}">{% blocktrans with posted_time=comment.posted|timesince %}{{ posted_time }} ago{% endblocktrans %}</span>
+            <span class="font-italic" title="{% trans 'Posted' %}">{% blocktrans with posted_time=comment.posted|naturaltime %}{{ posted_time }}{% endblocktrans %}</span>
             {% endif %}
             {% can_delete_comment comment user as can_delete %}
             {% if comment.user == user %}

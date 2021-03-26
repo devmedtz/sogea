@@ -3,7 +3,7 @@
     {% if has_valid_profile %}
         <div class="{% block image_wrapper_cls %}col-2 col-md-1{% endblock image_wrapper_cls %}">
             <a href="{% get_profile_url comment %}">
-                <img class="{% block image_cls %}w-100{% endblock image_cls %}"
+                <img class="rounded-circle {% block image_cls %}w-100{% endblock image_cls %}" height="40" width="40"
                      src="{% get_img_path comment %}" alt="{% get_username_for_comment comment %}">
             </a>
         </div>
