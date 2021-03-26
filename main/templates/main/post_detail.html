@@ -316,16 +316,16 @@
                             {% else %}
                             <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" value="{{post.author.profile.pk}}" class="btn btn-maroon mx-3">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
                             {% endif %}
+                            <div class="mx-3 text-center my-2">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><i class="fa fa-users text-maroon" aria-hidden="true"></i></li>
+                                    <li class="list-inline-item"><b>{{followers}}</b> followers</li>
+                                    <li class="list-inline-item"><b>{% if following %}{{following}}{% else %}0{% endif %}</b> following</li>
+                                  </ul>
+                            </div>
                             {% else %}
                             <a class="btn btn-maroon mx-3" href="{% url 'account_login' %}?next={{request.path}}">Follow</a>
                             {% endif %}
-                        </div>
-                        <div class="mx-3 text-center my-2">
-                            <ul class="list-inline">
-                                <li class="list-inline-item"><i class="fa fa-users text-maroon" aria-hidden="true"></i></li>
-                                <li class="list-inline-item"><b>{{followers}}</b> followers</li>
-                                <li class="list-inline-item"><b>{% if following %}{{following}}{% else %}0{% endif %}</b> following</li>
-                              </ul>
                         </div>
                          
                         <hr>

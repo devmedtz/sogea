@@ -139,15 +139,15 @@ def post_detail(request, post_slug):
     post.view_count += 1
     post.save()
 
-    profile = Profile.objects.get(user=post.author)
-    following = profile.following.count()
-    followers = post.author.profile.following.count()
- 
     post_bookmarks = PostBookmark.objects.filter(post=post).count()
 
-    try:
+    if request.user.is_authenticated:
         post_state = PostBookmark.objects.filter(user=request.user, post=post)
         like_state = post.likes.filter(id=request.user.id)
+
+        profile = Profile.objects.get(user=request.user)
+        following = profile.following.count()
+        followers = post.author.profile.following.count()
 
         #follow
   
@@ -163,23 +163,24 @@ def post_detail(request, post_slug):
         else:
             follow = False
 
-    except Post.DoesNotExist:
-        post_state = None
-        post_bookmarks = None
-        like_state = None
-        follow = None
-        my_profile = None
+        context = {
+            'followers':followers,
+            'following':following,
+            'post_state':post_state,
+            'like_state':like_state, 
+            'follow':follow, 
+            'profile':my_profile,
+            'post':post,
+            'post_bookmarks':post_bookmarks,
+        }
+
+        template_name = 'main/post_detail.html'
+
+        return render(request, template_name, context)
 
     context = {
         'post':post,
         'post_bookmarks':post_bookmarks,
-        'followers':followers,
-        'following':following,
-        'post_state':post_state,
-        'post_bookmarks':post_bookmarks,
-        'like_state':like_state, 
-        'follow':follow, 
-        'profile':my_profile
     }
 
     template_name = 'main/post_detail.html'
