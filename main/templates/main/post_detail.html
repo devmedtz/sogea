@@ -236,14 +236,14 @@
                         <a name="{{post.id}}" class="likin" id="co" style="color: black;"><i class="my-float fa fa-thumbs-o-up me-2"></i></a><br><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
                         {% endif %}
                     {% else %}
-                        <a name="{{ post.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up my-float me-2" aria-hidden="true"></i></a><br><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
+                        <a name="{{ post.id }}" style="color: black;" class="likin" href="{% url 'account_login' %}?next={{request.path}}" id="co"><i class="fa fa-thumbs-o-up my-float me-2" aria-hidden="true"></i></a><br><span class="me-3 like-count-{{post.id}}">{{post.total_likes}}</span>
                     {% endif %} 
                 </div>
                 <div class="col-12">
                     {% if request.user.is_authenticated %}
                     <i class="bookmark-click fa fa-bookmark-o me-2 my-float {% if post_state %}text-primary{% endif %}" data-url="{% url 'posts:save_post_bookmark' %}" id="{{post.id}}"></i><br><span class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}}</span>
                     {% else %}
-                    <a name="{{ post.id }}" style="color: black;" href="{% url 'account_login' %}" id="{{post.id}}"><i class="bookmark-click fa fa-bookmark-o me-2 my-float" aria-hidden="true"></i></a><br><span class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}}</span>
+                    <a name="{{ post.id }}" style="color: black;" href="{% url 'account_login' %}?next={{request.path}}" id="{{post.id}}"><i class="bookmark-click fa fa-bookmark-o me-2 my-float" aria-hidden="true"></i></a><br><span class="{% if post_state %}text-primary{% endif %} me-3 bookmark-count-{{post.id}}">{{post_bookmarks}}</span>
                     {% endif %}
                   
                 </div>
@@ -311,11 +311,21 @@
 
                         <div class="d-grid gap-2">
                             {% if request.user.is_authenticated %}
-                            <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" value="{{post.author.profile.pk}}" class="btn btn-maroon mx-3">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
+                            {% if user.profile == post.author.profile %}
+                            <a href="{% url 'dashboard:profile_update' user.id %}" class="btn btn-secondary mx-3">Edit Profile</a>
                             {% else %}
-                            <a class="btn btn-maroon mx-3" href="{% url 'account_login' %}">Follow</a>
+                            <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" value="{{post.author.profile.pk}}" class="btn btn-maroon mx-3">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
                             {% endif %}
-                            
+                            {% else %}
+                            <a class="btn btn-maroon mx-3" href="{% url 'account_login' %}?next={{request.path}}">Follow</a>
+                            {% endif %}
+                        </div>
+                        <div class="mx-3 text-center my-2">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i class="fa fa-users text-maroon" aria-hidden="true"></i></li>
+                                <li class="list-inline-item"><b>{{followers}}</b> followers</li>
+                                <li class="list-inline-item"><b>{% if following %}{{following}}{% else %}0{% endif %}</b> following</li>
+                              </ul>
                         </div>
                          
                         <hr>
@@ -366,14 +376,14 @@
                 <a name="{{post.id}}" class="mobile-likin" id="co" style="color: black;"><i class="fa fa-thumbs-o-up me-2 my-3 fa-2x"></i></a><span class="me-3 m-like-count-{{post.id}}">{{post.total_likes}} likes</span>
             {% endif %}
             {% else %}
-                <a name="{{ post.id }}" style="color: black;" class="mobile-likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2 my-3 fa-2x" aria-hidden="true"></i></a><span class="me-3 m-like-count-{{post.id}}">{{post.total_likes}} likes</span>
+                <a name="{{ post.id }}" style="color: black;" class="mobile-likin" href="{% url 'account_login' %}?next={{request.path}}" id="co"><i class="fa fa-thumbs-o-up me-2 my-3 fa-2x" aria-hidden="true"></i></a><span class="me-3 m-like-count-{{post.id}}">{{post.total_likes}} likes</span>
             {% endif %}
         </div>
         <div class="col-6">
             {% if request.user.is_authenticated %}
                 <i class="mobile-bookmark-click fa fa-bookmark-o me-2 my-3 fa-2x {% if post_state %}text-primary{% endif %}" data-url="{% url 'posts:save_post_bookmark' %}" id="{{post.id}}"></i><span class="me-3 m-bookmark-count-{{post.id}}">{{post_bookmarks}} save</span>
             {% else %}
-                <a name="{{ post.id }}" style="color: black;"  href="{% url 'account_login' %}" id="{{post.id}}"><i class="bookmark-click fa fa-bookmark-o me-2 my-3 fa-2x" aria-hidden="true"></i></a><p class="me-3 m-bookmark-count-{{post.id}}">{{post_bookmarks}} saved</p>
+                <a name="{{ post.id }}" style="color: black;"  href="{% url 'account_login' %}?next={{request.path}}" id="{{post.id}}"><i class="bookmark-click fa fa-bookmark-o me-2 my-3 fa-2x" aria-hidden="true"></i></a><p class="me-3 m-bookmark-count-{{post.id}}">{{post_bookmarks}} saved</p>
             {% endif %}
         </div>
     </div>

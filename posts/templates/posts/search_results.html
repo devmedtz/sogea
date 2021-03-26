@@ -104,7 +104,11 @@
                         </div>                   
                     </div>
                 </a>
-                
+                {% empty %}
+                    <div class="text-center">
+                        <img class="my-5" src="{% static 'images/no_item.svg' %}" height="170" width="auto" alt="no_item"><br>
+                        <h3>Sorry no results found!</h3>
+                    </div>
                 {% endfor %}
             </div>
         </div>

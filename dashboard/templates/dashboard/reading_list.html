@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Reading Lists {% endblock title %}
 
@@ -27,6 +28,11 @@
                                         <a class="text-primary" href="{% url 'main:post_detail' post.post.slug %}"><strong>{{post.post.title}}</strong></a>
                                     </td>
                                 </tr>
+                                {% empty %}
+                                <div class="text-center">
+                                    <img src="{% static 'images/no_item.svg' %}" height="100" width="auto" alt="no_item"><br>
+                                    <a class="btn btn-primary my-3">Save a Post for Future Reading</a>
+                                </div>
                                 {% endfor %}
                             </tbody>
                         </table>
