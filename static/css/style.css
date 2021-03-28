@@ -61,6 +61,9 @@ html, body {
 .bg-gray{
   background-color: #d2d6db;
 }
+.mobile-bg-gray{
+  background-color: #d2d6dbcc;
+}
 .btn-maroon {
   color: #fff;
   background-color: #c1272d;

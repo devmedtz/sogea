@@ -136,8 +136,10 @@ def yearly_posts(request):
 def post_detail(request, post_slug):
 
     post = get_object_or_404(Post, slug=post_slug)
-    post.view_count += 1
-    post.save()
+
+    if not request.user == post.author:
+        post.view_count += 1
+        post.save()
 
     post_bookmarks = PostBookmark.objects.filter(post=post).count()
 
