@@ -57,15 +57,21 @@ def save_likes(request):
 def follow_profile(request):
     
     my_profile = Profile.objects.get(user=request.user)
+
     pk = request.GET.get('profile_pk')
+
     obj = Profile.objects.get(pk=pk)
 
-    if obj.user in my_profile.following.all():
-        my_profile.following.remove(obj.user)
-        return JsonResponse({'bool': False})
+    if obj.user == request.user:
+        print('cant follow your self')
+        return JsonResponse({'status': 'none'})
     else:
-        my_profile.following.add(obj.user)
-        return JsonResponse({'bool': True})
+        if obj.user in my_profile.following.all():
+            my_profile.following.remove(obj.user)
+            return JsonResponse({'bool': False})
+        else:
+            my_profile.following.add(obj.user)
+            return JsonResponse({'bool': True})
 
 
 @login_required

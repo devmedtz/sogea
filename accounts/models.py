@@ -59,7 +59,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email',]
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def has_module_perms(self, app_label):
         return True
@@ -82,7 +82,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
 
-    following = models.ManyToManyField(CustomUser, related_name='following', blank=True)
+    following = models.ManyToManyField(CustomUser, related_name='follows', blank=True, symmetrical=False)
 
  
     profile_picture = models.ImageField(upload_to=profile_pic_filename, default='profile_pics/default_profile.png')
@@ -100,6 +100,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    class Meta:
+       unique_together = (("user", "following"),)
 
     @property
     def profiles_posts(self):

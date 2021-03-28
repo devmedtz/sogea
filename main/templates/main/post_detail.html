@@ -314,12 +314,12 @@
                             {% if user.profile == post.author.profile %}
                             <a href="{% url 'dashboard:profile_update' user.id %}" class="btn btn-secondary mx-3">Edit Profile</a>
                             {% else %}
-                            <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" value="{{post.author.profile.pk}}" class="btn btn-maroon mx-3">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
+                            <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" post_id="{{post.id}}" value="{{post.author.profile.pk}}" class="btn mx-3 {% if follow %}btn-success{% else %}btn-maroon{% endif %}">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
                             {% endif %}
                             <div class="mx-3 text-center my-2">
                                 <ul class="list-inline">
                                     <li class="list-inline-item"><i class="fa fa-users text-maroon" aria-hidden="true"></i></li>
-                                    <li class="list-inline-item"><b>{{followers}}</b> followers</li>
+                                    <li class="list-inline-item followers-count-{{post.id}}"><b>{{followers}}</b> followers</li>
                                     <li class="list-inline-item"><b>{% if following %}{{following}}{% else %}0{% endif %}</b> following</li>
                                   </ul>
                             </div>
@@ -523,6 +523,7 @@
         $(document).ready(function() {
             $('#follow-button').click(function() {
                 var url = $(this).attr('data-url');
+                var postID = $(this).attr('post_id');
                 var profile_pk = $(this).val();
                 console.log(url);
                 console.log(profile_pk);
@@ -534,11 +535,25 @@
                         'profile_pk':profile_pk
                     },
                     success: function (res) {
-                        if (res.bool == true) {
+                        var _prevfollowers=$(".followers-count-"+postID).text();
+
+                        if (res.status == 'none') {
+                            $("#follow-button").html("You can't follow yourself");
+                            $("#follow-button").removeClass("btn-maroon");
+                            $("#follow-button").removeClass("btn-success");
+                            $("#follow-button").addClass("btn-warning");
+                        }
+                        else if (res.bool == true) {
                             $("#follow-button").html("Unfollow");
+                            $("#follow-button").addClass("btn-success");
+                            $("#follow-button").removeClass("btn-maroon");
+                            $(".followers-count-"+postID).text(parseInt(_prevfollowers)+1 + " followers");
                         }
                         else if(res.bool==false){
                             $("#follow-button").html("follow");
+                            $("#follow-button").addClass("btn-maroon");
+                            $("#follow-button").removeClass("btn-success");
+                            $(".followers-count-"+postID).text(parseInt(_prevfollowers)-1 + " followers");
                         }
                     }
                 })

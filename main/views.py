@@ -145,9 +145,9 @@ def post_detail(request, post_slug):
         post_state = PostBookmark.objects.filter(user=request.user, post=post)
         like_state = post.likes.filter(id=request.user.id)
 
-        profile = Profile.objects.get(user=request.user)
-        following = profile.following.count()
-        followers = post.author.profile.following.count()
+
+        following = post.author.profile.following.count()
+        followers = Profile.objects.filter(following=post.author).count()
 
         #follow
   
@@ -158,8 +158,6 @@ def post_detail(request, post_slug):
 
         if view_profile.user in my_profile.following.all():
             follow = True
-        elif view_profile == my_profile:
-            follow = 'hide'
         else:
             follow = False
 
