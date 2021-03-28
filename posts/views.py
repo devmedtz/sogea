@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import permission_required
 from django.views.generic import View
 from django.contrib import messages
 from taggit.models import Tag
+from django.db.models import Count, Q
 
 from .forms import PostForm
 from .models import Post, PostBookmark
@@ -176,7 +177,7 @@ def search(request):
     if 'query' in request.GET: 
         query = request.GET.get('query')
         if query:
-            queryset = queryset.filter(title__icontains=query)
+            queryset = queryset.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
 
     context = {
         'posts_list': queryset,
