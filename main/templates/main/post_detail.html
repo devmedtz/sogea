@@ -255,7 +255,8 @@
         
         <div class="col-lg-8 offset-lg-1 ">
             <div class="card">
-                <img src="{{post.featured_image.url}}" class="card-img-top" width="100%" height="auto" alt="{{post.title}}">
+                <img src="{{post.featured_image.url}}" class="card-img-top d-none d-lg-block" width="100%" height="auto" alt="{{post.title}}">
+                <img src="{{post.featured_image.url}}" class="d-lg-none" width="100%" height="auto" alt="{{post.title}}">
                 <div class="card-body">
                     <h4 class="title card-title">{{post.title}}</h4>
                     {% for t in post.tags.all %}

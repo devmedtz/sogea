@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-9 d-flex justify-content-end">
                         <ul class="list-inline">
-                            <li class="list-inline-item"><a class="{% active_link 'main:homepage' 'active' strict=True %}" href="{% url 'main:homepage' %}">Latest</a></li>
+                            <li class="list-inline-item"><a class="{% active_link 'main:homepage' 'active' strict=True %}" href="{% url 'main:homepage' %}">All</a></li>
                             <li class="list-inline-item"><a class="{% active_link 'main:yesterday_posts' 'active' strict=True %}" href="{% url 'main:yesterday_posts' %}">Yesterday</a></li>
                             <li class="list-inline-item"><a class="{% active_link 'main:week-post' 'active' strict=True %}" href="{% url 'main:week-post'  %}">Week</a></li>
                             <li class="list-inline-item"><a class="{% active_link 'main:month-post' 'active' strict=True %}" href="{% url 'main:month-post' %}">Month</a></li>                           
@@ -72,7 +72,10 @@
                 {% if p_ft %}
                     <a href="{% url 'main:post_detail' p_ft.slug %}">
                     <div class="card mb-3 border-0 shadow-sm">
-                        <img src="{{p_ft.featured_image.url}}" class="card-img-top" alt="{{p_ft.title}}">
+                        
+                        <img src="{{p_ft.featured_image.url}}" class="card-img-top d-none d-lg-block" width="100%" height="auto" alt="{{p_ft.title}}">
+                        <img src="{{p_ft.featured_image.url}}" class="d-lg-none" width="100%" height="auto" alt="{{p_ft.title}}">
+
                         <div class="card-body">
                             <h5 class="title card-title">{{p_ft.title}}</h5>
                             <ul class="list-inline">
