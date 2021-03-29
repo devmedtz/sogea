@@ -184,3 +184,17 @@ def search(request):
         'values':request.GET,
     }
     return render(request, 'posts/search_results.html', context)
+
+
+def post_tag_list(request, tag):
+
+    queryset = Post.objects.filter(status='Approved',tags__name__icontains=tag).order_by('-created_at')
+
+    context = {
+        'posts_list': queryset,
+        'tag':tag,
+    }
+
+    template_name = 'posts/tags_post_list.html'
+
+    return render(request, template_name, context)

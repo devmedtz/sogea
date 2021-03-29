@@ -4,7 +4,7 @@
 {% load comment_tags %}
 {% load widget_tweaks %}
 
-{% block title %} {{values.query}} {% endblock %}
+{% block title %} {{tag}} {% endblock %}
 
 {% block stylesheet %}
 <style>
@@ -46,19 +46,9 @@
                 
             </div>
             <div class="col-lg-7 mt-3">
-                <div class="d-lg-none">
-                    <form id="mobile-search-form" method="GET" action=".">
-                        <div class="input-group mb-3 mt-2">
-                            <input type="search" id="form1" name="query" class="form-control" placeholder="Search...." value="{{values.query}}">
-                            <button type="submit" class="btn btn-maroon">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
                 <div class="row">
                     <div class="col-12">
-                        <h4><b>Search Results</b></h4>
+                        <h4><b>Post Tag List</b></h4>
                     </div>
                 </div>
 

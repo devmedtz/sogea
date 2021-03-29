@@ -85,7 +85,7 @@
                             
                             <small class="py-3"> 
                                 {% for mt in common_tags %}
-                                <a href="#">
+                                <a href="{% url 'posts:post_tag_list' mt %}">
                                     <span class="badge bg-success">#{{mt}}</span>
                                 </a>
                                 {% endfor %}
@@ -130,7 +130,7 @@
                             
                             <small class="py-3"> 
                                 {% for t in post.tags.all %}
-                                <a href="#">
+                                <a href="{% url 'posts:post_tag_list' t %}">
                                     <span class="badge bg-success">#{{t}}</span>
                                 </a>
                                 {% endfor %}

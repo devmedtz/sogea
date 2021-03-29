@@ -336,3 +336,8 @@ html, body {
     height: 50px;
     border: 2px solid #51D2B7;
   }
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #c1272d;
+}

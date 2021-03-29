@@ -260,7 +260,7 @@
                 <div class="card-body">
                     <h4 class="title card-title">{{post.title}}</h4>
                     {% for t in post.tags.all %}
-                    <a href="#">
+                    <a href="{% url 'posts:post_tag_list' t %}">
                         <span class="badge bg-success">#{{t}}</span>
                     </a>
                     {% endfor %}

@@ -62,7 +62,7 @@
                                     {% render_field form.tags class="form-control" %}
                                     <small class="my-3">Common Tags: 
                                         {% for mt in common_tags %}
-                                        <a href="#">
+                                        <a href="{% url 'posts:post_tag_list' mt %}">
                                             <span class="badge bg-success">{{mt}}</span>
                                         </a>
                                         {% endfor %}
