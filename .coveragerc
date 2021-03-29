@@ -1,0 +1,10 @@
+[coverage:run]
+omit =
+	manage.py
+	*/migrations/*
+	*/__init__.py
+	*/settings.py
+	*/apps.*
+	*/tests/*
+	*/site-packages/*
+	*/admin.py
