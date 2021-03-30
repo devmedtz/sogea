@@ -314,12 +314,14 @@
                         <p class="">{{post.author.profile.bio|safe}}</p>
 
                         <div class="d-grid gap-2">
+                            <a class="btn btn-primary mx-3" href="{% url 'accounts:profile_detail' post.author.username %}">View</a>
                             {% if request.user.is_authenticated %}
                             {% if user.profile == post.author.profile %}
                             <a href="{% url 'dashboard:profile_update' user.id %}" class="btn btn-secondary mx-3">Edit Profile</a>
                             {% else %}
                             <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" post_id="{{post.id}}" value="{{post.author.profile.pk}}" class="btn mx-3 {% if follow %}btn-success{% else %}btn-maroon{% endif %}">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
                             {% endif %}
+                            
                             <div class="mx-3 text-center my-2">
                                 <ul class="list-inline">
                                     <li class="list-inline-item"><i class="fa fa-users text-maroon" aria-hidden="true"></i></li>
@@ -331,21 +333,7 @@
                             <a class="btn btn-maroon mx-3" href="{% url 'account_login' %}?next={{request.path}}">Follow</a>
                             {% endif %}
                         </div>
-                         
-                        <hr>
-                        <div>
-                            <ul>
-                                {% if post.author.profile.website %}
-                                <li><b>Web:</b> <a href="{{post.author.profile.website}}" target="_blank">{{post.author.profile.website}}</a></li>
-                                {% endif %}
-                                {% if post.author.profile.location %}
-                                <li><b>Location:</b> {{post.author.profile.location}}</li>
-                                {% endif %}
-                                {% if post.author.profile.display_email == True %}
-                                <li><b>Email:</b> {{post.author.email}}</li>
-                                {% endif %}
-                            </ul>
-                        </div>
+                        
                         <hr>
                         <div class="row justify-content-center user-social-link">
                             {% if post.author.profile.youtube_link %}

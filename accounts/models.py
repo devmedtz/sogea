@@ -97,6 +97,7 @@ class Profile(models.Model):
     facebook_link = models.URLField(verbose_name='Facebook URL', blank=True, null=True)
     instagram_link = models.URLField(verbose_name='Instagram URL', blank=True, null=True)
     linkedin_link = models.URLField(verbose_name='Linkedin URL', blank=True, null=True)
+    twitter_link = models.URLField(verbose_name='Twitter URL', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -113,7 +114,7 @@ class Profile(models.Model):
         return self.following.count()  
 
     def get_absolute_url(self):
-        return reverse('main:homepage')
+        return reverse('account:profile_detail', kwargs={'username':self.user.username})
 
     class Meta:
         ordering = ('-created_at',)

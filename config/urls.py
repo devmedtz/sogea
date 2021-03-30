@@ -9,6 +9,8 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('accounts/', include('allauth.urls')),
 
+    path('account/', include('accounts.urls', namespace='account')),
+
     path('posts/', include('posts.urls', namespace='posts')),
     path('dashboard/', include('dashboard.urls', namespace='dashboard')),
     path('marketing/', include('marketing.urls', namespace='marketing')),

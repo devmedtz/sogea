@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load comment_tags %}
+
+{% block title %}{{profile.user.username}} profile{% endblock title %}
+
+{% block stylesheet %}
+
+<style>
+    .card {
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1rem;
+    }
+
+    .gutters-sm {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+    .gutters-sm>.col, .gutters-sm>[class*=col-] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    .mb-3, .my-3 {
+        margin-bottom: 1rem!important;
+    }
+    .h-100 {
+        height: 100%!important;
+    }
+    .shadow-none {
+        box-shadow: none!important;
+    }
+</style>
+{% endblock stylesheet %}
+
+{% block content %}
+
+<div class="container margin-top-120">
+    <div class="main-body">
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="{{profile.profile_picture.url}}" alt="Admin" class="rounded-circle" width="150" height="150">
+                        <div class="mt-3">
+                            <h4>{{profile.user.username}}</h4>
+                            <div class="my-2 text-center">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><i class="fa fa-users text-maroon" aria-hidden="true"></i></li>
+                                    <li class="list-inline-item followers-count-{{profile.pk}}"><b>{{followers}}</b> followers</li>
+                                    <li class="list-inline-item"><b>{% if following %}{{following}}{% else %}0{% endif %}</b> following</li>
+                                </ul>
+                            </div>
+                            <p class="text-primary mb-1">{{profile.bio|safe}}</p>
+                            <p class="text-muted fs-6"><i class="fa fa-map-marker me-2" aria-hidden="true"></i>{{profile.location}}</p>
+                            {% if request.user.is_authenticated %}
+                            {% if user.profile == post.author.profile %}
+                                <a href="{% url 'dashboard:profile_update' user.id %}" class="btn btn-secondary mx-3">Edit Profile</a>
+                            {% else %}
+                            <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" profile_id="{{profile.pk}}" value="{{profile.pk}}" class="btn mx-3 {% if follow %}btn-success{% else %}btn-maroon{% endif %}">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
+                            {% endif %}
+                            {% else %}
+                            <a class="btn btn-maroon mx-3" href="{% url 'account_login' %}?next={{request.path}}">Follow</a>
+                            {% endif %}
+                        </div>
+                        <div class="mt-4 text-center">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="{{profile.linkedin_link}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>
+                                <li class="list-inline-item"><a href="{{profile.twitter_link}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
+                                <li class="list-inline-item"><a href="{{profile.instagram_link}}" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li class="list-inline-item"><a href="{{profile.facebook_link}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li class="list-inline-item"><a href="{{profile.youtube_link}}" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3><b>All Activity</b></h3>
+                        {% for post in posts_list %}
+                        <a href="{% url 'main:post_detail' post.slug %}">
+                            <div class="card mb-2 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="title card-title">{{post.title}}</h5>
+                                    <ul class="list-inline">
+                                        <li class="author list-inline-item">@{{post.author.username}}</li>
+                                    </ul>
+                                    
+                                    <small class="py-3"> 
+                                        {% for t in post.tags.all %}
+                                        <a href="{% url 'posts:post_tag_list' t %}">
+                                            <span class="badge bg-success">#{{t}}</span>
+                                        </a>
+                                        {% endfor %}
+                                    </small>
+                                    <div class="row mt-3">
+                                    <div class="col-6">
+                                        {% if request.user.is_authenticated %}
+                                            {% if post.id in already_liked %}
+                                                <a name="{{post.id}}" class="latest-likin" id="co" style="color: blue;"><i class="fa fa-thumbs-o-up me-2"></i></a><span class="me-3 likes-count-{{post.id}}">{{post.total_likes}}</span>
+                                            {% else %}
+                                                <a name="{{ post.id }}" style="color: black;" class="latest-likin" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 likes-count-{{post.id}}">{{post.total_likes}}</span>
+                                            {% endif %}
+                                        {% else %}
+                                            <a name="{{ post.id }}" style="color: black;" class="latest-likin" href="{% url 'account_login' %}" id="co"><i class="fa fa-thumbs-o-up me-2" aria-hidden="true"></i></a><span class="me-3 likes-count-{{post.id}}">{{post.total_likes}}</span>
+                                        {% endif %}
+
+
+                                        <a><i class="fa fa-comments-o me-2"></i> {% get_comments_count post user %} </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex d-flex justify-content-end">
+                                            <small class="text-muted me-2">{{post.view_count}} <i class="fa fa-eye"></i></small>
+                                            <small class="text-muted me-3">{{post.get_readtime}} read</small>
+                                        </div>
+                                    </div>
+                                    </div>
+                                
+                                </div>                   
+                            </div>
+                        </a>
+                        {% empty %}
+                            <div class="text-center mb-5">
+                                <img class="my-5" src="{% static 'images/no_item.svg' %}" height="150" width="auto" alt="no_item"><br>
+                                <h6>Sorry, no Activity found!</h6>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+        $('#follow-button').click(function() {
+            var url = $(this).attr('data-url');
+            var profileID = $(this).attr('profile_id');
+            var profile_pk = $(this).val();
+
+            $.ajax({
+                url:url,
+                type: 'GET',
+                data:{
+                    'profile_pk':profile_pk
+                },
+                success: function (res) {
+                    var _prevfollowers=$(".followers-count-"+profileID).text();
+
+                    if (res.status == 'none') {
+                        $("#follow-button").html("You can't follow yourself");
+                        $("#follow-button").removeClass("btn-maroon");
+                        $("#follow-button").removeClass("btn-success");
+                        $("#follow-button").addClass("btn-warning");
+                    }
+                    else if (res.bool == true) {
+                        $("#follow-button").html("Unfollow");
+                        $("#follow-button").addClass("btn-success");
+                        $("#follow-button").removeClass("btn-maroon");
+                        $(".followers-count-"+profileID).text(parseInt(_prevfollowers)+1 + " followers");
+                    }
+                    else if(res.bool==false){
+                        $("#follow-button").html("follow");
+                        $("#follow-button").addClass("btn-maroon");
+                        $("#follow-button").removeClass("btn-success");
+                        $(".followers-count-"+profileID).text(parseInt(_prevfollowers)-1 + " followers");
+                    }
+                }
+            })
+        }); 
+    });
+</script>
+{% endblock javascript %}

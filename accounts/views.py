@@ -1,14 +1,13 @@
-# from django.contrib.auth.views import LoginView, LogoutView
-
 from allauth.account.views import LoginView, SignupView
 
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views.generic import TemplateView, CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from accounts.forms import SignUpForm, MyAuthForm
-from accounts.models import CustomUser
+from accounts.models import CustomUser, Profile
+from posts.models import Post
 
 
 class UserLoginView(LoginView):
@@ -25,24 +24,44 @@ class UserLoginView(LoginView):
             return f'/admin/'
 
 
-class Signup(LoginRequiredMixin, UserPassesTestMixin, SignupView):
-    form_class = SignUpForm
-    template_name = 'accounts/signup.html'
-    success_url = reverse_lazy('accounts:login')
+def profile_detail(request, username):
 
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        if request.method == 'POST':
-            if form.is_valid():
-                user = form.save()
-                user.save()
+    profile = get_object_or_404(Profile, user__username=username)
 
-                return self.form_valid(form)
-            else:
-                return self.form_invalid(form)
+    posts_list = Post.objects.filter(status='Approved', author=profile.user).exclude(featured=True).order_by('-created_at')
 
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
+    #follow
+    following = profile.following.count()
+    followers = Profile.objects.filter(following=profile.user).count()
 
+    if request.user.is_authenticated:
+        my_profile = Profile.objects.get(user=request.user)
+
+        if profile.user in my_profile.following.all():
+            follow = True
+        else:
+            follow = False
+
+        context = {
+            'profile':profile,
+            'posts_list':posts_list,
+            'following':following,
+            'followers':followers,
+            'follow':follow
+            }
+
+        template_name = 'profile/profile_detail.html'
+
+        return render(request, template_name, context)
+
+
+    context = {
+        'profile':profile,
+        'posts_list':posts_list,
+        'following':following,
+        'followers':followers,
+    }
+
+    template_name = 'profile/profile_detail.html'
+
+    return render(request, template_name, context=context)
