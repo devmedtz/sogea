@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Followers {% endblock title %}
+
+{% block stylesheet %}
+{% endblock stylesheet %} 
+
+{% block content %}
+
+<div class="container margin-top-80 pt-5 margin-bottom-60" style="min-height: 100vh;">
+
+    <div class="row">
+        <div class="col-lg-3 nav-pills">
+            {% include 'dashboard/includes/sidebar.html' %}
+        </div>
+        <div class="col-lg-9">
+            {% include 'dashboard/includes/mobile_sidebar.html' %}
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="pb-3">
+                        <h4><strong>Followers ({{followers.count}})</strong></h4>
+                    </div>
+
+                    <div class="row">
+                        {% for follower in followers %}
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card border-0 shadow-sm">
+                                <a href="{% url 'accounts:profile_detail' follower.user.username %}">
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <img src="{{follower.profile_picture.url}}" class="rounded-circle" width="100" height="100" alt="profile-image">
+                                        </div>
+                                        <p class="my-3 text-primary text-center"><b>@{{follower.user.username}}</b></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center">
+                            <img src="{% static 'images/no_item.svg' %}" height="100" width="auto" alt="no_item"><br>
+                            <a class="btn btn-primary my-3">Save a Post for Future Reading</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

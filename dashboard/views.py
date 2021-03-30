@@ -11,21 +11,20 @@ from .forms import ProfileForm
 
 @login_required
 def dashboard(request):
-
     user = request.user
-
     posts = Post.objects.filter(author=user).order_by('-created_at')
-
     post_views = posts.aggregate(total=Sum('view_count'))
-
     profile = Profile.objects.get(user=user)
     following = profile.following.count()
+
+    followers = Profile.objects.filter(following=profile.user).count()
 
     context = {
         'posts':posts,
         'post_views':post_views,
         'total_post':posts.count(),
         'following':following,
+        'followers':followers,
     }
 
     template_name = 'dashboard/index.html'
@@ -71,5 +70,35 @@ def reading_list(request):
     context = {'posts':posts}
     
     template_name = 'dashboard/reading_list.html'
+
+    return render(request, template_name, context)
+
+def followers(request):
+
+    
+    profile = get_object_or_404(Profile, pk=request.user.profile.pk)
+
+    followers = Profile.objects.filter(following=profile.user)
+
+    context ={
+        'followers':followers
+    }
+
+    template_name = 'dashboard/followers.html'
+
+    return render(request, template_name, context)
+
+def following(request):
+
+    profile = get_object_or_404(Profile, pk=request.user.profile.pk)
+
+    following = profile.following.all()
+    print(following)
+
+    context ={
+        'following':following
+    }
+
+    template_name = 'dashboard/following.html'
 
     return render(request, template_name, context)

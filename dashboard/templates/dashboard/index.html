@@ -37,18 +37,22 @@
             </div>
             <div class="col-lg-3">
                 <div class="card border-0 shadow-sm p-2">
-                    <div class="card-body">
-                        <h3><strong>{{user.following.all.count}}</strong></h3>
-                        <p>Followers</p>
-                    </div>
+                    <a href="{% url 'dashboard:followers' %}">
+                        <div class="card-body">
+                            <h3><strong>{{followers}}</strong></h3>
+                            <p>Followers</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="card border-0 shadow-sm p-2">
-                    <div class="card-body">
-                        <h3><strong>{{following}}</strong></h3>
-                        <p>Following</p>
-                    </div>
+                    <a href="{% url 'dashboard:following' %}">
+                        <div class="card-body">
+                            <h3><strong>{{following}}</strong></h3>
+                            <p>Following</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
