@@ -1,0 +1,68 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Technology Homesite">
+    <meta name="generator" content="Sogea Platform">
+
+    <title>Sogea Dashboard - {% block title %}{% endblock title %}</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'admins/css/dashboard.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- fontawesome icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'images/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
+    {% block stylesheet %}{% endblock stylesheet %}
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  <body class="bg-light">
+    
+    {% include 'admins/includes/header.html' %}
+
+    <div class="container-fluid">
+      <div class="row">
+        {% include 'admins/includes/sidebar.html' %}
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+    </div>
+
+    {% include 'admins/includes/scripts.html' %}
+
+    {% block javascript %}{% endblock javascript %}
+
+  </body>
+</html>

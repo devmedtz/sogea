@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'posts',
     'dashboard',
     'marketing',
+    'admins',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_social_share',
     'active_link',
+    'analytical',
 
     'allauth',
     'allauth.account',
@@ -324,3 +326,7 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+#DJANGO ANALYTICS
+GOOGLE_ANALYTICS_PROPERTY_ID =  'UA-193498519-1'
+#ANALYTICAL_INTERNAL_IPS = ['192.168.1.45', '192.168.1.57']

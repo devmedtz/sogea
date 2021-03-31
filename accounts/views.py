@@ -1,4 +1,5 @@
-from allauth.account.views import LoginView, SignupView
+
+from django.contrib.auth.views import LoginView, LogoutView
 
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views.generic import TemplateView, CreateView
@@ -11,17 +12,19 @@ from posts.models import Post
 
 
 class UserLoginView(LoginView):
-    template_name = 'accounts/login.html'
+    template_name = 'admins/login.html'
     form_class = MyAuthForm
 
     def get_success_url(self):
         url = self.get_redirect_url()
         if url:
             return url
-        elif self.request.user.is_admin:
-            return reverse('admins:dashboard')
+        if self.request.user.is_admin or self.request.user.is_moderator:
+            return reverse('admins:admin_dashboard')
+        if self.request.user.is_superuser:
+            return f'/superuser/'
         else:
-            return f'/admin/'
+            return f'/'
 
 
 def profile_detail(request, username):

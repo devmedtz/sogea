@@ -1,0 +1,55 @@
+{% load static %}
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Technology Homesite">
+    <title>Sogea Admin Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'admins/css/signin.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    
+<main class="form-signin">
+    <form method="POST" action="" >{% csrf_token %}
+        <img class="mb-4" src="{% static 'images/logo-desktop.png' %}" alt="">
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible fade show">
+                {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="input-group mb-3">
+            {% render_field form.username class="form-control" placeholder=form.username.label %}
+        </div>
+        <div class="input-group mb-3">
+            {% render_field form.password class="form-control" placeholder=form.password.label %}
+        </div>
+
+        <button type="submit" class="btn btn-maroon btn-block mb-3">Sign In</button>
+        
+        <div class="row">
+            <div class="col-12 col-md mt-3">
+                <p class="mb-1"><b>Sogea Community</b>  &copy; 2021 - <script>document.write(new Date().getFullYear())</script></p>
+            </div>
+        </div>
+    </form>
+</main>
+
+
+    
+  </body>
+</html>

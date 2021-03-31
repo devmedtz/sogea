@@ -1,0 +1,61 @@
+{% extends 'admins/includes/base.html' %}
+{% load static %} 
+
+{% block title %}{% endblock title %}
+
+{% block stylesheet %}{% endblock stylesheet %}
+
+{% block content %} 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row pb-5 h-100 g-3">
+    <div class="col-lg-3">
+        <div class="card border-top shadow-sm p-2">
+            <div class="card-body">
+                <h3><strong>{{approved_posts}}</strong></h3>
+                <p>Approved Posts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card border-0 shadow-sm p-2">
+            <div class="card-body">
+                <h3><strong>
+                    {{pending_posts}}
+                </strong></h3>
+                <p>Pending Posts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card border-0 shadow-sm p-2">
+            <div class="card-body">
+                <h3><strong>{{total_user}}</strong></h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card border-0 shadow-sm p-2">
+            <a href="{% url 'dashboard:following' %}">
+                <div class="card-body">
+                    <h3><strong>{{following}}</strong></h3>
+                    <p>Following</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block javascript %}{% endblock javascript %}
