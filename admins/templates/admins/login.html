@@ -22,7 +22,7 @@
 <main class="form-signin">
     <form method="POST" action="" >{% csrf_token %}
         <img class="mb-4" src="{% static 'images/logo-desktop.png' %}" alt="">
-        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <h1 class="h3 mb-3 fw-normal">Admin Login</h1>
         
         {% if form.non_field_errors %}
             {% for error in form.non_field_errors %}

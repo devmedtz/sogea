@@ -28,7 +28,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     {% block stylesheet %}{% endblock stylesheet %}
-    {% analytical_head_top %}{% analytical_head_bottom %}
 
     <title>Sogea Community - {% block title %}{% endblock %}</title>
 </head>
@@ -43,7 +42,7 @@
 
     {% include 'includes/scripts.html' %}
     {% block javascript %}{% endblock javascript %}
-    {% analytical_body_top %}{% analytical_body_bottom %}
+
 </body>
 
 </html>

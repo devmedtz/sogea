@@ -1,4 +1,5 @@
     {% load static %}
+    {% load active_link_tags %}
 
     <footer class="footer container-fluid pt-5 pb-3 bg-gray text-muted text-center text-small">
         <div class="row">
@@ -8,9 +9,8 @@
                     <li class="list-inline-item"><a href="#">Job Listing</a></li>
                     <li class="list-inline-item"><a href="#">Podcast</a></li>
                     <li class="list-inline-item"><a href="#">Videos</a></li>
-                    <li class="list-inline-item"><a href="#">Tags</a></li>
-                    <li class="list-inline-item"><a href="#">Code of Conduct</a></li>
-                    <li class="list-inline-item"><a href="#">FAQ</a></li>
+                    <li class="list-inline-item"><a class="nav-link {% active_link 'main:code_of_conduct' 'active' %}" href="{% url 'main:code_of_conduct' %}">Code of Conduct</a></li>
+                    <li class="list-inline-item"><a href="{% url 'main:faq' %}">FAQ</a></li>
                     <li class="list-inline-item"><a href="#">Sponsors</a></li>
                 </ul>
             </div>
@@ -19,10 +19,10 @@
             <div class="col-12 col-md">
                 <ul class="list-inline ">
                     
-                    <li class="list-inline-item"><a href="#">About</a></li>
-                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                    <li class="list-inline-item"><a href="#">Terms of use</a></li>
-                    <li class="list-inline-item"><a href="#">contact</a></li>
+                    <li class="list-inline-item"><a href="{% url 'main:about' %}">About</a></li>
+                    <li class="list-inline-item"><a href="{% url 'main:privacy_policy' %}">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="{% url 'main:terms_of_use' %}">Terms of use</a></li>
+                    <li class="list-inline-item"><a href="{% url 'main:contacts' %}">contact</a></li>
                     {% if not request.user.is_authenticated %}
                     <li class="list-inline-item"><a href="{% url 'account_login' %}"><b>Login</b></a></li>
                     <li class="list-inline-item"><a href="{% url 'account_signup' %}"><b>Signup</b></a></li>
@@ -34,16 +34,16 @@
         </div>
         <div class="row">
             <div class="col-12 col-md">
-                <p class="mb-3"><b>Sogea Community</b> – Is the platform help people to upscale their skills and knowledge in Agriculture, Financial and Information Technology (IT) <br>The Platform developed and Managed by <a href="http://technologyhomesite.com" target="_blank"></a><b>Technology Homesite, - </b><small>Tanzania Software Development Company</small></p>
+                <p class="mb-3"><b>Sogea Community</b> – Is the platform help people to upscale their skills and knowledge in Agriculture, Financial and Information Technology (IT) <br>The Platform developed and Managed by <a href="https://technologyhomesite.com" target="_blank"><b>Technology Homesite,</a> - </b><small>Tanzania Software Development Company</small></p>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md icon border-bottom border-light">
                 <ul class="list-inline ">
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-github-square fa-2x"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-youtube-play fa-2x"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.instagram.com/sogea_community/" target="_blank"><i class="fa fa-instagram fa-2x"></i></a></li>
+                    <li class="list-inline-item"><a href="https://github.com/devmedtz/sogea.git" target="_blank"><i class="fa fa-github-square fa-2x"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.linkedin.com/company/sogea-community" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                    <!-- <li class="list-inline-item"><a href="#"><i class="fa fa-youtube-play fa-2x"></i></a></li> -->
                 </ul>
             </div>
         </div>

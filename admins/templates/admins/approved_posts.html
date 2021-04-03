@@ -1,0 +1,46 @@
+{% extends 'admins/includes/base.html' %}
+{% load static %} 
+
+{% block title %}Approved Posts{% endblock title %}
+
+{% block stylesheet %}{% endblock stylesheet %}
+
+{% block content %} 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Approved Posts</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'admins:admin_dashboard' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Approved Post</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row pb-5 h-100 g-3">
+    <div class="card border-o shadow-sm">
+        <div class="card-body">
+            <table class="table table-borderless">
+                {% for post in posts %}
+                <tr>
+                    <td>{{forloop.counter}}.</td>
+                    <td>
+                        <a class="text-primary" href="{% url 'main:post_detail' post.slug %}"><strong>{{post.title}}</strong></a>
+                    </td>
+                    <td>
+                        <span class="badge {% if post.status == 'Pending' %}bg-warning{% else %}bg-success{% endif %}">{{post.status}}</span>
+                    </td>
+                    <td>
+                        <a class="text-primary" href="{% url 'posts:edit_post' post.id %}"><i class="fa fa-edit me-2"></i></a>
+                        <a class="text-danger confirm-delete" href="{% url 'posts:delete_post' post.id %}"><i class="fa fa-times-circle"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block javascript %}{% endblock javascript %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %} 
+
+{% block title %}FAQ {% endblock %} 
+
+{% block stylesheet %} 
+<style>
+    p{
+        font-size: 18px;
+    }
+</style>
+{% endblock stylesheet %} 
+
+{% block content %}
+<div class="container" style="min-height: 100vh;">
+    <div class="row margin-top-120 margin-bottom-60">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h3 class="my-3"><strong>Frequently Asked Question</strong></h3>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Who can post to sogea.co.tz?
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <p>Anyone! Yes, you have permission to make a new post of any kind as long as it meets our community guidelines and gets through common-sense spam filters. Your post is subject to removal at the discretion of the moderators if they believe it does not meet the requirements of our <a class="text-primary" href="{% url 'main:code_of_conduct' %}">code of conduct</a>.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I post article on sogea.co.tz?
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <p>Click on "Write a Post" in the top right corner of the site. Write your article, give it a title, tag it with appropriate tags, and fill out any other relevant fields. Then, once you're ready. We will review your post by our moderators after pass Your post will now be published.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How do I get featured on the home page?
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <p>The home page is selected by our editorial team. You can email us with any specific questions.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block javascript %} {% endblock javascript %}

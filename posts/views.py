@@ -87,7 +87,7 @@ def create_edit_post(request, id=None):
     else:
         obj = Post(author=user)
 
-    posts = Post.objects.order_by('-created_at')
+    posts = Post.objects.order_by('-published_date')
 
     # Show most common tags 
     common_tags = Post.tags.most_common()[:4]
@@ -139,17 +139,6 @@ def delete_post(request, id):
     return redirect(reverse("dashboard:dashboard"))
 
 
-def tagged(request, slug):
-    tag = get_object_or_404(Tag, slug=slug)
-    # Filter posts by tag name  
-    posts = Post.objects.filter(tags=tag)
-    context = {
-        'tag':tag,
-        'posts':posts,
-    }
-    return render(request, 'home.html', context)
-
-
 @login_required
 def save_post_bookmark(request):
 
@@ -172,27 +161,36 @@ def save_post_bookmark(request):
 
 
 def search(request):
-    queryset = Post.objects.filter(status='Approved').order_by('-created_at')
+    queryset = Post.objects.filter(status='Approved').order_by('-published_date')
 
     if 'query' in request.GET: 
         query = request.GET.get('query')
         if query:
             queryset = queryset.filter(Q(title__icontains=query) | Q(tags__name__icontains=query)).distinct()
 
+    
+    # Show most common tags 
+    common_tags = Post.tags.most_common()[:5]
+
     context = {
         'posts_list': queryset,
         'values':request.GET,
+        'common_tags':common_tags,
     }
     return render(request, 'posts/search_results.html', context)
 
 
 def post_tag_list(request, tag):
 
-    queryset = Post.objects.filter(status='Approved',tags__name__icontains=tag).order_by('-created_at')
+    queryset = Post.objects.filter(status='Approved',tags__name__icontains=tag).order_by('-published_date')
+
+        # Show most common tags 
+    common_tags = Post.tags.most_common()[:5]
 
     context = {
         'posts_list': queryset,
         'tag':tag,
+        'common_tags':common_tags,
     }
 
     template_name = 'posts/tags_post_list.html'

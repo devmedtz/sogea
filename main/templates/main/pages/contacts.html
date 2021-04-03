@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+
+{% block title %}Contacts {% endblock %} 
+
+{% block stylesheet %} 
+<style>
+    p{
+        font-size: 18px;
+    }
+</style>
+{% endblock stylesheet %} 
+
+{% block content %}
+<div class="container" style="min-height: 100vh;">
+    <div class="row margin-top-120 margin-bottom-60">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h3 class="my-3"><strong>Contacts</strong></h3>
+                <p>We would love to hear from you!</p>
+                <p><b>Email: </b><strong><a class="text-primary" href="mailto:info@sogea.co.tz">info@sogea.co.tz</a></strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block javascript %} {% endblock javascript %}

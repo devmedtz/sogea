@@ -267,7 +267,7 @@
                     <ul class="list-inline py-3">
                         <li class="list-inline-item"><img class="image-circle rounded-circle"src="{{post.author.profile.profile_picture.url}}" alt="{{post.title}}"></li>
                         <li class="author list-inline-item">@{{post.author.username}}</li>
-                        <li class="list-inline-item">{{ post.created_at|naturaltime }}  <i class="fa fa-clock-o ms-2" aria-hidden="true"></i> {{post.get_readtime}} read</li>
+                        <li class="list-inline-item">{{ post.published_date|naturaltime }}  <i class="fa fa-clock-o ms-2" aria-hidden="true"></i> {{post.get_readtime}} read</li>
                     </ul>
                     <div>
                         {% post_to_facebook post.get_absolute_url %}

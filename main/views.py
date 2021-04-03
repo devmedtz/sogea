@@ -13,7 +13,7 @@ def homepage(request):
 
     template_name = 'main/index.html'
 
-    posts_list = Post.objects.filter(status='Approved').exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(status='Approved').exclude(featured=True).order_by('-published_date')
 
     try:
         p_ft = Post.objects.get(featured=True)
@@ -39,7 +39,11 @@ def yesterday_posts(request):
 
     one_day_ago = datetime.today() - timedelta(days=1)
 
-    posts_list = Post.objects.filter(created_at__lte=one_day_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+    print(one_day_ago)
+
+    posts_list = Post.objects.filter(published_date__lte=one_day_ago, status='Approved').exclude(featured=True).order_by('-published_date')
+
+    print('posts_list:',posts_list)
 
     try:
         p_ft = Post.objects.get(featured=True)
@@ -64,7 +68,7 @@ def weekly_posts(request):
 
     one_week_ago = datetime.today() - timedelta(days=7)
 
-    posts_list = Post.objects.filter(created_at__lte=one_week_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(published_date__lte=one_week_ago, status='Approved').exclude(featured=True).order_by('-published_date')
 
     try:
         p_ft = Post.objects.get(featured=True)
@@ -89,7 +93,7 @@ def monthly_posts(request):
 
     one_month_ago = datetime.today() - timedelta(days=30)
 
-    posts_list = Post.objects.filter(created_at__lte=one_month_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(published_date__lte=one_month_ago, status='Approved').exclude(featured=True).order_by('-published_date')
    
     try:
         p_ft = Post.objects.get(featured=True)
@@ -114,7 +118,7 @@ def yearly_posts(request):
 
     one_year_ago = datetime.today() - timedelta(days=365)
 
-    posts_list = Post.objects.filter(published_date__lte=one_year_ago, status='Approved').exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(published_date__lte=one_year_ago, status='Approved').exclude(featured=True).order_by('-published_date')
    
     try:
         p_ft = Post.objects.get(featured=True)
@@ -185,4 +189,41 @@ def post_detail(request, post_slug):
 
     template_name = 'main/post_detail.html'
 
+    return render(request, template_name, context)
+
+
+def code_of_conduct(request):
+
+    context = {}
+    template_name = 'main/pages/code_of_conduct.html'
+    return render(request, template_name, context)
+
+def terms_of_use(request):
+
+    context = {}
+    template_name = 'main/pages/terms_of_use.html'
+    return render(request, template_name, context)
+
+def privacy_policy(request):
+
+    context = {}
+    template_name = 'main/pages/privacy_policy.html'
+    return render(request, template_name, context)
+
+def contacts(request):
+
+    context = {}
+    template_name = 'main/pages/contacts.html'
+    return render(request, template_name, context)
+
+def about(request):
+
+    context = {}
+    template_name = 'main/pages/about.html'
+    return render(request, template_name, context)
+
+def FAQ(request):
+
+    context = {}
+    template_name = 'main/pages/faq.html'
     return render(request, template_name, context)

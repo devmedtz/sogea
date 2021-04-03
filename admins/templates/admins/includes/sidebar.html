@@ -11,13 +11,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link {% active_link 'admins:pending_posts' 'active' %}" href="{% url 'admins:pending_posts' %}">
             <span data-feather="file"></span>
             Pending Posts
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link {% active_link 'admins:approved_posts' 'active' %}" href="{% url 'admins:approved_posts' %}">
             <span data-feather="shopping-cart"></span>
             Published Posts
           </a>

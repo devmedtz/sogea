@@ -11,8 +11,8 @@
     <div class="btn-toolbar mb-2 mb-md-0">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Library</li>
+          <li class="breadcrumb-item"><a href="{% url 'admins:admin_dashboard' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">dashboard</li>
         </ol>
       </nav>
     </div>
@@ -47,12 +47,10 @@
     </div>
     <div class="col-lg-3">
         <div class="card border-0 shadow-sm p-2">
-            <a href="{% url 'dashboard:following' %}">
-                <div class="card-body">
-                    <h3><strong>{{following}}</strong></h3>
-                    <p>Following</p>
-                </div>
-            </a>
+            <div class="card-body">
+                <h3><strong>{{total_post_viewer.total}}</strong></h3>
+                <p>Total post viewers</p>
+            </div>
         </div>
     </div>
 </div>
