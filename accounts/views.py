@@ -31,7 +31,7 @@ def profile_detail(request, username):
 
     profile = get_object_or_404(Profile, user__username=username)
 
-    posts_list = Post.objects.filter(status='Approved', author=profile.user).exclude(featured=True).order_by('-created_at')
+    posts_list = Post.objects.filter(status='Approved', author=profile.user).order_by('-published_date')
 
     #follow
     following = profile.following.count()
