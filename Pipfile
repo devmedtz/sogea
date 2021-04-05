@@ -23,6 +23,7 @@ django-storages = "*"
 boto3 = "*"
 django-comments-dab = "*"
 django-analytical = "*"
+django-cookie-law = "*"
 
 [dev-packages]
 

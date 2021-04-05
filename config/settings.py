@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'django_social_share',
     'active_link',
     'analytical',
+    'cookielaw',
 
     'allauth',
     'allauth.account',

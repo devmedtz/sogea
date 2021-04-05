@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load cookielaw_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,6 +43,8 @@
 
     {% include 'includes/scripts.html' %}
     {% block javascript %}{% endblock javascript %}
+    
+    {% cookielaw_banner %}
 
 </body>
 
