@@ -10,7 +10,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['profile_picture','website', 'country', 'location', 'display_email', 'bio', 'youtube_link', 'facebook_link', 'instagram_link', 'linkedin_link',]
+        fields = ['profile_picture','website', 'country', 'location', 'display_email', 'bio', 'youtube_link', 'facebook_link', 'instagram_link', 'linkedin_link','twitter_link',]
         widgets = {
 			'bio': forms.Textarea(attrs={'rows': 3}),
 		}
