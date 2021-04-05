@@ -341,3 +341,8 @@ html, body {
     color: #fff;
     background-color: #c1272d;
 }
+
+.help-block{
+  font-size: 14px;
+  color: red;
+}

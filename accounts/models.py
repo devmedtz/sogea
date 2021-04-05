@@ -7,6 +7,7 @@ from django.db import models
 from django_countries.fields import CountryField
 
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
 
@@ -45,7 +46,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         verbose_name='Username',
         max_length=100,
-        unique=True,
+        unique=True
     )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)

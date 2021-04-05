@@ -6,14 +6,36 @@ from django.db import transaction
 from allauth.account.forms import SignupForm
 
 from .models import CustomUser,Profile
+from django.core.validators import RegexValidator
 
+no_space_validator = RegexValidator(
+    r' ',
+    _('No spaces allowed'),
+    inverse_match=True,
+    code='invalid_username')
+
+def clean_unique(form, field, exclude_initial=True, 
+                 format="The %(field)s %(value)s has already been taken."):
+    value = form.cleaned_data.get(field)
+    if value:
+        qs = form._meta.model._default_manager.filter(**{field:value})
+        if exclude_initial and form.initial:
+            initial_value = form.initial.get(field)
+            qs = qs.exclude(**{field:initial_value})
+        if qs.count() > 0:
+            raise forms.ValidationError(format % {'field':field, 'value':value})
+    return value
 
 class CustomSignupForm(SignupForm):
+
+    username = forms.CharField(required=True, label='Username',validators=[no_space_validator])
 
     # Override the init method
     def __init__(self, *args, **kwargs):
         # Call the init of the parent class
         super().__init__(*args, **kwargs)
+
+        self.fields["username"].widget.attrs["placeholder"] = 'username'
 
 
     # Put in custom signup logic
