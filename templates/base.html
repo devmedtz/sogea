@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- toastr -->
     <link rel="stylesheet" href="{% static 'css/toastr.min.css' %}" media="all">
+    <!-- cookielaw banner css -->
+    <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
     <!-- fontawesome icons -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- code highlight -->
@@ -43,7 +45,7 @@
 
     {% include 'includes/scripts.html' %}
     {% block javascript %}{% endblock javascript %}
-    
+
     {% cookielaw_banner %}
 
 </body>
