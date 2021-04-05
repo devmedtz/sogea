@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from config.decorators import admin_required, moderator_required
+
 from django.contrib.auth import get_user_model
 from django.db.models import Count, Q, Sum
 from datetime import datetime
@@ -10,6 +12,7 @@ User = get_user_model()
 
 
 @login_required
+@admin_required(login_url='/accounts/login', redirect_field_name='', message='You are not authorised to view this page.')
 def admin_dashboard(request):
 
     approved_posts = Post.objects.filter(status='Approved').count()
@@ -31,6 +34,7 @@ def admin_dashboard(request):
 
 
 @login_required
+@admin_required(login_url='/accounts/login', redirect_field_name='', message='You are not authorised to view this page.')
 def pending_posts(request):
 
     posts = Post.objects.filter(status='Pending').order_by('-created_at')
@@ -43,9 +47,10 @@ def pending_posts(request):
 
 
 @login_required
+@admin_required(login_url='/accounts/login', redirect_field_name='', message='You are not authorised to view this page.')
 def approved_posts(request):
 
-    posts = Post.objects.filter(status='Approved').order_by('-created_at')
+    posts = Post.objects.filter(status='Approved').order_by('-published_date')
 
     context = {
         'posts':posts,
@@ -55,6 +60,7 @@ def approved_posts(request):
 
 
 @login_required
+@admin_required(login_url='/accounts/login', redirect_field_name='', message='You are not authorised to view this page.')
 def approve_pending_posts(request, slug):
 
     Post.objects.filter(slug=slug).update(
