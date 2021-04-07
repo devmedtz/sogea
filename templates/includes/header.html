@@ -97,7 +97,7 @@
                               <li><div class="dropdown-item me-3"><small><b>{{user.username}}</b></small></div>
                                 </li>
                               <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item me-3" href="{% url 'accounts:profile_detail' user.username %}"><i class="fa fa-user text-maroon"></i>{{user.username.split|join:'_'}} View Profile</a></li>
+                              <li><a class="dropdown-item me-3" href="{% url 'accounts:profile_detail' user.username %}"><i class="fa fa-user text-maroon"></i> View Profile</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'dashboard:dashboard' %}">
                                 <i class="fa fa-tachometer text-maroon" aria-hidden="true"></i> Dashboard</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'posts:create_post' %}">
