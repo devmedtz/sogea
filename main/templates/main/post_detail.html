@@ -337,16 +337,22 @@
                         <hr>
                         <div class="row justify-content-center user-social-link">
                             {% if post.author.profile.youtube_link %}
-                            <div class="col-auto"><a href="{{post.author.profile.youtube_link}}"><i class="fa fa-youtube text-facebook"></i></a></div>
+                            <div class="col-auto"><a href="{{post.author.profile.youtube_link}}"><i class="fa fa-youtube-play"></i></a></div>
                             {% endif %}
                             {% if post.author.profile.facebook_link %}
                             <div class="col-auto"><a href="{{post.author.profile.facebook_link}}"><i class="fa fa-facebook text-facebook"></i></a></div>
                             {% endif %}
                             {% if post.author.profile.linkedin_link %}
-                            <div class="col-auto"><a href="{{post.author.profile.linkedin_link}}"><i class="fa fa-linkedin text-twitter"></i></a></div>
+                            <div class="col-auto"><a href="{{post.author.profile.linkedin_link}}"><i class="fa fa-linkedin "></i></a></div>
                             {% endif %}
                             {% if post.author.profile.instagram_link %}
-                            <div class="col-auto"><a href="{{post.author.profile.instagram_link}}"><i class="fa fa-instagram text-dribbble"></i></a></div>
+                            <div class="col-auto"><a href="{{post.author.profile.instagram_link}}"><i class="fa fa-instagram"></i></a></div>
+                            {% endif %}
+                            {% if post.author.profile.twitter_link %}
+                            <div class="col-auto"><a href="{{post.author.profile.twitter_link}}"><i class="fa fa-twitter text-twitter"></i></a></div>
+                            {% endif %}
+                            {% if post.author.profile.github_link %}
+                            <div class="col-auto"><a href="{{post.author.profile.github_link}}"><i class="fa fa-github"></i></a></div>
                             {% endif %}
                         </div>
                     </div>

@@ -84,11 +84,24 @@
                         </div>
                         <div class="mt-4 text-center">
                             <ul class="list-inline">
+                                {% if profile.linkedin_link %}
                                 <li class="list-inline-item"><a href="{{profile.linkedin_link}}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>
+                                {% endif %}
+                                {% if profile.twitter_link %}
                                 <li class="list-inline-item"><a href="{{profile.twitter_link}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
+                                {% endif %}
+                                {% if profile.instagram_link %}
                                 <li class="list-inline-item"><a href="{{profile.instagram_link}}" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                {% endif %}
+                                {% if profile.facebook_link %}
                                 <li class="list-inline-item"><a href="{{profile.facebook_link}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li class="list-inline-item"><a href="{{profile.youtube_link}}" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a> </li>
+                                {% endif %}
+                                {% if profile.youtube_link %}
+                                <li class="list-inline-item"><a href="{{profile.youtube_link}}" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a> </li>
+                                {% endif %}
+                                {% if profile.github_link %}
+                                <li class="list-inline-item"><a href="{{profile.github_link}}" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a> </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
