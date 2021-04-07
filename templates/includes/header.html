@@ -94,10 +94,10 @@
                         <li class="nav-item dropdown">
                             <img class="dropdown-toggle image-circle rounded-circle" data-bs-toggle="dropdown" src="{{user.profile.profile_picture.url}}" alt="profile-image" role="button" aria-expanded="false">
                             <ul class="dropdown-menu dropdown-menu-end border-maroon">
-                              <li><div class="dropdown-item me-3"><small>@{{user.username}}</small></div>
+                              <li><div class="dropdown-item me-3"><small><b>{{user.username}}</b></small></div>
                                 </li>
                               <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item me-3" href="{% url 'dashboard:profile_update' user.id %}"><i class="fa fa-pencil text-maroon"></i> Update Profile</a></li>
+                              <li><a class="dropdown-item me-3" href="{% url 'accounts:profile_detail' user.username %}"><i class="fa fa-user text-maroon"></i>{{user.username.split|join:'_'}} View Profile</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'dashboard:dashboard' %}">
                                 <i class="fa fa-tachometer text-maroon" aria-hidden="true"></i> Dashboard</a></li>
                               <li><a class="dropdown-item me-3" href="{% url 'posts:create_post' %}">

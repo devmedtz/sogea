@@ -10,6 +10,8 @@ from accounts.forms import SignUpForm, MyAuthForm
 from accounts.models import CustomUser, Profile
 from posts.models import Post
 
+import urllib.parse
+
 
 class UserLoginView(LoginView):
     template_name = 'admins/login.html'
@@ -29,7 +31,13 @@ class UserLoginView(LoginView):
 
 def profile_detail(request, username):
 
+    username = urllib.parse.unquote(username)
+
+    print('username:',username)
+
     profile = get_object_or_404(Profile, user__username=username)
+
+    print('profile:',profile)
 
     posts_list = Post.objects.filter(status='Approved', author=profile.user).order_by('-published_date')
 
