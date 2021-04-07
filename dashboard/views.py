@@ -44,8 +44,8 @@ def profile_update(request, id):
     if form.is_valid():
         form.save()
 
-        return redirect(reverse("dashboard:profile_update", kwargs={
-            'id': id
+        return redirect(reverse("accounts:profile_detail", kwargs={
+            'username': request.user.username
         }))
         messages.success(request, "You are successfully update profile")
     else:

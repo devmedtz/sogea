@@ -311,7 +311,7 @@
                             <img src="{{post.author.profile.profile_picture.url}}" class="img-radius" alt="User-Profile-Image">
                         </div>
                         <h5 class="f-w-600 m-t-25 m-b-10 text-center">{{post.author.username}}</h5>
-                        <p class="">{{post.author.profile.bio|safe}}</p>
+                        <p class="text-center">{{post.author.profile.bio|safe}}</p>
 
                         <div class="d-grid gap-2">
                             <a class="btn btn-primary mx-3" href="{% url 'accounts:profile_detail' post.author.username %}">View</a>

@@ -73,11 +73,11 @@
                             <p class="text-primary mb-1">{{profile.bio|safe}}</p>
                             <p class="text-muted fs-6"><i class="fa fa-map-marker me-2" aria-hidden="true"></i>{{profile.location}}</p>
                             {% if request.user.is_authenticated %}
-                            {% if user.profile == post.author.profile %}
-                                <a href="{% url 'dashboard:profile_update' user.id %}" class="btn btn-secondary mx-3">Edit Profile</a>
-                            {% else %}
-                            <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" profile_id="{{profile.pk}}" value="{{profile.pk}}" class="btn mx-3 {% if follow %}btn-success{% else %}btn-maroon{% endif %}">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
-                            {% endif %}
+                                {% if user.profile == profile %}
+                                    <a href="{% url 'dashboard:profile_update' user.id %}" class="btn btn-secondary mx-3">Edit Profile</a>
+                                {% else %}
+                                <button id="follow-button" data-url="{% url 'posts:follow_profile' %}" profile_id="{{profile.pk}}" value="{{profile.pk}}" class="btn mx-3 {% if follow %}btn-success{% else %}btn-maroon{% endif %}">{% if follow %}Unfollow{% else %}Follow{% endif %}</button>
+                                {% endif %}
                             {% else %}
                             <a class="btn btn-maroon mx-3" href="{% url 'account_login' %}?next={{request.path}}">Follow</a>
                             {% endif %}

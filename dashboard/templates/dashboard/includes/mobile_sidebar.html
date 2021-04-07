@@ -11,7 +11,7 @@
           <li><a class="dropdown-item {% active_link 'dashboard:reading_list' 'active' %}" href="{% url 'dashboard:reading_list' %}">Reading lists</a></li>
           <a class="nav-link {% active_link 'dashboard:followers' 'active' %}" href="{% url 'dashboard:followers' %}">Followers</a>
           <a class="nav-link {% active_link 'dashboard:following' 'active' %}" href="{% url 'dashboard:following' %}">following users</a>
-          <li><a class="dropdown-item {% active_link 'dashboard:profile_update' user.id 'active' %}" href="{% url 'dashboard:profile_update' user.id %}">Edit Profile</a></li>
+          <li></li><a class="nav-link" href="{% url 'accounts:profile_detail' user.username %}">View Profile</a></li>
           <li><a class="dropdown-item {% active_link 'account_change_password' 'active' %}" href="{% url 'account_change_password' %}">Change Password</a></li>
         </ul>
       </div>
