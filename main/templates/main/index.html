@@ -84,7 +84,7 @@
                             </ul>
                             
                             <small class="py-3"> 
-                                {% for mt in common_tags %}
+                                {% for mt in p_ft.tags.all %}
                                 <a href="{% url 'posts:post_tag_list' mt %}">
                                     <span class="badge bg-success">#{{mt}}</span>
                                 </a>
