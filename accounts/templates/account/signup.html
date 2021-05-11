@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+{% load account socialaccount %}
 
 {% load i18n %}
 
@@ -43,6 +44,15 @@
             </div>
             
           </form>
+
+          <h5 class="text-center my-3">OR</h5>
+          {% get_providers as socialaccount_providers %}
+          {% for provider in socialaccount_providers %}
+          <div class="d-grid gap-2">
+            <a title="{{provider.name}}" class="btn btn-lg {% if provider.name == 'Google' %}btn-google{% endif %}"  
+            href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fa fa-{{provider.name|lower}} me-2" id="social_icon"></i>Login with {{provider.name}}</a>
+          </div>
+          {% endfor %}
       
         </div>
       </div>
