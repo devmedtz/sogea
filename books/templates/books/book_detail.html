@@ -1,0 +1,45 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block title %} Books-Name {% endblock title %} 
+
+{% block stylesheet %} {% endblock stylesheet %} 
+
+{% block content %} 
+  <!-- Popular Free Books -->
+  <div class="container book margin-top-120 margin-bottom-60" style="min-height: 100vh;">
+    <div class="row g-3">
+        <div class="col-md-2">
+            <div class="card shadow-sm mb-3">
+                <img src="{{book.thumbnail.url}}"
+                  class="card-img-top" alt=""/>
+            </div>
+            <div>PUBLISHED: {{book.published}}</div>
+            <div>PAGES: {{book.pages}}</div>
+            <div>DOWNLOADS: {{book.downloads}}</div>
+        </div>
+        <div class="col-md-10">
+            <h2>{{book.title|capfirst}}</h2>
+            <a href=""><b>By {{book.author}}</b></a>
+
+            <form method="POST" action="{% url 'books:download_book' book.slug %}">
+                {% csrf_token %}
+                <input type="hidden" name="download" value="1">
+                <div class="my-3">
+                    <button type="submit" class="btn btn-maroon px-5 py-3"><i class="fa fa-download me-2"></i><b>Free Download</b></button>
+                </div>
+            </form>
+
+            <div class="alert alert-dark">
+                <small>This book is available for free download in a pdf formats only, You can also read the full text online using our ereader.</small>
+            </div>
+
+            <div class="my-3">
+                <p>{{book.description|safe}}</p>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %} 
+
+{% block javascript %} {% endblock javascript %}

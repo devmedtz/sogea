@@ -1,0 +1,49 @@
+{% load static %}
+{% load account socialaccount %}
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <div class="container-fluid justify-content-between">
+        <!-- Left elements -->
+        <div class="d-flex">
+            <!-- Brand -->
+            <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="{% url 'books:home' %}">
+                <img src="{% static 'images/logo-desktop.png' %}" loading="lazy" alt="logo">
+            </a>
+  
+            <!-- Search form -->
+            <form class="input-group w-auto my-auto d-none d-sm-flex">
+                <input autocomplete="off" type="search" class="form-control rounded"
+                placeholder="Search" style="min-width: 325px;" />
+                <span class="input-group-text border-0 d-none d-lg-flex bg-maroon text-light">
+                <i class="fas fa-search"></i>
+                </span>
+            </form>
+        </div>
+        <!-- Left elements -->
+  
+        <!-- Center elements -->
+        <ul class="navbar-nav flex-row d-none d-md-flex">
+            <li class="nav-item">
+            <a class="nav-link" href="/">Main</a>
+            </li>
+        </ul>
+        <!-- Center elements -->
+  
+        <!-- Right elements -->
+        <ul class="navbar-nav flex-row">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item me-lg-1">
+                <a class="btn btn-maroon" href="{% url 'account_logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item me-3 me-lg-1">
+                <a class="btn btn-outline-maroon" href="{% url 'account_login' %}">Login</a>
+            </li>
+            <li class="nav-item me-lg-1">
+                <a class="btn btn-maroon" href="{% url 'account_signup' %}">Signup</a>
+            </li>
+            {% endif %}
+        </ul>
+        <!-- Right elements -->
+    </div>
+  </nav>

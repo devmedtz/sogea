@@ -1,0 +1,71 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block title %} Books {% endblock title %} 
+
+{% block stylesheet %}
+<style>
+  .banner h2{
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  .banner p{
+    color: white;
+    font-size: 20px
+  }
+</style>
+{% endblock stylesheet %} 
+
+{% block content %} 
+  <!-- Background image -->
+  <div class="p-5 banner">
+    <div class="mask">
+      <div class="container margin-top-120">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Join to access our best free & discounted ebooks.</h2>
+            <p>We find the best ebook deals so you don't have to. Never pay full price again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+
+  <!-- Books Category -->
+  <div class="container books-category margin-top-60 margin-bottom-60">
+    <div class="row">
+      <h4>BROWSE CATEGORY <a href="#">(view All)</a></h4>
+    </div>
+    <div class="row">
+      {% for category in categories %}
+      <div class="col-lg-3 col-md-4 col-6">
+        <a href="#">{{category.name}} <span>({{category.book_set.all.count}})</span></a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Popular Free Books -->
+  <div class="container books-category margin-top-60 margin-bottom-60">
+    <div class="row">
+      <h4>FREE EBOOKS</h4>
+    </div>
+    <div class="row g-3">
+      {% for book in books %}
+      <div class="col-lg-2 col-md-4 col-6">
+        <a href="{% url 'books:book_detail' book.slug %}">
+          <div class="card shadow-sm">
+            <img src="{{book.thumbnail.url}}"
+              class="card-img-top" alt=""/>
+          </div>
+        </a>
+        <a class="book-title" href="{% url 'books:book_detail' book.slug %}">{{book.title|capfirst}}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %} 
+
+{% block javascript %} {% endblock javascript %}

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'dashboard',
     'marketing',
     'admins',
+    'books',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
     'active_link',
     'analytical',
     'cookielaw',
+    'fontawesome-free',
 
     'allauth',
     'allauth.account',

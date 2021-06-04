@@ -24,6 +24,7 @@ boto3 = "*"
 django-comments-dab = "*"
 django-analytical = "*"
 django-cookie-law = "*"
+fontawesome-free = "*"
 
 [dev-packages]
 

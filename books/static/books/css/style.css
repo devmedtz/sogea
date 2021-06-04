@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+html, body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+.text-maroon {
+    color: #c1272d;
+  }
+
+.margin-top-60{
+    margin-top: 60px;
+}
+.margin-top-80{
+    margin-top: 80px;
+}
+.margin-top-120{
+    margin-top: 120px;
+}
+.margin-bottom-60{
+    margin-bottom: 60px;
+}
+.margin-bottom-80{
+    margin-top: 80px;
+}
+.margin-bottom-110{
+    margin-top: 110px;
+}
+.margin-bottom-120{
+    margin-top: 120px;
+}
+
+.padding-top-60{
+    padding-top: 60px;
+}
+.padding-top-80{
+    padding-top: 80px;
+}
+.padding-bottom-60{
+    padding-top: 60px;
+}
+.padding-bottom-80{
+    padding-top: 80px;
+}
+
+.bg-site{
+    background-color: #f8f9fa;
+  }
+  .bg-maroon {
+    background-color:#c1272d;
+  }
+  .bg-white{
+    background-color: #fff;
+  }
+  .bg-dark{
+    background-color: #000;
+  }
+  .bg-gray{
+    background-color: #d2d6db;
+  }
+  .mobile-bg-gray{
+    background-color: #d2d6dbcc;
+  }
+  .btn-maroon {
+    color: #fff;
+    background-color: #c1272d;
+    border-color: #c1272d;
+  }
+  .btn-maroon:hover{
+    color:#fff;
+    background-color:#c1272d;
+    border-color:#c1272d
+  }
+  .btn-outline-maroon {
+    color: #c1272d;
+    border-color: #c1272d;
+  }
+
+.container, .container-fluid, .container-lg, .container-md {
+    --bs-gutter-x: 2.2rem;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)/2);
+    padding-left: calc(var(--bs-gutter-x)/2);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Books category */
+.books-category h4{
+  font-weight: 600;
+  margin-bottom: 10px; 
+}
+
+/* Books list */
+.book-title {
+  color: #3e3e3e;
+  text-overflow: clip;
+}
+.book-title:hover, .book-title:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+.book h2{
+  font-weight: 600;
+}
+
+/* Banner */
+.banner {
+  background: url('../images/banner.jpg');
+  background-size: cover;
+  height: 400px;
+  margin-top: 58px;
+}
+.banner .mask {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  height: 460px;
+  min-width: 100%
+}
