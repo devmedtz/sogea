@@ -69,7 +69,6 @@ INSTALLED_APPS = [
     'active_link',
     'analytical',
     'cookielaw',
-    'fontawesome-free',
 
     'allauth',
     'allauth.account',
