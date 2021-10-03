@@ -33,7 +33,7 @@ class Post(models.Model):
     content = RichTextUploadingField(blank=False)
     view_count = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    featured_image = models.ImageField(upload_to=featured_image_path)
+    featured_image = models.ImageField(upload_to='posts/')
     featured = models.BooleanField(default=False)
     tags = TaggableManager()
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
