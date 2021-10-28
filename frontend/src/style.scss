@@ -1,0 +1,12 @@
+@import "bootstrap";
+
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url(./fonts/OpenSans-Regular.ttf) format('truetype');
+  }
+
+h3{
+    font-size: 36px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
